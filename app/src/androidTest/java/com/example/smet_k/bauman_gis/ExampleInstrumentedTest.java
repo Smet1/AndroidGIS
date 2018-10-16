@@ -1,4 +1,4 @@
-package com.example.smet_k.myapplication;
+package com.example.smet_k.bauman_gis;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.smet_k.myapplication", appContext.getPackageName());
+        assertEquals("com.example.smet_k.bauman_gis", appContext.getPackageName());
     }
 }

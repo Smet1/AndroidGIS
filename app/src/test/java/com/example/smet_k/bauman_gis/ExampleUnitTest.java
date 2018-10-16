@@ -1,4 +1,4 @@
-package com.example.smet_k.myapplication;
+package com.example.smet_k.bauman_gis;
 
 import org.junit.Test;
 
