@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/InputFrom"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:hint="From"
+        />
+
+    <EditText
+        android:id="@+id/InputTo"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/InputFrom"
+        android:hint="To"
+        />
+
+    <Button
+        android:id="@+id/Calculate"
+        android:layout_toRightOf="@+id/InputFrom"
+        android:layout_marginStart="10dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/InputTo"
+        android:layout_marginTop="20dp"
+        android:text="lead me there!"
+        />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/Calculate"
+        android:text="Recent routes:"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+
+</RelativeLayout>
