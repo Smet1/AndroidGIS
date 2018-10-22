@@ -19,6 +19,9 @@
         <activity android:name=".NavigatorActivity">
 
         </activity>
+        <activity android:name=".RouteActivity">
+
+        </activity>
     </application>
 
 </manifest>
