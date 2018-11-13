@@ -67,7 +67,7 @@ public class NavigatorActivity extends AppCompatActivity {
 
 
 
-                Log.d(LOG_TAG, "--- Rows in mytable: ---");
+                Log.d(LOG_TAG, "--- Rows in RecentRoutes: ---");
                 // делаем запрос всех данных из таблицы mytable, получаем Cursor
                 Cursor c = db.query("RecentRoutes", null, null, null, null, null, null);
 
