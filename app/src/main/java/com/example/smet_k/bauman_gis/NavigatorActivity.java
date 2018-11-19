@@ -1,13 +1,9 @@
 package com.example.smet_k.bauman_gis;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,11 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.jar.JarException;
 
 public class NavigatorActivity extends AppCompatActivity {
     final String LOG_TAG = "NavigatorActivity";
-    DBHelper dbHelper;
+    DBWorker dbHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,8 +25,12 @@ public class NavigatorActivity extends AppCompatActivity {
 
         final Button startNewActivityBtn = findViewById(R.id.Calculate);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.TopFrame, RecyclerRouteListFragment.newInstance())
+                .commit();
+
         // создаем объект для создания и управления версиями БД
-        dbHelper = new DBHelper(this);
+        dbHelper = new DBWorker(this);
 
         startNewActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,28 +113,6 @@ public class NavigatorActivity extends AppCompatActivity {
 
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    class DBHelper extends SQLiteOpenHelper {
-        public DBHelper(Context context) {
-            // конструктор суперкласса
-            super(context, "RecentRoutes", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            Log.d(LOG_TAG, "--- onCreate database ---");
-            // создаем таблицу с полями
-            db.execSQL("create table RecentRoutes ("
-                    + "id integer primary key autoincrement,"
-                    + "point_from integer,"
-                    + "point_to integer" + ");");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        }
     }
 
 }
