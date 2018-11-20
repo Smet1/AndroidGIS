@@ -6,9 +6,27 @@
 
     <TextView
         android:id="@+id/num"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_height="80dp" />
+
+    <TextView
+        android:id="@+id/pointer"
+        android:layout_toEndOf="@+id/num"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="->"
+        />
+
+    <TextView
+        android:id="@+id/num_1"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_toEndOf="@+id/pointer"
+        android:layout_marginStart="10dp"/>
 
 
 </RelativeLayout>

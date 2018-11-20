@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class NavigatorActivity extends AppCompatActivity {
     final String LOG_TAG = "NavigatorActivity";
@@ -25,12 +28,40 @@ public class NavigatorActivity extends AppCompatActivity {
 
         final Button startNewActivityBtn = findViewById(R.id.Calculate);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.TopFrame, RoutesListFragment.newInstance())
-                .commit();
+        List<Route> listToShow = new ArrayList<>();
 
         // создаем объект для создания и управления версиями БД
         dbHelper = new DBWorker(this);
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.query("RecentRoutes", null, null, null, null, null, null);
+        Log.d(LOG_TAG, "--- NavigatorActivity.onCreate: ---");
+        if (c.moveToFirst()) {
+            // определяем номера столбцов по имени в выборке
+            int idColIndex = c.getColumnIndex("id");
+            int point_from = c.getColumnIndex("point_from");
+            int point_to = c.getColumnIndex("point_to");
+
+            do {
+                // получаем значения по номерам столбцов и пишем все в лог
+                Log.d(LOG_TAG,
+                        "ID = " + c.getInt(idColIndex) +
+                                ", from = " + c.getString(point_from) +
+                                ", to = " + c.getString(point_to));
+                // переход на следующую строку
+
+                listToShow.add(new Route(Integer.parseInt(c.getString(point_from)), Integer.parseInt(c.getString(point_to))));
+
+                // а если следующей нет (текущая - последняя), то false - выходим из цикла
+            } while (c.moveToNext());
+        } else
+            Log.d(LOG_TAG, "0 rows");
+        c.close();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.TopFrame, RoutesListFragment.newInstance(listToShow))
+                .commit();
+
 
         startNewActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override

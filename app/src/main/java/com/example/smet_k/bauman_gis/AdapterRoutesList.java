@@ -108,14 +108,14 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.RoutesRecyclerViewHolder> {
 
     private final LayoutInflater layoutInflater;
-    private final List<Integer> data;
-
+    private final List<Route> data;
     private final OnItemClickListener<Integer> onItemClickListener;
 
 
@@ -134,8 +134,9 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
     @Override
     public void onBindViewHolder(RoutesRecyclerViewHolder holder, int position) {
-        holder.bind(data.get(position), (OnItemClickListener) this.onItemClickListener);
-        holder.number.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
+        holder.bind(data.get(position), this.onItemClickListener);
+//        holder.number.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
+//        holder.number_1.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
     }
 
     @Override
@@ -143,29 +144,34 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         return data.size();
     }
 
-    public void add(Integer newData) {
+    public void add(Route newData) {
         data.add(0, newData);
         notifyItemInserted(0);
     }
 
+    public void setItems(Collection<Route> in) {
+        data.addAll(in);
+        notifyDataSetChanged();
+    }
+
     final static class RoutesRecyclerViewHolder extends RecyclerView.ViewHolder {
         private final TextView number;
+        private final TextView number_1;
 
 
         RoutesRecyclerViewHolder(View itemView) {
             super(itemView);
             number = itemView.findViewById(R.id.num);
+            number_1 = itemView.findViewById(R.id.num_1);
         }
 
-        void bind(final Integer i, OnItemClickListener onItemClickListener) {
-            number.setText(i.toString());
+        void bind(final Route i, OnItemClickListener onItemClickListener) {
+            Integer tmp_from = i.getFrom();
+            number.setText(Integer.toString(tmp_from));
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(i);
-                }
-            });
+            number_1.setText(Integer.toString(i.getTo()));
+
+            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
         }
 
 

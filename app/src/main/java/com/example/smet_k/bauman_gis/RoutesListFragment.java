@@ -32,22 +32,38 @@ package com.example.smet_k.bauman_gis;
 //}
 
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class RoutesListFragment extends Fragment {
+
+    private final static String KEY = "list";
+
+    private List<Route> recentRoutes = new ArrayList<>();
+
+    public static RoutesListFragment newInstance(Collection<Route> in) {
+        RoutesListFragment myFragment = new RoutesListFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY, (Serializable) in);
+        myFragment.setArguments(bundle);
+
+//        recentRoutes.addAll(in);
+
+        return myFragment;
+    }
 
     public static RoutesListFragment newInstance() {
         RoutesListFragment myFragment = new RoutesListFragment();
@@ -76,14 +92,22 @@ public class RoutesListFragment extends Fragment {
         AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
 
         RecyclerView numbers = view.findViewById(R.id.route_list);
-        numbers.setLayoutManager(new GridLayoutManager(getContext(), getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 4 : 3));
+        numbers.setLayoutManager(new LinearLayoutManager(getContext()));
         numbers.setAdapter(numbersAdapter);
         numbers.setHasFixedSize(true);
 
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            recentRoutes = (List<Route>) arguments.get(KEY);
+        }
 
-        for (Integer i = 1000; i > 0; --i) {
+        for (Route i : recentRoutes) {
             numbersAdapter.add(i);
         }
+
+//        for (Integer i = 8; i > 0; --i) {
+//            numbersAdapter.add(new Route(i, i * 2));
+//        }
     }
 
     private void onItemClick(Integer i) {

@@ -1,12 +1,12 @@
 package com.example.smet_k.bauman_gis;
 
 public class Route {
-    private int from;
-    private int to;
+    private Integer from;
+    private Integer to;
 
     // TODO(): после алгоритма построения хранить маршрут
 //    private string route;
-    public Route(int from, int to) {
+    public Route(Integer from, Integer to) {
         this.from = from;
         this.to = to;
     }
@@ -18,10 +18,10 @@ public class Route {
         return to;
     }
 
-    public void setFrom(int from) {
+    public void setFrom(Integer from) {
         this.from = from;
     }
-    public void setTo(int to) {
+    public void setTo(Integer to) {
         this.to = to;
     }
 }
