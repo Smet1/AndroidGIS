@@ -134,7 +134,7 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
     @Override
     public void onBindViewHolder(RoutesRecyclerViewHolder holder, int position) {
-        holder.bind(data.get(position), (AdapterView.OnItemClickListener) this.onItemClickListener);
+        holder.bind(data.get(position), (OnItemClickListener) this.onItemClickListener);
         holder.number.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
     }
 
@@ -157,13 +157,13 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
             number = itemView.findViewById(R.id.num);
         }
 
-        void bind(final Integer i, AdapterView.OnItemClickListener onItemClickListener) {
+        void bind(final Integer i, OnItemClickListener onItemClickListener) {
             number.setText(i.toString());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(number);
+                    onItemClickListener.onItemClick(i);
                 }
             });
         }
