@@ -26,7 +26,7 @@ public class NavigatorActivity extends AppCompatActivity {
         final Button startNewActivityBtn = findViewById(R.id.Calculate);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.TopFrame, RecyclerRouteListFragment.newInstance())
+                .replace(R.id.TopFrame, RouteListFragment.newInstance())
                 .commit();
 
         // создаем объект для создания и управления версиями БД

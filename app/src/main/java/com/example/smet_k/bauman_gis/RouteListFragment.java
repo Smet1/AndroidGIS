@@ -8,17 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RecyclerRouteListFragment extends Fragment {
+public class RouteListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    public static RecyclerRouteListFragment newInstance() {
+    public static RouteListFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        RecyclerRouteListFragment fragment = new RecyclerRouteListFragment();
+        RouteListFragment fragment = new RouteListFragment();
         fragment.setArguments(args);
         return fragment;
     }
