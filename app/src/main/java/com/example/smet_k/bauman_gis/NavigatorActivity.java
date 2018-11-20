@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,11 @@ public class NavigatorActivity extends AppCompatActivity {
                     from = Integer.parseInt(check_edit.getText().toString());
                 } catch (NumberFormatException e) {
                     from = 0;
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "А хуй тебе!",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
                 }
 
                 check_edit = (EditText) findViewById(R.id.InputTo);
@@ -80,6 +87,11 @@ public class NavigatorActivity extends AppCompatActivity {
                     to = Integer.parseInt(check_edit.getText().toString());
                 } catch (NumberFormatException e) {
                     to = 0;
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "А хуй тебе!",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
                 }
 
                 // создаем объект для данных
@@ -128,6 +140,20 @@ public class NavigatorActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        Log.d(LOG_TAG, "=== ON RESUME === ");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(LOG_TAG, "=== ON PAUSE === ");
+
+        super.onPause();
+    }
+
     private void toggleState() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();
@@ -136,7 +162,8 @@ public class NavigatorActivity extends AppCompatActivity {
         RouteFragment routeFragment = RouteFragment.newInstance(5, 12);
 
         if (bottom != null && bottom.isAdded()) {
-            transaction.remove(bottom);
+                transaction.remove(bottom);
+            Log.d(LOG_TAG, "=== REMOVED FRAGMENT === ");
             transaction.add(R.id.TopFrame, routeFragment);
         } else {
             transaction.add(R.id.TopFrame, routeFragment);

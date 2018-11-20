@@ -34,11 +34,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/AdapterRoutesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/AdapterRoutesList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/Route.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/RoutesListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/RoutesListFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -98,8 +94,8 @@
       <file leaf-file-name="NavigatorActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="52" column="64" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
+            <state relative-caret-position="478">
+              <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2655,7 +2651,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java</url>
-          <line>76</line>
+          <line>83</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -2667,7 +2663,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java</url>
-          <line>60</line>
+          <line>62</line>
           <properties />
           <option name="timeStamp" value="17" />
         </line-breakpoint>
@@ -2696,7 +2692,7 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="23" />
+      <option name="time" value="24" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -2900,6 +2896,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="968" column="18" selection-start-line="968" selection-start-column="18" selection-end-line="968" selection-end-column="18" />
+          <folding>
+            <element signature="e#37840#37841#0" expanded="true" />
+            <element signature="e#37878#37879#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3074,8 +3074,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/NavigatorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="52" column="64" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
+        <state relative-caret-position="478">
+          <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
