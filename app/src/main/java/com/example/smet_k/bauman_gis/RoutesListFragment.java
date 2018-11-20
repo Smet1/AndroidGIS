@@ -73,7 +73,7 @@ public class RoutesListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AdapterRoutesList numbersAdapter = new AdapterRoutesList();
+        AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
 
         RecyclerView numbers = view.findViewById(R.id.route_list);
         numbers.setLayoutManager(new GridLayoutManager(getContext(), getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 4 : 3));
@@ -87,10 +87,10 @@ public class RoutesListFragment extends Fragment {
     }
 
     private void onItemClick(Integer i) {
-//        getFragmentManager().beginTransaction()
-//                .replace(R.id.container, NumberFragment.newInstance(i))
-//                .addToBackStack(null)
-//                .commit();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, NumberFragment.newInstance(i))
+                .addToBackStack(null)
+                .commit();
     }
 
 }

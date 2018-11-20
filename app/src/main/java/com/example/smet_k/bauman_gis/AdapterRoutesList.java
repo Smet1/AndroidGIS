@@ -160,7 +160,12 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         void bind(final Integer i, AdapterView.OnItemClickListener onItemClickListener) {
             number.setText(i.toString());
 
-            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(number);
+                }
+            });
         }
 
 
