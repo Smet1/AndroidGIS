@@ -36,9 +36,10 @@ public class DBWorker extends SQLiteOpenHelper {
 
     }
 
-    public void insert(SQLiteDatabase db, Integer point_from, Integer point_to) {
+    public void insert(DBWorker dbWorker, Integer point_from, Integer point_to) {
         // создаем объект для данных
         ContentValues cv = new ContentValues();
+        SQLiteDatabase db = dbWorker.getWritableDatabase();
 
         // подключаемся к БД
         Log.d(LOG_TAG, "--- Insert in RecentRoutes: ---");

@@ -1,5 +1,8 @@
 package com.example.smet_k.bauman_gis;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +27,9 @@ public class RoutesListFragment extends Fragment {
     private final static String KEY = "list";
 
     private List<Route> recentRoutes = new ArrayList<>();
+    RecyclerView numbers;
+    DBWorker dbHelper;
+
 
     public static RoutesListFragment newInstance(Collection<Route> in) {
         RoutesListFragment myFragment = new RoutesListFragment();
@@ -60,25 +66,27 @@ public class RoutesListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
-
-        RecyclerView numbers = view.findViewById(R.id.route_list);
-        numbers.setLayoutManager(new LinearLayoutManager(getContext()));
-        numbers.setAdapter(numbersAdapter);
-        numbers.setHasFixedSize(true);
-
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            recentRoutes = (List<Route>) arguments.get(KEY);
-        }
-
-        for (Route i : recentRoutes) {
-            numbersAdapter.add(i);
-        }
+//
+        numbers = view.findViewById(R.id.route_list);
+//        AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
+//
+//        RecyclerView numbers = view.findViewById(R.id.route_list);
+//        numbers.setLayoutManager(new LinearLayoutManager(getContext()));
+//        numbers.setAdapter(numbersAdapter);
+//        numbers.setHasFixedSize(true);
+//
+//        Bundle arguments = getArguments();
+//        if (arguments != null) {
+//            recentRoutes = (List<Route>) arguments.get(KEY);
+//        }
+//
+//        for (Route i : recentRoutes) {
+//            numbersAdapter.add(i);
+//        }
     }
 
     private void onItemClick(Route i) {
+
 
         // getChildFragmentManager не работает, нельзя бросить данные в другой фрагмент
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -107,6 +115,50 @@ public class RoutesListFragment extends Fragment {
     @Override
     public void onResume() {
         Log.d(LOG_TAG, "=== ON RESUME === ");
+
+        List<Route> listToShow = new ArrayList<>();
+        dbHelper = new DBWorker(getActivity());
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.query("RecentRoutes", null, null, null, null, null, null);
+        Log.d(LOG_TAG, "--- NavigatorActivity.onCreate: ---");
+        if (c.moveToFirst()) {
+            // определяем номера столбцов по имени в выборке
+            int idColIndex = c.getColumnIndex("id");
+            int point_from = c.getColumnIndex("point_from");
+            int point_to = c.getColumnIndex("point_to");
+
+            do {
+                // получаем значения по номерам столбцов и пишем все в лог
+                Log.d(LOG_TAG,
+                        "ID = " + c.getInt(idColIndex) +
+                                ", from = " + c.getString(point_from) +
+                                ", to = " + c.getString(point_to));
+                // переход на следующую строку
+
+                listToShow.add(new Route(Integer.parseInt(c.getString(point_from)), Integer.parseInt(c.getString(point_to))));
+
+                // а если следующей нет (текущая - последняя), то false - выходим из цикла
+            } while (c.moveToNext());
+        } else
+            Log.d(LOG_TAG, "0 rows");
+        c.close();
+
+        AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
+
+//        RecyclerView numbers = view.findViewById(R.id.route_list);
+        numbers.setLayoutManager(new LinearLayoutManager(getContext()));
+        numbers.setAdapter(numbersAdapter);
+        numbers.setHasFixedSize(true);
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            recentRoutes = listToShow;
+        }
+
+        for (Route i : recentRoutes) {
+            numbersAdapter.add(i);
+        }
         super.onResume();
     }
 
