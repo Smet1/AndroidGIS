@@ -43,6 +43,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -108,30 +110,46 @@ public class RoutesListFragment extends Fragment {
         }
     }
 
-//    private void onItemClick(Integer integer) {
-//        Log.d("Route", "pidor");
-//    }
-//
     private void onItemClick(Route i) {
-//        getFragmentManager().beginTransaction()
-//                .replace(R.id.container, NumberFragment.newInstance(i))
-//                .addToBackStack(null)
-//                .commit();
+
+        // getChildFragmentManager не работает, нельзя бросить данные в другой фрагмент
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();
         Fragment bottom = getFragmentManager().findFragmentById(R.id.TopFrame);
 
         RouteFragment routeFragment = RouteFragment.newInstance(i.getFrom(), i.getTo());
 
-        if (bottom != null && bottom.isAdded()) {
-            transaction.remove(bottom);
-            transaction.add(R.id.TopFrame, routeFragment);
-        } else {
-            transaction.add(R.id.TopFrame, routeFragment);
-        }
+        // выставляю значения в эдит текст в нижнем баре
+        EditText editText = (EditText) getActivity().findViewById(R.id.InputFrom);
+        editText.setText(Integer.toString(i.getFrom()));
+
+        editText = (EditText) getActivity().findViewById(R.id.InputTo);
+        editText.setText(Integer.toString(i.getTo()));
+
+        assert bottom != null;
+        transaction.remove(bottom);
+        transaction.add(R.id.TopFrame, routeFragment);
 
         transaction.addToBackStack(null);
         transaction.commit();
+
+
+
+    }
+
+
+    final String LOG_TAG = "RoutesList";
+    @Override
+    public void onResume() {
+        Log.d(LOG_TAG, "=== ON RESUME === ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(LOG_TAG, "=== ON PAUSE === ");
+
+        super.onPause();
     }
 
 }
