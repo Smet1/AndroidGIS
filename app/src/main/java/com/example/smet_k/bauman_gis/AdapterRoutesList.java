@@ -116,10 +116,10 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
     private final LayoutInflater layoutInflater;
     private final List<Route> data;
-    private final OnItemClickListener<Integer> onItemClickListener;
+    private final OnItemClickListener<Route> onItemClickListener;
 
 
-    public AdapterRoutesList(Context context, OnItemClickListener<Integer> onItemClickListener) {
+    public AdapterRoutesList(Context context, OnItemClickListener<Route> onItemClickListener) {
         layoutInflater = LayoutInflater.from(context);
 
         this.data = new ArrayList<>();
@@ -166,9 +166,8 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         }
 
         void bind(final Route i, OnItemClickListener onItemClickListener) {
-            Integer tmp_from = i.getFrom();
-            number.setText(Integer.toString(tmp_from));
-
+//            Integer tmp_from = i.getFrom();
+            number.setText(Integer.toString(i.getFrom()));
             number_1.setText(Integer.toString(i.getTo()));
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));

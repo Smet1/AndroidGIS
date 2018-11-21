@@ -36,8 +36,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,17 +106,32 @@ public class RoutesListFragment extends Fragment {
         for (Route i : recentRoutes) {
             numbersAdapter.add(i);
         }
-
-//        for (Integer i = 8; i > 0; --i) {
-//            numbersAdapter.add(new Route(i, i * 2));
-//        }
     }
 
-    private void onItemClick(Integer i) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, NumberFragment.newInstance(i))
-                .addToBackStack(null)
-                .commit();
+//    private void onItemClick(Integer integer) {
+//        Log.d("Route", "pidor");
+//    }
+//
+    private void onItemClick(Route i) {
+//        getFragmentManager().beginTransaction()
+//                .replace(R.id.container, NumberFragment.newInstance(i))
+//                .addToBackStack(null)
+//                .commit();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        Fragment bottom = getFragmentManager().findFragmentById(R.id.TopFrame);
+
+        RouteFragment routeFragment = RouteFragment.newInstance(i.getFrom(), i.getTo());
+
+        if (bottom != null && bottom.isAdded()) {
+            transaction.remove(bottom);
+            transaction.add(R.id.TopFrame, routeFragment);
+        } else {
+            transaction.add(R.id.TopFrame, routeFragment);
+        }
+
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

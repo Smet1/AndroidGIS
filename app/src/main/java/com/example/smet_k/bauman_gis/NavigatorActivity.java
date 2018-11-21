@@ -22,6 +22,8 @@ import java.util.List;
 public class NavigatorActivity extends AppCompatActivity {
     final String LOG_TAG = "NavigatorActivity";
     DBWorker dbHelper;
+    Integer cur_from = 0;
+    Integer cur_to = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class NavigatorActivity extends AppCompatActivity {
                 Integer from;
                 try {
                     from = Integer.parseInt(check_edit.getText().toString());
+                    cur_from = from;
                 } catch (NumberFormatException e) {
                     from = 0;
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -85,6 +88,7 @@ public class NavigatorActivity extends AppCompatActivity {
                 Integer to;
                 try {
                     to = Integer.parseInt(check_edit.getText().toString());
+                    cur_to = to;
                 } catch (NumberFormatException e) {
                     to = 0;
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -159,7 +163,7 @@ public class NavigatorActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         Fragment bottom = getSupportFragmentManager().findFragmentById(R.id.TopFrame);
 
-        RouteFragment routeFragment = RouteFragment.newInstance(5, 12);
+        RouteFragment routeFragment = RouteFragment.newInstance(cur_from, cur_to);
 
         if (bottom != null && bottom.isAdded()) {
                 transaction.remove(bottom);
