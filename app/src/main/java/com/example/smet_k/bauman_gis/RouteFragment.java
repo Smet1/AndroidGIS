@@ -15,7 +15,6 @@ public class RouteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blue, container, false);
         return view;
-//        return inflater.inflate(R.layout.fragment_blue, container, false);
     }
 
     public static RouteFragment newInstance(int from, int to) {
