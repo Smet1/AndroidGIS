@@ -1,23 +1,15 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class NavigatorActivity extends AppCompatActivity {
     final String LOG_TAG = "NavigatorActivity";
@@ -101,7 +93,7 @@ public class NavigatorActivity extends AppCompatActivity {
         RouteFragment routeFragment = RouteFragment.newInstance(cur_from, cur_to);
 
         if (bottom != null && bottom.isAdded()) {
-                transaction.remove(bottom);
+            transaction.remove(bottom);
             Log.d(LOG_TAG, "=== REMOVED FRAGMENT === ");
             transaction.add(R.id.TopFrame, routeFragment);
         } else {

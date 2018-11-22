@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 public class Route {
     private Integer from;

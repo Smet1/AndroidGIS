@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -70,7 +70,7 @@ public class DBWorker extends SQLiteOpenHelper {
                         // получаем значения по номерам столбцов и пишем все в лог
                         Log.d(LOG_TAG,
                                 "ID = " + c.getInt(idColIndex) +
-                                         ", from = " + c.getString(point_from) +
+                                        ", from = " + c.getString(point_from) +
                                         ", to = " + c.getString(point_to));
                         // переход на следующую строку
 

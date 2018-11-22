@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,5 +11,4 @@ public class RouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_route);
 
     }
-
 }

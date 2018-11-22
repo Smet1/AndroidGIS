@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -72,4 +72,5 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
     }
 }
+
 

@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -48,3 +48,4 @@ public class RouteFragment extends Fragment {
         textView.setText(to.toString());
     }
 }
+

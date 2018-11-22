@@ -1,4 +1,4 @@
-package com.example.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -146,3 +146,4 @@ public class RoutesListFragment extends Fragment {
     }
 
 }
+
