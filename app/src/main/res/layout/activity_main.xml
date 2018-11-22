@@ -33,6 +33,7 @@
         app:itemTextColor="#FFF"
         app:itemIconTint="#FFF"
         app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"
         android:layout_gravity="start">
 
     </android.support.design.widget.NavigationView>
