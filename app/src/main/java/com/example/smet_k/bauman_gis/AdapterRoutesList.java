@@ -1,13 +1,11 @@
 package com.example.smet_k.bauman_gis;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,8 +36,6 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
     @Override
     public void onBindViewHolder(RoutesRecyclerViewHolder holder, int position) {
         holder.bind(data.get(position), this.onItemClickListener);
-//        holder.number.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
-//        holder.number_1.setTextColor(position % 2 == 1 ? Color.RED : Color.BLUE);
     }
 
     @Override
@@ -61,7 +57,6 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         private final TextView number;
         private final TextView number_1;
 
-
         RoutesRecyclerViewHolder(View itemView) {
             super(itemView);
             number = itemView.findViewById(R.id.num);
@@ -69,13 +64,11 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         }
 
         void bind(final Route i, OnItemClickListener onItemClickListener) {
-//            Integer tmp_from = i.getFrom();
             number.setText(Integer.toString(i.getFrom()));
             number_1.setText(Integer.toString(i.getTo()));
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
         }
-
 
     }
 }

@@ -50,9 +50,10 @@ public class DBWorker extends SQLiteOpenHelper {
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
     }
 
-    public List<Route> select(SQLiteDatabase db, String tag, String query) {
+    public List<Route> select(DBWorker dbWorker, String tag, String query) {
         List<Route> listToShow = new ArrayList<>();
         ContentValues cv = new ContentValues();
+        SQLiteDatabase db = dbWorker.getWritableDatabase();
         Cursor c = null;
 
         switch (tag) {
@@ -69,7 +70,7 @@ public class DBWorker extends SQLiteOpenHelper {
                         // получаем значения по номерам столбцов и пишем все в лог
                         Log.d(LOG_TAG,
                                 "ID = " + c.getInt(idColIndex) +
-                                        ", from = " + c.getString(point_from) +
+                                         ", from = " + c.getString(point_from) +
                                         ", to = " + c.getString(point_to));
                         // переход на следующую строку
 

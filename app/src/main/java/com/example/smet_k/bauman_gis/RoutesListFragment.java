@@ -116,33 +116,9 @@ public class RoutesListFragment extends Fragment {
     public void onResume() {
         Log.d(LOG_TAG, "=== ON RESUME === ");
 
-        List<Route> listToShow = new ArrayList<>();
         dbHelper = new DBWorker(getActivity());
-        ContentValues cv = new ContentValues();
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("RecentRoutes", null, null, null, null, null, null);
-        Log.d(LOG_TAG, "--- NavigatorActivity.onCreate: ---");
-        if (c.moveToFirst()) {
-            // определяем номера столбцов по имени в выборке
-            int idColIndex = c.getColumnIndex("id");
-            int point_from = c.getColumnIndex("point_from");
-            int point_to = c.getColumnIndex("point_to");
 
-            do {
-                // получаем значения по номерам столбцов и пишем все в лог
-                Log.d(LOG_TAG,
-                        "ID = " + c.getInt(idColIndex) +
-                                ", from = " + c.getString(point_from) +
-                                ", to = " + c.getString(point_to));
-                // переход на следующую строку
-
-                listToShow.add(new Route(Integer.parseInt(c.getString(point_from)), Integer.parseInt(c.getString(point_to))));
-
-                // а если следующей нет (текущая - последняя), то false - выходим из цикла
-            } while (c.moveToNext());
-        } else
-            Log.d(LOG_TAG, "0 rows");
-        c.close();
+        List<Route> listToShow = AppComponent.getInstance().dbWorker.select(dbHelper, "all", "");
 
         AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
 
