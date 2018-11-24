@@ -33,7 +33,6 @@ public class AppComponent {
                 .addInterceptor(chain ->
                         chain.proceed(
                                 chain.request().newBuilder()
-                                        .addHeader("Authorization", "OAuth " + prefs.getString(KEY_OAUTH, "Can't read"))
                                         .build()))
                 .build();
 

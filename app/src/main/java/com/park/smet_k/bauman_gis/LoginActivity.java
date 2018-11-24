@@ -93,21 +93,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        // ski97@mail.ru
-        // test
-//        Call<Void> call = AppComponent.getInstance().bgisApi.userLogin(email_str, password_str);
-//
-//        call.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                Log.d(LOG_TAG, "--- Login OK ---");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                Log.d(LOG_TAG, "--- Login ERROR ---");
-//            }
-//        });
         Callback<User> callback = new Callback<User>() {
 
             @Override
@@ -126,6 +111,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         // avoid static error
-        AppComponent.getInstance().bgisApi.userLogin(email_str, password_str).enqueue(callback);
+        AppComponent.getInstance().bgisApi.userLogin(new User(email_str, password_str)).enqueue(callback);
     }
 }
