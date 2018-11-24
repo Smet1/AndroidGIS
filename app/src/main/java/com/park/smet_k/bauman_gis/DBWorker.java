@@ -89,6 +89,15 @@ public class DBWorker extends SQLiteOpenHelper {
         return listToShow;
     }
 
+    public void truncate(DBWorker dbWorker) {
+        Log.d(LOG_TAG, "--- RecentRoutes truncate: ---");
+
+        SQLiteDatabase db = dbWorker.getWritableDatabase();
+        db.execSQL("delete FROM " + "RecentRoutes");
+
+        Log.d(LOG_TAG, "--- RecentRoutes truncate DONE ---");
+    }
+
     //insert
     //selet
     //update
