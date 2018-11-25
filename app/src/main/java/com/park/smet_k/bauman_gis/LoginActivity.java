@@ -9,6 +9,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.api.BgisApi;
 import com.park.smet_k.bauman_gis.model.User;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences prefs = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
+        // уже залогинился
         if (!prefs.getBoolean(KEY_IS_FIRST, true)) {
             startMainActivity();
         }
@@ -62,11 +64,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-
                 userLogin();
 
                 break;
             case R.id.textViewRegister:
+
+                // TODO(): регистрация
                 break;
         }
     }
@@ -97,15 +100,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                SharedPreferences.Editor editor = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE).edit();
                 User body = response.body();
                 if (body != null) {
-                    Log.d(LOG_TAG, "--- Login OK ---");
+                    Log.d(LOG_TAG, "--- Login OK body != null ---");
+
+                    // сохраняю айди пользователя
+                    editor.putInt(KEY_OAUTH, body.getId());
+                    // уже логинился
+                    editor.putBoolean(KEY_IS_FIRST, false);
+
+                    editor.apply();
+                    startMainActivity();
+                } else {
+                    Log.d(LOG_TAG, "--- Login OK body == null ---");
+
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Invalid login/password",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Server Error",
+                        Toast.LENGTH_SHORT);
+                toast.show();
                 t.printStackTrace();
             }
         };

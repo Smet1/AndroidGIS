@@ -8,7 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface BgisApi {
     // TODO(): URL
@@ -16,4 +16,7 @@ public interface BgisApi {
 
     @POST("/login")
     Call<User> userLogin(@Body User user);
+
+    @GET("/get/{id}")
+    Call<User> getUserInfo(@Path("id") Integer id);
 }

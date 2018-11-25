@@ -21,9 +21,9 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/display_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="smet_k"
             android:textColor="#FFF"
             android:textSize="18dp" />
 
@@ -31,7 +31,7 @@
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="smet0650@gmail.com"
+            android:text="your@s.mail"
             android:textColor="#FFF"
             android:textSize="14dp" />
     </LinearLayout>
