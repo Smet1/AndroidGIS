@@ -17,4 +17,7 @@ public interface BgisApi {
 
     @GET("/get/{id}")
     Call<User> getUserInfo(@Path("id") Integer id);
+
+    @POST("/post")
+    Call<User> userSignUp(@Body User user);
 }

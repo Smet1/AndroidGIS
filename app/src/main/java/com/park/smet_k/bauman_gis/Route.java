@@ -1,7 +1,9 @@
 package com.park.smet_k.bauman_gis;
 
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.util.Pair;
 
 import java.util.ArrayList;
@@ -54,6 +56,14 @@ class GridLocation {
     public Integer getY() {
         return y;
     }
+
+    public int compare(GridLocation o) {
+        if (this.getX() < o.getX() && this.getY() < o.getY()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
 // для приоритетной очередин
@@ -64,16 +74,24 @@ class AStarSearch {
 
     public static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
 
-    AStarSearch(GridWithWeights graph,
+    AStarSearch() {
+        frontier = new PriorityQueue<>(PQComparator);
+    }
+
+
+    public void doAStarSearch(GridWithWeights graph,
                 GridLocation start, GridLocation goal,
                 Map<GridLocation, GridLocation> came_from, Map<GridLocation, Double> cost_so_far) {
-        frontier = new PriorityQueue<>(PQComparator);
+//        frontier = new PriorityQueue<>(PQComparator);
         frontier.add(new Pair<>(start, 0.0));
 
         came_from.put(start, start);
         cost_so_far.put(start, 0.0);
 
+        Integer counter = 0;
+
         while (!frontier.isEmpty()) {
+            counter += 1;
             GridLocation current = frontier.poll().first;
 
             if (current == goal) {
@@ -89,12 +107,14 @@ class AStarSearch {
                     came_from.put(next, current);
                 }
             }
+            Log.d("search", Integer.toString(counter));
         }
+
     }
 
     // евристика для A со звездой
     static double heuristic(GridLocation a,GridLocation b){
-        return Math.abs(a.getX()-b.getX())+Math.abs(a.getY()-b.getY());
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 }
 
@@ -145,7 +165,7 @@ class GridWithWeights {
 
     // проверка на проходимость
     boolean passable(GridLocation id) {
-        return walls.contains(id);
+        return !walls.contains(id);
     }
 
     // возможные шаги (вправо, вниз, влево, вверх)

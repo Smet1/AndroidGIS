@@ -6,80 +6,48 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.park.smet_k.bauman_gis.api.BgisApi;
 import com.park.smet_k.bauman_gis.model.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private final String LOG_TAG = "LoginActivity";
-
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+    private String LOG_TAG = "SignUpActivity";
     private EditText email;
     private EditText password;
-
-    private final static String KEY_IS_FIRST = "is_first";
-    private final static String KEY_OAUTH = "oauth";
-    private final static String STORAGE_NAME = "storage";
-
-//    private final BgisApi bgisApi = AppComponent.getInstance().bgisApi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.signup_activity);
+
+        findViewById(R.id.signup).setOnClickListener(this);
+        findViewById(R.id.textViewLogin).setOnClickListener(this);
 
         email = findViewById(R.id.edit_email);
         password = findViewById(R.id.edit_password);
-
-        findViewById(R.id.login).setOnClickListener(this);
-        findViewById(R.id.textViewRegister).setOnClickListener(this);
-
-
-        // =================
-        SharedPreferences prefs = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
-
-        // уже залогинился
-        if (!prefs.getBoolean(KEY_IS_FIRST, true)) {
-            startMainActivity();
-        }
-        // =================
-    }
-
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login:
-                userLogin();
+            case R.id.signup:
+                userRegister();
 
                 break;
-            case R.id.textViewRegister:
+            case R.id.textViewLogin:
 
-                startSignUpActivity();
+                startLoginActivity();
                 break;
         }
     }
 
-    private void startSignUpActivity() {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    private void userLogin() {
+    private void userRegister() {
         String email_str = email.getText().toString().trim();
         String password_str = password.getText().toString().trim();
 
@@ -105,18 +73,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                SharedPreferences.Editor editor = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE).edit();
                 User body = response.body();
                 if (body != null) {
                     Log.d(LOG_TAG, "--- Login OK body != null ---");
 
-                    // сохраняю айди пользователя
-                    editor.putInt(KEY_OAUTH, body.getId());
-                    // уже логинился
-                    editor.putBoolean(KEY_IS_FIRST, false);
+                    startLoginActivity();
 
-                    editor.apply();
-                    startMainActivity();
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Success, now login please",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 } else {
                     Log.d(LOG_TAG, "--- Login OK body == null ---");
 
@@ -139,6 +105,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         // avoid static error
-        AppComponent.getInstance().bgisApi.userLogin(new User(email_str, password_str)).enqueue(callback);
+        AppComponent.getInstance().bgisApi.userSignUp(new User(email_str, password_str)).enqueue(callback);
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
