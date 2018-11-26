@@ -32,42 +32,39 @@ public class NavigatorActivity extends AppCompatActivity {
                 .commit();
 
 
-        startNewActivityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText check_edit = (EditText) findViewById(R.id.InputFrom);
-                Integer from;
-                try {
-                    from = Integer.parseInt(check_edit.getText().toString());
-                    cur_from = from;
-                } catch (NumberFormatException e) {
-                    from = 0;
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "А хуй тебе!",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
-                }
-
-                check_edit = (EditText) findViewById(R.id.InputTo);
-                Integer to;
-                try {
-                    to = Integer.parseInt(check_edit.getText().toString());
-                    cur_to = to;
-                } catch (NumberFormatException e) {
-                    to = 0;
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "А хуй тебе!",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
-                }
-
-                // заносим данные в БД
-                AppComponent.getInstance().dbWorker.insert(dbHelper, cur_from, cur_to);
-
-                toggleState();
+        startNewActivityBtn.setOnClickListener(v -> {
+            EditText check_edit = (EditText) findViewById(R.id.InputFrom);
+            Integer from;
+            try {
+                from = Integer.parseInt(check_edit.getText().toString());
+                cur_from = from;
+            } catch (NumberFormatException e) {
+                from = 0;
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "А хуй тебе!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
             }
+
+            check_edit = (EditText) findViewById(R.id.InputTo);
+            Integer to;
+            try {
+                to = Integer.parseInt(check_edit.getText().toString());
+                cur_to = to;
+            } catch (NumberFormatException e) {
+                to = 0;
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "А хуй тебе!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
+            // заносим данные в БД
+            AppComponent.getInstance().dbWorker.insert(dbHelper, cur_from, cur_to);
+
+            toggleState();
         });
 
     }
