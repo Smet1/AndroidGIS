@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -69,10 +70,12 @@ public class RouteFragment extends Fragment {
         GridLocation start = new GridLocation(1, 4);
         GridLocation goal = new GridLocation( 8, 5);
 
-        Map came_from = new TreeMap<GridLocation, GridLocation>();
-        Map cost_so_far = new TreeMap<GridLocation, Double>();
+        Map<GridLocation, GridLocation> came_from = new HashMap<>();
+        Map<GridLocation, Double> cost_so_far = new HashMap<>();
 
-        new AStarSearch(grid, start, goal, came_from, cost_so_far);
+        AStarSearch test = new AStarSearch(grid, start, goal, came_from, cost_so_far);
+
+        goal.getY();
     }
 }
 

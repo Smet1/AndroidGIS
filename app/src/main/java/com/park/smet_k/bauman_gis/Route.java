@@ -6,6 +6,7 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -100,7 +101,7 @@ class AStarSearch {
 class GridWithWeights {
     ArrayList<GridLocation> DIRS = new ArrayList<>();
     Integer width, height;
-    Set<GridLocation> walls = new TreeSet<>();
+    Set<GridLocation> walls = new HashSet<>();
 
     public GridWithWeights() {
         DIRS.add(new GridLocation(1,0));
