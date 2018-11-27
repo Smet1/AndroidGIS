@@ -140,5 +140,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // avoid static error
         AppComponent.getInstance().bgisApi.userLogin(new User(email_str, password_str)).enqueue(callback);
+        // enqueue работает в отдельном потоке
     }
 }

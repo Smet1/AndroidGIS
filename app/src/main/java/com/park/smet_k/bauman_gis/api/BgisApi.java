@@ -5,6 +5,8 @@ import com.park.smet_k.bauman_gis.model.Message;
 import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -31,4 +33,7 @@ public interface BgisApi {
 
     @DELETE("/clear_routes/{id}")
     Call<Message> deleteHistory(@Path("id") Integer id);
+
+    @GET("/get_routes/{id}")
+    Call<List<RouteModel>> pullRoutes(@Path("id") Integer id);
 }

@@ -2,8 +2,13 @@ package com.park.smet_k.bauman_gis;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.park.smet_k.bauman_gis.api.BgisApi;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Retrofit;
 import okhttp3.OkHttpClient;
@@ -19,6 +24,10 @@ public class AppComponent {
     public final BgisApi bgisApi;
 
     private final SharedPreferences prefs;
+
+    private final Executor executor = Executors.newSingleThreadExecutor();
+
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     public static AppComponent getInstance() {
         return instance;
@@ -50,4 +59,6 @@ public class AppComponent {
             instance = new AppComponent(context);
         }
     }
+
+//    ListenerHandler<On>
 }

@@ -17,7 +17,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;
+
+import java.util.List;
 
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
+
+    DBWorker dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getUserInfo();
+        getUserRoutes();
+    }
+
+    private void getUserRoutes() {
+        SharedPreferences preferences = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+        Integer userId = preferences.getInt(KEY_OAUTH, -1);
+        dbHelper = new DBWorker(this);
+
+        Callback<List<RouteModel>> callback = new Callback<List<RouteModel>>() {
+
+            @Override
+            public void onResponse(retrofit2.Call<List<RouteModel>> call, Response<List<RouteModel>> response) {
+
+                List<RouteModel> body = response.body();
+                if (body != null) {
+                    Log.d(LOG_TAG, "--- pullRoutes OK body != null --- id = " + userId.toString());
+                    // очищаю таблицу
+                    AppComponent.getInstance().dbWorker.truncate(dbHelper);
+
+                    for (RouteModel i : body) {
+                        AppComponent.getInstance().dbWorker.insert(dbHelper, i.getPoint_from(), i.getPoint_to());
+                    }
+
+                } else {
+                    Log.d(LOG_TAG, "--- pullRoutes OK body == null --- id = " + userId.toString());
+                    // TODO(): сделать логаут, тк в этом случае пользователя на сервере нет
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<List<RouteModel>> call, Throwable t) {
+                Log.d(LOG_TAG, "--- pullRoutes ERROR onFailure ---");
+
+                t.printStackTrace();
+            }
+        };
+
+        // avoid static error
+        AppComponent.getInstance().bgisApi.pullRoutes(userId).enqueue(callback);
     }
 
     private void getUserInfo() {
