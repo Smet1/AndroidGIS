@@ -1,5 +1,7 @@
 package com.park.smet_k.bauman_gis.api;
 
+import com.park.smet_k.bauman_gis.Route;
+import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;
 
 import retrofit2.Call;
@@ -20,4 +22,8 @@ public interface BgisApi {
 
     @POST("/post")
     Call<User> userSignUp(@Body User user);
+
+
+    @POST("/insert")
+    Call<RouteModel> pushRoute(@Body RouteModel routeModel);
 }
