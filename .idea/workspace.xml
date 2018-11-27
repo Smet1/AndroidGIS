@@ -24,7 +24,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26e8c2ce-734f-4eeb-bc75-e91fd080b316" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/NavigatorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/NavigatorActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -97,8 +97,8 @@
       <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SignUpActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="104" column="10" lean-forward="true" selection-start-line="71" selection-start-column="8" selection-end-line="104" selection-end-column="10" />
+            <state relative-caret-position="562">
+              <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="107" selection-end-column="107" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,17 +109,31 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
+            <state relative-caret-position="653">
+              <caret line="85" column="61" selection-start-line="85" selection-start-column="55" selection-end-line="85" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NavigatorActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SettingsFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="583">
+              <caret line="68" column="33" lean-forward="true" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2019#2020#0" expanded="true" />
+                <element signature="e#2078#2079#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NavigatorActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/NavigatorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+            <state relative-caret-position="90">
+              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="25" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -148,7 +162,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -156,8 +170,8 @@
       <file leaf-file-name="BgisApi.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
+            <state relative-caret-position="480">
+              <caret line="32" column="56" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,30 +187,6 @@
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login_activity.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/login_activity.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="31" selection-end-line="62" selection-end-column="17" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
             <state />
           </provider>
         </entry>
@@ -2483,7 +2473,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_route.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/RouteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/RecyclerRouteList.java" />
@@ -2514,7 +2503,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AccountFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/DBWorker.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AppComponent.java" />
@@ -2532,8 +2520,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SignUpActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/RouteModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/NavigatorActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/Message.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java" />
       </list>
     </option>
   </component>
@@ -2929,7 +2919,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smet_k/bauman_gis/RoutesListFragment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_route.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_blue.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item.xml" />
@@ -2940,16 +2929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3279,33 +3258,31 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SignUpActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
+        <state relative-caret-position="562">
+          <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="107" selection-end-column="107" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SignUpActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="104" column="10" lean-forward="true" selection-start-line="71" selection-start-column="8" selection-end-line="104" selection-end-column="10" />
+        <state relative-caret-position="285">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#213#214#0" expanded="true" />
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#315#316#0" expanded="true" />
+            <element signature="e#361#362#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3328,10 +3305,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="56" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="85" column="61" selection-start-line="85" selection-start-column="55" selection-end-line="85" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/NavigatorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+        <state relative-caret-position="90">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="25" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/SettingsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="583">
+          <caret line="68" column="33" lean-forward="true" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="true" />
+            <element signature="e#2078#2079#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

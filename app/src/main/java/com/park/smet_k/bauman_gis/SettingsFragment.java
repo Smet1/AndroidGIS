@@ -1,5 +1,6 @@
 package com.park.smet_k.bauman_gis;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.park.smet_k.bauman_gis.model.Message;
+import com.park.smet_k.bauman_gis.model.RouteModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
+
 public class SettingsFragment extends Fragment {
+    private final static String KEY_IS_FIRST = "is_first";
+    private final static String KEY_OAUTH = "oauth";
+    private final static String STORAGE_NAME = "storage";
     private DBWorker dbWorker;
 
     public static SettingsFragment newInstance() {
@@ -35,16 +48,31 @@ public class SettingsFragment extends Fragment {
         dbWorker = new DBWorker(getActivity());
         Button reset = getActivity().findViewById(R.id.clear_button);
 
-        reset.setOnClickListener(new View.OnClickListener(){
+        reset.setOnClickListener(v -> {
+            AppComponent.getInstance().dbWorker.truncate(dbWorker);
+            SharedPreferences preferences = getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
 
-            @Override
-            public void onClick(View v) {
-                AppComponent.getInstance().dbWorker.truncate(dbWorker);
-                Toast toast = Toast.makeText(getActivity(),
-                        "История маршрутов очищена!",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-            }
+            Integer userId = preferences.getInt(KEY_OAUTH, -1);
+
+            Callback<Message> callback = new Callback<Message>() {
+                @Override
+                public void onResponse(Call<Message> call, Response<Message> response) {
+                }
+
+                @Override
+                public void onFailure(Call<Message> call, Throwable t) {
+                    t.printStackTrace();
+                }
+
+            };
+
+            // avoid static error
+            AppComponent.getInstance().bgisApi.deleteHistory(userId).enqueue(callback);
+
+            Toast toast = Toast.makeText(getActivity(),
+                    "История маршрутов очищена!",
+                    Toast.LENGTH_SHORT);
+            toast.show();
         });
     }
 }

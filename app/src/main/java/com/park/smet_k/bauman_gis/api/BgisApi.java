@@ -1,11 +1,13 @@
 package com.park.smet_k.bauman_gis.api;
 
 import com.park.smet_k.bauman_gis.Route;
+import com.park.smet_k.bauman_gis.model.Message;
 import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -26,4 +28,7 @@ public interface BgisApi {
 
     @POST("/insert")
     Call<RouteModel> pushRoute(@Body RouteModel routeModel);
+
+    @DELETE("/clear_routes/{id}")
+    Call<Message> deleteHistory(@Path("id") Integer id);
 }
