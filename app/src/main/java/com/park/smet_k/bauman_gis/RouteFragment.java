@@ -6,12 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ import java.util.TreeMap;
 
 public class RouteFragment extends Fragment {
     // просчет маршрута при создании фрагмента
-
+    String LOG_TAG = "RouteFragment";
 
     @Nullable
     @Override
@@ -73,15 +75,17 @@ public class RouteFragment extends Fragment {
         GridLocation start = new GridLocation(1, 4);
         GridLocation goal = new GridLocation( 8, 5);
 
+//        int check = start.compare(goal);
+//        Log.d(LOG_TAG, Integer.toString(check));
+
 //        Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
-        // TODO(): hash -> tree map
         TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
         TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
 
         AStarSearch test = new AStarSearch();
         test.doAStarSearch(grid, start, goal, came_from, cost_so_far);
 
-        goal.getY();
+        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
     }
 }
 

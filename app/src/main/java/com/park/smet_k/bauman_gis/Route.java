@@ -1,14 +1,12 @@
 package com.park.smet_k.bauman_gis;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -58,8 +56,18 @@ class GridLocation {
     }
 
     public int compare(GridLocation o) {
-        if (this.getX() < o.getX() && this.getY() < o.getY()) {
+//        if (this.getX() < o.getX() && this.getY() < o.getY()) {
+//            return 0;
+//        } else {
+//            return 1;
+//        }
+        if (this.getX() < o.getX()) {
             return 1;
+        } else if (this.getY() < o.getY()) {
+            if (this.getX().equals(o.getX()))
+                return 1;
+            else
+                return 0;
         } else {
             return 0;
         }
@@ -69,8 +77,8 @@ class GridLocation {
 // для приоритетной очередин
 @RequiresApi(api = Build.VERSION_CODES.N)
 class AStarSearch {
-//    Pair<GridLocation, Double> PQElement;
-    PriorityQueue<Pair<GridLocation, Double>> frontier;
+    //    Pair<GridLocation, Double> PQElement;
+    private PriorityQueue<Pair<GridLocation, Double>> frontier;
 
     public static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
 
@@ -105,6 +113,7 @@ class AStarSearch {
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
+//                    came_from.put(current, next);
                 }
             }
             Log.d("search", Integer.toString(counter));
@@ -112,36 +121,54 @@ class AStarSearch {
 
     }
 
+    public ArrayList<GridLocation> reconstruct_path(GridLocation start, GridLocation goal, Map<GridLocation, GridLocation> came_from) {
+        ArrayList<GridLocation> path = new ArrayList<>();
+        GridLocation current = goal;
+
+        while (current != start) {
+            path.add(current);
+            current = came_from.get(current);
+        }
+
+        path.add(start);
+
+        return path;
+    }
+
+
     // евристика для A со звездой
-    static double heuristic(GridLocation a,GridLocation b){
+    static double heuristic(GridLocation a, GridLocation b){
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 }
 
 class GridWithWeights {
-    ArrayList<GridLocation> DIRS = new ArrayList<>();
+    ArrayList<GridLocation> DIRS;
     Integer width, height;
-    Set<GridLocation> walls = new HashSet<>();
+    Set<GridLocation> walls;
 
     public GridWithWeights() {
+        width = 0;
+        height = 0;
+        DIRS = new ArrayList<>();
+        walls = new TreeSet<>(GridLocation::compare);
+
         DIRS.add(new GridLocation(1,0));
         DIRS.add(new GridLocation(0, -1));
         DIRS.add(new GridLocation(-1,0));
         DIRS.add(new GridLocation(0,1));
-
-        width = 0;
-        height = 0;
-
     }
 
     public GridWithWeights(Integer w, Integer h) {
+        width = w;
+        height = h;
+        DIRS = new ArrayList<>();
+        walls = new TreeSet<>(GridLocation::compare);
+
         DIRS.add(new GridLocation(1,0));
         DIRS.add(new GridLocation(0, -1));
         DIRS.add(new GridLocation(-1,0));
         DIRS.add(new GridLocation(0,1));
-
-        width = w;
-        height = h;
     }
 
     public void add_rect(Integer x1, Integer y1, Integer x2, Integer y2) {
@@ -160,7 +187,7 @@ class GridWithWeights {
 
     // в границах?
     boolean in_bounds(GridLocation id) {
-        return 0 <= id.getX() && id.getX() < width && 0 <= id.getY() && id.getY() < height;
+        return ((0 <= id.getX()) && (id.getX() < this.width) && (0 <= id.getY()) && (id.getY() < this.height));
     }
 
     // проверка на проходимость
@@ -186,4 +213,5 @@ class GridWithWeights {
 
         return results;
     }
+
 }

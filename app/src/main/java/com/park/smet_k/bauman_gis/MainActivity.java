@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onFailure(retrofit2.Call<List<RouteModel>> call, Throwable t) {
                 Log.d(LOG_TAG, "--- pullRoutes ERROR onFailure ---");
 
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Server not reachable",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
                 t.printStackTrace();
             }
         };
@@ -121,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFailure(retrofit2.Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- getUser ERROR onFailure ---");
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Server not reachable",
+                        Toast.LENGTH_SHORT);
+                toast.show();
 
                 t.printStackTrace();
             }

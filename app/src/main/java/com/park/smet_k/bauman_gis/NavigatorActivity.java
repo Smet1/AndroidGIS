@@ -2,6 +2,7 @@ package com.park.smet_k.bauman_gis;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -44,7 +45,7 @@ public class NavigatorActivity extends AppCompatActivity {
 
 
         startNewActivityBtn.setOnClickListener(v -> {
-            EditText check_edit = (EditText) findViewById(R.id.InputFrom);
+            EditText check_edit = findViewById(R.id.InputFrom);
             Integer from;
             try {
                 from = Integer.parseInt(check_edit.getText().toString());
@@ -52,13 +53,13 @@ public class NavigatorActivity extends AppCompatActivity {
             } catch (NumberFormatException e) {
                 from = 0;
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "А хуй тебе!",
+                        "Invalid values!",
                         Toast.LENGTH_SHORT);
                 toast.show();
                 return;
             }
 
-            check_edit = (EditText) findViewById(R.id.InputTo);
+            check_edit = findViewById(R.id.InputTo);
             Integer to;
             try {
                 to = Integer.parseInt(check_edit.getText().toString());
@@ -66,7 +67,7 @@ public class NavigatorActivity extends AppCompatActivity {
             } catch (NumberFormatException e) {
                 to = 0;
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "А хуй тебе!",
+                        "Invalid values!",
                         Toast.LENGTH_SHORT);
                 toast.show();
                 return;
@@ -79,7 +80,7 @@ public class NavigatorActivity extends AppCompatActivity {
             Callback<RouteModel> callback = new Callback<RouteModel>() {
 
                 @Override
-                public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
+                public void onResponse(@NonNull Call<RouteModel> call, Response<RouteModel> response) {
                     RouteModel body = response.body();
                     if (body != null) {
                         Log.d(LOG_TAG, "--- Login OK body != null ---");
