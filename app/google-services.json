@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "45628213858",
+    "firebase_url": "https://androidtp-7eb2b.firebaseio.com",
+    "project_id": "androidtp-7eb2b",
+    "storage_bucket": "androidtp-7eb2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45628213858:android:b1d269381209d70c",
+        "android_client_info": {
+          "package_name": "com.park.smet_k.bauman_gis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45628213858-in50scj4s3smprr77npqghigj3h7tjnt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.park.smet_k.bauman_gis",
+            "certificate_hash": "e3ade69e71506609971a9d553696ed184881f178"
+          }
+        },
+        {
+          "client_id": "45628213858-6nk9aiq4v9m5teflgm1rk9rtj2r4sola.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACdXuX1tATx0GGbjygHvOoo1XRJ_f5G4c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45628213858-6nk9aiq4v9m5teflgm1rk9rtj2r4sola.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
