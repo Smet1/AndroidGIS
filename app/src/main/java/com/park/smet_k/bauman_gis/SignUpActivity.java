@@ -37,12 +37,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signup:
+                findViewById(R.id.signup).setEnabled(false);
+                findViewById(R.id.textViewLogin).setEnabled(false);
+
                 userRegister();
 
                 break;
             case R.id.textViewLogin:
-
+                findViewById(R.id.signup).setEnabled(false);
+                findViewById(R.id.textViewLogin).setEnabled(false);
                 startLoginActivity();
+
                 break;
         }
     }

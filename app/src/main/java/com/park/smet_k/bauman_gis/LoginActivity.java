@@ -60,12 +60,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
+                findViewById(R.id.login).setEnabled(false);
+                findViewById(R.id.textViewRegister).setEnabled(false);
                 userLogin();
 
                 break;
             case R.id.textViewRegister:
-
+                findViewById(R.id.login).setEnabled(false);
+                findViewById(R.id.textViewRegister).setEnabled(false);
                 startSignUpActivity();
+
                 break;
         }
     }

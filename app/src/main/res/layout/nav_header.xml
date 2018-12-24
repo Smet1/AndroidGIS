@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#3F51B5"
+    android:background="#ebebeb"
     android:padding="16dp">
 
     
@@ -24,7 +24,6 @@
             android:id="@+id/display_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFF"
             android:textSize="18dp" />
 
         <TextView
@@ -32,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="your@s.mail"
-            android:textColor="#FFF"
             android:textSize="14dp" />
     </LinearLayout>
 </LinearLayout>

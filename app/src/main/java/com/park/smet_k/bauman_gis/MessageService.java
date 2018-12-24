@@ -2,6 +2,9 @@ package com.park.smet_k.bauman_gis;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -12,6 +15,7 @@ public class MessageService extends FirebaseMessagingService {
 
     public static final String TAG = "NOTIFICATION";
     private static final int NOTIFICATION_ID_SIMPLE = 1;
+    private Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -41,11 +45,11 @@ public class MessageService extends FirebaseMessagingService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, MainActivity.CHANNEL_DEFAULT);
 
-        builder.setSmallIcon(R.drawable.ic_map_black_24dp)
+        builder.setSmallIcon(R.drawable.ic_announcement)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setAutoCancel(true);
-
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri);
 
         manager.notify(NOTIFICATION_ID_SIMPLE, builder.build());
     }

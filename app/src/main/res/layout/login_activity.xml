@@ -13,7 +13,8 @@
         android:layout_marginBottom="10dp"
         android:text="Login"
         android:layout_centerHorizontal="true"
-        android:textSize="40sp"/>
+        android:textSize="40sp"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -59,6 +60,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:text="Login!"/>
+        android:text="Login!"
+        />
 
 </RelativeLayout>

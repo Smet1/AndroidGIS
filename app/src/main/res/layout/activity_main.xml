@@ -31,12 +31,14 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#3F51B5"
-        app:itemTextColor="#FFF"
-        app:itemIconTint="#FFF"
+        android:background="#ebebeb"
         app:menu="@menu/nav_menu"
         app:headerLayout="@layout/nav_header"
         android:layout_gravity="start">
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
+
+    <!--android:background="#3F51B5"-->
+    <!--app:itemTextColor="#FFF"-->
+    <!--app:itemIconTint="#FFF"-->
