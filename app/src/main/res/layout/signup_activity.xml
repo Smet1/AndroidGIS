@@ -6,23 +6,26 @@
     tools:context=".SignUpActivity">
 
     <TextView
+        android:id="@+id/signupHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="48dp"
         android:text="SignUp"
+        android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
-        android:textSize="40sp"/>
+        android:textSize="40sp"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <EditText
             android:id="@+id/edit_email"
@@ -40,24 +43,32 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="32dp"
+        android:text="Sign Up!"
+        android:background="@drawable/contained_rounded_btn"
+        android:textColor="#ebebeb"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:translationZ="4dp"/>
+
     <TextView
         android:id="@+id/textViewLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@id/signup"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:text="Click to login"
+        android:text="Already have account?"
         android:textAlignment="center"
-        android:lineSpacingExtra="7dp"/>
-
-    <Button
-        android:id="@+id/signup"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:text="Sign Up!"/>
+        android:lineSpacingExtra="8dp"/>
 
 </RelativeLayout>

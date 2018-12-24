@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
+
+
 
 //    private final BgisApi bgisApi = AppComponent.getInstance().bgisApi;
 
@@ -58,18 +62,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         switch (v.getId()) {
             case R.id.login:
                 findViewById(R.id.login).setEnabled(false);
                 findViewById(R.id.textViewRegister).setEnabled(false);
+                v.startAnimation(animAlpha);
+
                 userLogin();
+
+                findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.textViewRegister).setEnabled(true);
 
                 break;
             case R.id.textViewRegister:
                 findViewById(R.id.login).setEnabled(false);
                 findViewById(R.id.textViewRegister).setEnabled(false);
+                v.startAnimation(animAlpha);
+
                 startSignUpActivity();
 
+                findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.textViewRegister).setEnabled(true);
                 break;
         }
     }
