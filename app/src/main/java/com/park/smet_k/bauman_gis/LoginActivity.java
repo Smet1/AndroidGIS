@@ -66,9 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton = findViewById(R.id.login);
         loginSwitch = findViewById(R.id.textViewLogin);
 
-
-//        findViewById(R.id.login).setOnClickListener(this);
-//        findViewById(R.id.textViewRegister).setOnClickListener(this);
         registerButton.setOnClickListener(this);
         registerSwitch.setOnClickListener(this);
 
@@ -104,18 +101,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.login:
                 findViewById(R.id.login).setEnabled(false);
-                findViewById(R.id.textViewRegister).setEnabled(false);
+                findViewById(R.id.textViewLogin).setEnabled(false);
                 v.startAnimation(animAlpha);
 
                 userLogin();
 
                 findViewById(R.id.login).setEnabled(true);
-                findViewById(R.id.textViewRegister).setEnabled(true);
+                findViewById(R.id.textViewLogin).setEnabled(true);
                 break;
 
             case R.id.signup:
                 findViewById(R.id.signup).setEnabled(false);
-                findViewById(R.id.textViewLogin).setEnabled(false);
+                findViewById(R.id.textViewRegister).setEnabled(false);
 
                 userRegister();
 
@@ -125,8 +122,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.textViewLogin:
                 findViewById(R.id.login).setEnabled(false);
-                findViewById(R.id.textViewRegister).setEnabled(false);
+                findViewById(R.id.textViewLogin).setEnabled(false);
                 v.startAnimation(animAlpha);
+
+
+                emailLogin.clearFocus();
+                emailLogin.setError(null);
+                passwordLogin.clearFocus();
+                passwordLogin.setError(null);
+
 
                 registerForm.animate().translationX(0);
                 registerHeader.animate().translationX(0);
@@ -139,13 +143,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginSwitch.animate().translationX(-2000);
 
                 findViewById(R.id.login).setEnabled(true);
-                findViewById(R.id.textViewRegister).setEnabled(true);
+                findViewById(R.id.textViewLogin).setEnabled(true);
                 break;
 
             case R.id.textViewRegister:
-                findViewById(R.id.login).setEnabled(false);
+                findViewById(R.id.signup).setEnabled(false);
                 findViewById(R.id.textViewRegister).setEnabled(false);
                 v.startAnimation(animAlpha);
+
+
+                emailSignup.clearFocus();
+                emailSignup.setError(null);
+                passwordSignup.clearFocus();
+                passwordSignup.setError(null);
+
 
                 registerForm.animate().translationX(2000);
                 registerHeader.animate().translationX(2000);
@@ -157,17 +168,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginButton.animate().translationX(0);
                 loginSwitch.animate().translationX(0);
 
-                findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.signup).setEnabled(true);
                 findViewById(R.id.textViewRegister).setEnabled(true);
                 break;
 
         }
-    }
-
-    private void startSignUpActivity() {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     private void userLogin() {
