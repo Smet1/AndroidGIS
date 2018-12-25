@@ -20,6 +20,9 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+// TODO(): переделать настройки на PreferenceFragmentCompat
+// https://developer.android.com/guide/topics/ui/settings/?hl=ru
+
 public class SettingsFragment extends Fragment {
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";

@@ -33,12 +33,13 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="24dp"
         android:layout_width="160dp"
-        android:layout_height="34dp"
+        android:layout_height="48dp"
         android:text="Clear"
         android:background="@drawable/contained_rounded_btn"
         android:textSize="16sp"
         android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
         android:elevation="6dp"
+        android:padding="8dp"
         android:stateListAnimator="@null"
         android:translationZ="4dp" />
 

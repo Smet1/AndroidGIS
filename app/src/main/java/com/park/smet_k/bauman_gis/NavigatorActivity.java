@@ -52,10 +52,12 @@ public class NavigatorActivity extends AppCompatActivity {
                 cur_from = from;
             } catch (NumberFormatException e) {
                 from = 0;
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Invalid values!",
-                        Toast.LENGTH_SHORT);
-                toast.show();
+                check_edit.setError("Invalid value");
+                check_edit.requestFocus();
+//                Toast toast = Toast.makeText(getApplicationContext(),
+//                        "Invalid values!",
+//                        Toast.LENGTH_SHORT);
+//                toast.show();
                 return;
             }
 
@@ -66,10 +68,12 @@ public class NavigatorActivity extends AppCompatActivity {
                 cur_to = to;
             } catch (NumberFormatException e) {
                 to = 0;
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Invalid values!",
-                        Toast.LENGTH_SHORT);
-                toast.show();
+                check_edit.setError("Invalid value");
+                check_edit.requestFocus();
+//                Toast toast = Toast.makeText(getApplicationContext(),
+//                        "Invalid values!",
+//                        Toast.LENGTH_SHORT);
+//                toast.show();
                 return;
             }
 

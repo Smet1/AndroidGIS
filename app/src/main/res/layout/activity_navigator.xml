@@ -6,32 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/InputFrom"
-        android:layout_width="152dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_alignParentBottom="true"
-        android:hint="From"
-        android:inputType=""
-        android:autofillHints="dfg" />
+    <!--<EditText-->
+        <!--android:id="@+id/InputFrom"-->
+        <!--android:layout_width="152dp"-->
+        <!--android:layout_height="52dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:hint="From"-->
+        <!--android:inputType=""-->
+        <!--android:autofillHints="dfg" />-->
 
-    <EditText
-        android:id="@+id/InputTo"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/InputFromWrap"
         android:layout_width="152dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/InputFrom"
+        android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
-        android:hint="To"
-        android:autofillHints=""
-        android:inputType="" />
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/InputFrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From"
+            android:inputType="text"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/InputToWrap"
+        android:layout_toEndOf="@+id/InputFromWrap"
+        android:layout_width="152dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/InputTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To"
+            android:inputType="text"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--<EditText-->
+        <!--android:id="@+id/InputTo"-->
+        <!--android:layout_width="152dp"-->
+        <!--android:layout_height="52dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_toEndOf="@+id/InputFrom"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:hint="To"-->
+        <!--android:autofillHints=""-->
+        <!--android:inputType="" />-->
 
     <Button
         android:id="@+id/Calculate"
-        android:layout_toEndOf="@+id/InputTo"
+        android:layout_toEndOf="@+id/InputToWrap"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_width="152dp"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.model.User;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,10 +26,10 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final String LOG_TAG = "LoginActivity";
 
-    private EditText emailLogin;
-    private EditText passwordLogin;
-    private EditText emailSignup;
-    private EditText passwordSignup;
+    private TextInputEditText emailLogin;
+    private TextInputEditText passwordLogin;
+    private TextInputEditText emailSignup;
+    private TextInputEditText passwordSignup;
 
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
@@ -73,10 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginSwitch.setOnClickListener(this);
 
 
-        registerForm.animate().translationX(-2000);
-        registerHeader.animate().translationX(-2000);
-        registerButton.animate().translationX(-2000);
-        registerSwitch.animate().translationX(-2000);
+        registerForm.animate().translationX(2000);
+        registerHeader.animate().translationX(2000);
+        registerButton.animate().translationX(2000);
+        registerSwitch.animate().translationX(2000);
 
 
         // =================
@@ -128,8 +131,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 emailLogin.clearFocus();
                 emailLogin.setError(null);
+                Objects.requireNonNull(emailLogin.getText()).clear();
+
                 passwordLogin.clearFocus();
                 passwordLogin.setError(null);
+                Objects.requireNonNull(passwordLogin.getText()).clear();
+
 
 
                 registerForm.animate().translationX(0);
@@ -154,8 +161,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 emailSignup.clearFocus();
                 emailSignup.setError(null);
+                Objects.requireNonNull(emailSignup.getText()).clear();
+
                 passwordSignup.clearFocus();
                 passwordSignup.setError(null);
+                Objects.requireNonNull(passwordSignup.getText()).clear();
 
 
                 registerForm.animate().translationX(2000);

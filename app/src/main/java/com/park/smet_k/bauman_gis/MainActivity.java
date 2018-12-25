@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getUserInfo();
         getUserRoutes();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, ServerNewsFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
     }
 
     private void getUserRoutes() {
