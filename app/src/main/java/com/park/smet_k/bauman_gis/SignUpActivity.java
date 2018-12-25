@@ -1,8 +1,8 @@
 package com.park.smet_k.bauman_gis;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -77,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Callback<User> callback = new Callback<User>() {
 
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, Response<User> response) {
                 User body = response.body();
                 if (body != null) {
                     Log.d(LOG_TAG, "--- Login OK body != null ---");
@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Server Error",

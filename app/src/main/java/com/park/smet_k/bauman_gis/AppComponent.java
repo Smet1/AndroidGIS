@@ -20,8 +20,8 @@ public class AppComponent {
     private final static String STORAGE_NAME = "storage";
 
     private static AppComponent instance = null;
-    public final DBWorker dbWorker;
-    public final BgisApi bgisApi;
+    final DBWorker dbWorker;
+    final BgisApi bgisApi;
 
     private final SharedPreferences prefs;
 
@@ -54,7 +54,7 @@ public class AppComponent {
                 .create(BgisApi.class);
     }
 
-    public static void init(Context context) {
+    static void init(Context context) {
         if (instance == null) {
             instance = new AppComponent(context);
         }

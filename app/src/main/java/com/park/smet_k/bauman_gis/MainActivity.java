@@ -18,6 +18,7 @@ import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,13 +29,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    String LOG_TAG = "MainActivity";
+    private String LOG_TAG = "MainActivity";
 
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
 
-    DBWorker dbHelper;
+    private DBWorker dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getUserInfo();
         getUserRoutes();
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Callback<List<RouteModel>> callback = new Callback<List<RouteModel>>() {
 
             @Override
-            public void onResponse(retrofit2.Call<List<RouteModel>> call, Response<List<RouteModel>> response) {
+            public void onResponse(@NonNull retrofit2.Call<List<RouteModel>> call, Response<List<RouteModel>> response) {
 
                 List<RouteModel> body = response.body();
                 if (body != null) {
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             @Override
-            public void onFailure(retrofit2.Call<List<RouteModel>> call, Throwable t) {
+            public void onFailure(@NonNull retrofit2.Call<List<RouteModel>> call, Throwable t) {
                 Log.d(LOG_TAG, "--- pullRoutes ERROR onFailure ---");
 
                 Toast toast = Toast.makeText(getApplicationContext(),
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Callback<User> callback = new Callback<User>() {
 
             @Override
-            public void onResponse(retrofit2.Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull retrofit2.Call<User> call, Response<User> response) {
 
                 User body = response.body();
                 if (body != null) {
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             @Override
-            public void onFailure(retrofit2.Call<User> call, Throwable t) {
+            public void onFailure(@NonNull retrofit2.Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- getUser ERROR onFailure ---");
 
                 Toast toast = Toast.makeText(getApplicationContext(),

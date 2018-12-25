@@ -34,7 +34,7 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
     }
 
     @Override
-    public void onBindViewHolder(RoutesRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RoutesRecyclerViewHolder holder, int position) {
         holder.bind(data.get(position), this.onItemClickListener);
     }
 

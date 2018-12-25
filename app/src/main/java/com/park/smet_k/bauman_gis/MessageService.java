@@ -2,7 +2,6 @@ package com.park.smet_k.bauman_gis;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -13,7 +12,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MessageService extends FirebaseMessagingService {
 
-    public static final String TAG = "NOTIFICATION";
+    private static final String TAG = "NOTIFICATION";
     private static final int NOTIFICATION_ID_SIMPLE = 1;
     private Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 

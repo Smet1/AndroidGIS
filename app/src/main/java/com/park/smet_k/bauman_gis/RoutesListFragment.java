@@ -17,14 +17,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class RoutesListFragment extends Fragment {
 
     private final static String KEY = "list";
 
     private List<Route> recentRoutes = new ArrayList<>();
-    RecyclerView numbers;
-    DBWorker dbHelper;
+    private RecyclerView numbers;
+    private DBWorker dbHelper;
 
 
     public static RoutesListFragment newInstance(Collection<Route> in) {
@@ -92,8 +93,10 @@ public class RoutesListFragment extends Fragment {
         RouteFragment routeFragment = RouteFragment.newInstance(i.getFrom(), i.getTo());
 
         // выставляю значения в эдит текст в нижнем баре
-        EditText editText = (EditText) getActivity().findViewById(R.id.InputFrom);
+        EditText editText = (EditText) Objects.requireNonNull(getActivity()).findViewById(R.id.InputFrom);
+//        EditText editText = (EditText) getActivity().findViewById(R.id.InputFrom);
         editText.setText(Integer.toString(i.getFrom()));
+//        editText.setText(Integer.toString(i.getFrom()));
 
         editText = (EditText) getActivity().findViewById(R.id.InputTo);
         editText.setText(Integer.toString(i.getTo()));

@@ -12,7 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.model.Message;
-import com.park.smet_k.bauman_gis.model.RouteModel;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,21 +50,23 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dbWorker = new DBWorker(getActivity());
-        Button reset = getActivity().findViewById(R.id.clear_button);
+        Button reset = Objects.requireNonNull(getActivity()).findViewById(R.id.clear_button);
+//        Button reset = getActivity().findViewById(R.id.clear_button);
 
         reset.setOnClickListener(v -> {
             AppComponent.getInstance().dbWorker.truncate(dbWorker);
-            SharedPreferences preferences = getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+            SharedPreferences preferences = Objects.requireNonNull(getContext()).getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+//            SharedPreferences preferences = getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
 
             Integer userId = preferences.getInt(KEY_OAUTH, -1);
 
             Callback<Message> callback = new Callback<Message>() {
                 @Override
-                public void onResponse(Call<Message> call, Response<Message> response) {
+                public void onResponse(@NonNull Call<Message> call, @NonNull Response<Message> response) {
                 }
 
                 @Override
-                public void onFailure(Call<Message> call, Throwable t) {
+                public void onFailure(@NonNull Call<Message> call, Throwable t) {
                     t.printStackTrace();
                 }
 

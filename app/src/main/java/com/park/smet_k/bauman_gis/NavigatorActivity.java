@@ -8,26 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.model.RouteModel;
-import com.park.smet_k.bauman_gis.model.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NavigatorActivity extends AppCompatActivity {
-    final String LOG_TAG = "NavigatorActivity";
+    private final String LOG_TAG = "NavigatorActivity";
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
-    DBWorker dbHelper;
-    Integer cur_from = 0;
-    Integer cur_to = 0;
+    private DBWorker dbHelper;
+    private Integer cur_from = 0;
+    private Integer cur_to = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,7 +102,7 @@ public class NavigatorActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<RouteModel> call, Throwable t) {
+                public void onFailure(@NonNull Call<RouteModel> call, Throwable t) {
                     Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Server Error",

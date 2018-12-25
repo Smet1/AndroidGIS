@@ -99,6 +99,6 @@ public class DBWorker extends SQLiteOpenHelper {
     }
 
     //insert
-    //selet
+    //select
     //update
 }

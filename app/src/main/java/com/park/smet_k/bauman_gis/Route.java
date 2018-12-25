@@ -80,16 +80,16 @@ class AStarSearch {
     //    Pair<GridLocation, Double> PQElement;
     private PriorityQueue<Pair<GridLocation, Double>> frontier;
 
-    public static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
+    private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
 
     AStarSearch() {
         frontier = new PriorityQueue<>(PQComparator);
     }
 
 
-    public void doAStarSearch(GridWithWeights graph,
-                GridLocation start, GridLocation goal,
-                Map<GridLocation, GridLocation> came_from, Map<GridLocation, Double> cost_so_far) {
+    void doAStarSearch(GridWithWeights graph,
+                       GridLocation start, GridLocation goal,
+                       Map<GridLocation, GridLocation> came_from, Map<GridLocation, Double> cost_so_far) {
 //        frontier = new PriorityQueue<>(PQComparator);
         frontier.add(new Pair<>(start, 0.0));
 

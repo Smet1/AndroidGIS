@@ -1,6 +1,5 @@
 package com.park.smet_k.bauman_gis.api;
 
-import com.park.smet_k.bauman_gis.Route;
 import com.park.smet_k.bauman_gis.model.Message;
 import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.User;

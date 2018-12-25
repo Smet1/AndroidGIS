@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="24dp"
         android:layout_width="160dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:text="Clear"
         android:background="@drawable/contained_rounded_btn"
         android:textSize="16sp"

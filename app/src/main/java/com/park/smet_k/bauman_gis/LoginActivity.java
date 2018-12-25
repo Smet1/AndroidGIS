@@ -3,16 +3,15 @@ package com.park.smet_k.bauman_gis;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -212,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Callback<User> callback = new Callback<User>() {
 
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, Response<User> response) {
                 SharedPreferences.Editor editor = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE).edit();
                 User body = response.body();
                 if (body != null) {
@@ -236,7 +235,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Server Error",
@@ -276,7 +275,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Callback<User> callback = new Callback<User>() {
 
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, Response<User> response) {
                 User body = response.body();
                 if (body != null) {
                     Log.d(LOG_TAG, "--- Login OK body != null ---");
@@ -306,7 +305,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, Throwable t) {
                 Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Server Error",
