@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.model.User;
@@ -21,13 +23,24 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final String LOG_TAG = "LoginActivity";
 
-    private EditText email;
-    private EditText password;
+    private EditText emailLogin;
+    private EditText passwordLogin;
+    private EditText emailSignup;
+    private EditText passwordSignup;
 
     private final static String KEY_IS_FIRST = "is_first";
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
 
+    private TextView registerHeader;
+    private View registerForm;
+    private Button registerButton;
+    private TextView registerSwitch;
+
+    private TextView loginHeader;
+    private View loginForm;
+    private Button loginButton;
+    private TextView loginSwitch;
 
 
 //    private final BgisApi bgisApi = AppComponent.getInstance().bgisApi;
@@ -37,11 +50,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        email = findViewById(R.id.edit_email);
-        password = findViewById(R.id.edit_password);
+        emailLogin = findViewById(R.id.edit_email_login);
+        passwordLogin = findViewById(R.id.edit_password_login);
 
-        findViewById(R.id.login).setOnClickListener(this);
-        findViewById(R.id.textViewRegister).setOnClickListener(this);
+        emailSignup = findViewById(R.id.edit_email_signup);
+        passwordSignup = findViewById(R.id.edit_password_signup);
+
+        registerHeader = findViewById(R.id.signupHeader);
+        registerForm = findViewById(R.id.linearLayoutSignUp);
+        registerButton = findViewById(R.id.signup);
+        registerSwitch = findViewById(R.id.textViewRegister);
+
+        loginHeader = findViewById(R.id.loginHeader);
+        loginForm = findViewById(R.id.linearLayoutLogin);
+        loginButton = findViewById(R.id.login);
+        loginSwitch = findViewById(R.id.textViewLogin);
+
+
+//        findViewById(R.id.login).setOnClickListener(this);
+//        findViewById(R.id.textViewRegister).setOnClickListener(this);
+        registerButton.setOnClickListener(this);
+        registerSwitch.setOnClickListener(this);
+
+        loginButton.setOnClickListener(this);
+        loginSwitch.setOnClickListener(this);
+
+
+        registerForm.animate().translationX(-2000);
+        registerHeader.animate().translationX(-2000);
+        registerButton.animate().translationX(-2000);
+        registerSwitch.animate().translationX(-2000);
 
 
         // =================
@@ -73,18 +111,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 findViewById(R.id.login).setEnabled(true);
                 findViewById(R.id.textViewRegister).setEnabled(true);
-
                 break;
+
+            case R.id.signup:
+                findViewById(R.id.signup).setEnabled(false);
+                findViewById(R.id.textViewLogin).setEnabled(false);
+
+                userRegister();
+
+                findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.textViewRegister).setEnabled(true);
+                break;
+
+            case R.id.textViewLogin:
+                findViewById(R.id.login).setEnabled(false);
+                findViewById(R.id.textViewRegister).setEnabled(false);
+                v.startAnimation(animAlpha);
+
+                registerForm.animate().translationX(0);
+                registerHeader.animate().translationX(0);
+                registerButton.animate().translationX(0);
+                registerSwitch.animate().translationX(0);
+
+                loginForm.animate().translationX(-2000);
+                loginHeader.animate().translationX(-2000);
+                loginButton.animate().translationX(-2000);
+                loginSwitch.animate().translationX(-2000);
+
+                findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.textViewRegister).setEnabled(true);
+                break;
+
             case R.id.textViewRegister:
                 findViewById(R.id.login).setEnabled(false);
                 findViewById(R.id.textViewRegister).setEnabled(false);
                 v.startAnimation(animAlpha);
 
-                startSignUpActivity();
+                registerForm.animate().translationX(2000);
+                registerHeader.animate().translationX(2000);
+                registerButton.animate().translationX(2000);
+                registerSwitch.animate().translationX(2000);
+
+                loginForm.animate().translationX(0);
+                loginHeader.animate().translationX(0);
+                loginButton.animate().translationX(0);
+                loginSwitch.animate().translationX(0);
 
                 findViewById(R.id.login).setEnabled(true);
                 findViewById(R.id.textViewRegister).setEnabled(true);
                 break;
+
         }
     }
 
@@ -95,12 +171,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin() {
-        String email_str = email.getText().toString().trim();
-        String password_str = password.getText().toString().trim();
+        String email_str = emailLogin.getText().toString().trim();
+        String password_str = passwordLogin.getText().toString().trim();
 
         if (email_str.isEmpty()) {
-            email.setError("email required");
-            email.requestFocus();
+            emailLogin.setError("email required");
+            emailLogin.requestFocus();
             return;
         }
 
@@ -111,8 +187,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        }
 
         if (password_str.isEmpty()) {
-            password.setError("password required");
-            password.requestFocus();
+            passwordLogin.setError("password required");
+            passwordLogin.requestFocus();
             return;
         }
 
@@ -156,5 +232,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // avoid static error
         AppComponent.getInstance().bgisApi.userLogin(new User(email_str, password_str)).enqueue(callback);
         // enqueue работает в отдельном потоке
+    }
+
+    private void userRegister() {
+        String email_str = emailSignup.getText().toString().trim();
+        String password_str = passwordSignup.getText().toString().trim();
+
+        if (email_str.isEmpty()) {
+            emailSignup.setError("email required");
+            emailSignup.requestFocus();
+            return;
+        }
+
+//        if (!Patterns.EMAIL_ADDRESS.matcher(email_str).matches()) {
+//            email.setError("enter valid email");
+//            email.requestFocus();
+//            return;
+//        }
+
+        if (password_str.isEmpty()) {
+            passwordSignup.setError("password required");
+            passwordSignup.requestFocus();
+            return;
+        }
+
+        Callback<User> callback = new Callback<User>() {
+
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User body = response.body();
+                if (body != null) {
+                    Log.d(LOG_TAG, "--- Login OK body != null ---");
+
+                    registerForm.animate().translationX(2000);
+                    registerHeader.animate().translationX(2000);
+                    registerButton.animate().translationX(2000);
+                    registerSwitch.animate().translationX(2000);
+
+                    loginForm.animate().translationX(0);
+                    loginHeader.animate().translationX(0);
+                    loginButton.animate().translationX(0);
+                    loginSwitch.animate().translationX(0);
+
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Success, now login please",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Log.d(LOG_TAG, "--- Login OK body == null ---");
+
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Invalid login/password",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d(LOG_TAG, "--- Login ERROR onFailure ---");
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Server Error",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                t.printStackTrace();
+            }
+        };
+
+        // avoid static error
+        AppComponent.getInstance().bgisApi.userSignUp(new User(email_str, password_str)).enqueue(callback);
     }
 }

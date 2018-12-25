@@ -9,7 +9,7 @@
         android:id="@+id/loginHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
+        android:layout_above="@+id/linearLayoutLogin"
         android:layout_marginBottom="48dp"
         android:text="Login"
         android:textColor="@color/colorPrimary"
@@ -18,7 +18,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -28,14 +28,14 @@
         android:padding="8dp">
 
         <EditText
-            android:id="@+id/edit_email"
+            android:id="@+id/edit_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/edit_password"
+            android:id="@+id/edit_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
@@ -48,9 +48,77 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/linearLayoutLogin"
         android:layout_marginTop="32dp"
         android:text="Login!"
+        android:background="@drawable/contained_rounded_btn"
+        android:textColor="#ebebeb"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:translationZ="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="Don't have account?"
+        android:textAlignment="center"
+        android:lineSpacingExtra="8dp"/>
+
+    <!-- //////////////////////////////////// -->
+
+    <TextView
+        android:id="@+id/signupHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayoutSignUp"
+        android:layout_marginBottom="48dp"
+        android:text="SignUp"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/edit_email_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/edit_password_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="textPassword"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayoutSignUp"
+        android:layout_marginTop="32dp"
+        android:text="Sign Up!"
         android:background="@drawable/contained_rounded_btn"
         android:textColor="#ebebeb"
         android:elevation="6dp"
@@ -61,13 +129,13 @@
         android:id="@+id/textViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login"
+        android:layout_below="@id/signup"
         android:layout_marginTop="24dp"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="Don't have account?"
+        android:text="Already have account?"
         android:textAlignment="center"
         android:lineSpacingExtra="8dp"/>
 
