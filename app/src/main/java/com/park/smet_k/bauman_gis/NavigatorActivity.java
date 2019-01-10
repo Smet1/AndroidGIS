@@ -49,7 +49,6 @@ public class NavigatorActivity extends AppCompatActivity {
                 from = Integer.parseInt(check_edit.getText().toString());
                 cur_from = from;
             } catch (NumberFormatException e) {
-                from = 0;
                 check_edit.setError("Invalid value");
                 check_edit.requestFocus();
 //                Toast toast = Toast.makeText(getApplicationContext(),
@@ -65,7 +64,6 @@ public class NavigatorActivity extends AppCompatActivity {
                 to = Integer.parseInt(check_edit.getText().toString());
                 cur_to = to;
             } catch (NumberFormatException e) {
-                to = 0;
                 check_edit.setError("Invalid value");
                 check_edit.requestFocus();
 //                Toast toast = Toast.makeText(getApplicationContext(),

@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:textSize="32sp"
         android:textColor="@color/colorPrimary"
-        android:text="Routes list" />
+        android:text="@string/routes_list_title" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/route_list"

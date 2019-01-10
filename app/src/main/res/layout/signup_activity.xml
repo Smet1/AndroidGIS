@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
         android:layout_marginBottom="48dp"
-        android:text="SignUp"
+        android:text="@string/signup"
         android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
         android:textSize="40sp"
@@ -31,14 +31,15 @@
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="email"
-            android:inputType="text"/>
+            android:hint="@string/email"
+            android:inputType="text"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword"/>
 
     </LinearLayout>

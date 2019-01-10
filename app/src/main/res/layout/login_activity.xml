@@ -7,49 +7,31 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/loginHeader"
+        android:id="@+id/skip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/skip_login"
+        android:textSize="20sp"
+        android:gravity="end"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/colorMiddle"
+        android:drawableEnd="@drawable/ic_last_page_black_24dp"
+        android:padding="8dp"
+        android:drawablePadding="2dp" />
+
+
+    <TextView
+        android:id="@+id/Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayoutLogin"
-        android:layout_marginBottom="48dp"
-        android:text="Login"
-        android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
-        android:textSize="40sp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
         />
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/linearLayoutLogin"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="24dp"-->
-        <!--android:layout_marginRight="24dp"-->
-        <!--android:orientation="vertical"-->
-        <!--android:padding="8dp">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="email"-->
-            <!--android:labelFor="@+id/edit_email_login"/>-->
-
-         <!--<EditText-->
-            <!--android:id="@+id/edit_email_login"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="email"-->
-            <!--android:inputType="text" />-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/edit_password_login"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="password"-->
-            <!--android:inputType="textPassword"/>-->
-
-    <!--</LinearLayout>-->
-
 
     <LinearLayout
         android:id="@+id/linearLayoutLogin"
@@ -70,7 +52,7 @@
                 android:id="@+id/edit_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="text"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -86,7 +68,7 @@
                 android:id="@+id/edit_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -101,7 +83,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/linearLayoutLogin"
         android:layout_marginTop="32dp"
-        android:text="Login!"
+        android:text="@string/login"
         android:background="@drawable/contained_rounded_btn"
         android:textColor="#ebebeb"
         android:elevation="6dp"
@@ -118,23 +100,23 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="Don't have account?"
+        android:text="@string/ask_account"
         android:textAlignment="center"
         android:lineSpacingExtra="8dp"/>
 
     <!-- //////////////////////////////////// -->
 
-    <TextView
-        android:id="@+id/signupHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayoutSignUp"
-        android:layout_marginBottom="48dp"
-        android:text="SignUp"
-        android:textColor="@color/colorPrimary"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/signupHeader"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/linearLayoutSignUp"-->
+        <!--android:layout_marginBottom="24dp"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:text="@string/title_signup"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textSize="36sp"-->
+        <!--/>-->
 
     <LinearLayout
         android:id="@+id/linearLayoutSignUp"
@@ -146,20 +128,6 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <!--<EditText-->
-            <!--android:id="@+id/edit_email_signup"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="email"-->
-            <!--android:inputType="text"/>-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/edit_password_signup"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="password"-->
-            <!--android:inputType="textPassword"/>-->
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,7 +137,7 @@
                 android:id="@+id/edit_email_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="text"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -186,7 +154,7 @@
                 android:id="@+id/edit_password_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -199,7 +167,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/linearLayoutSignUp"
         android:layout_marginTop="32dp"
-        android:text="Sign Up!"
+        android:text="@string/signup_btn"
         android:background="@drawable/contained_rounded_btn"
         android:textColor="#ebebeb"
         android:elevation="6dp"
@@ -216,7 +184,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="Already have account?"
+        android:text="@string/ask_register"
         android:textAlignment="center"
         android:lineSpacingExtra="8dp"/>
 

@@ -11,7 +11,7 @@
         android:layout_marginTop="16dp"
         android:textSize="32sp"
         android:textColor="@color/colorPrimary"
-        android:text="Settings" />
+        android:text="@string/settings" />
 
     <TextView
         android:id="@+id/label_clear"
@@ -22,7 +22,7 @@
         android:layout_marginTop="24dp"
         android:textSize="24sp"
         android:textColor="@color/colorPrimary"
-        android:text="Clear all routes" />
+        android:text="@string/clear_all_routes" />
 
     <Button
         android:id="@+id/clear_button"
@@ -32,7 +32,7 @@
         android:layout_margin="24dp"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:text="Clear"
+        android:text="@string/clear"
         android:background="@drawable/contained_rounded_btn"
         android:textSize="16sp"
         android:drawableStart="@drawable/ic_exit_to_app_black_24dp"

@@ -11,6 +11,6 @@
         android:layout_marginTop="16dp"
         android:textSize="32sp"
         android:textColor="@color/colorPrimary"
-        android:text="News" />
+        android:text="@string/news_title" />
 
 </RelativeLayout>

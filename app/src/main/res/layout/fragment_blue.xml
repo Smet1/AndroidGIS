@@ -22,7 +22,7 @@
         android:layout_below="@id/to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="тут будет построенный маршрут (скоро)"
+        android:text="@string/undone"
         android:textSize="24sp"
         android:padding="8dp"/>
 </RelativeLayout>

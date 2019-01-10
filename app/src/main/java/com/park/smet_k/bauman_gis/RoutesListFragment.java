@@ -93,12 +93,12 @@ public class RoutesListFragment extends Fragment {
         RouteFragment routeFragment = RouteFragment.newInstance(i.getFrom(), i.getTo());
 
         // выставляю значения в эдит текст в нижнем баре
-        EditText editText = (EditText) Objects.requireNonNull(getActivity()).findViewById(R.id.InputFrom);
+        EditText editText = Objects.requireNonNull(getActivity()).findViewById(R.id.InputFrom);
 //        EditText editText = (EditText) getActivity().findViewById(R.id.InputFrom);
         editText.setText(Integer.toString(i.getFrom()));
 //        editText.setText(Integer.toString(i.getFrom()));
 
-        editText = (EditText) getActivity().findViewById(R.id.InputTo);
+        editText = getActivity().findViewById(R.id.InputTo);
         editText.setText(Integer.toString(i.getTo()));
 
         assert bottom != null;
