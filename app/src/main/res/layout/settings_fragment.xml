@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/fragment_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="32sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/settings" />
+    <!--<TextView-->
+        <!--android:id="@+id/fragment_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:textSize="32sp"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:text="@string/settings" />-->
 
     <TextView
         android:id="@+id/label_clear"

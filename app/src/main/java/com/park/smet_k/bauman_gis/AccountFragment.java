@@ -22,6 +22,8 @@ public class AccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Account");
+
         return inflater.inflate(R.layout.account_fragment, container, false);
     }
 }

@@ -2,13 +2,16 @@ package com.park.smet_k.bauman_gis;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("main");
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getUserInfo();
@@ -147,10 +151,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // avoid static error
             AppComponent.getInstance().bgisApi.getUserInfo(userId).enqueue(callback);
         } else {
-            View navHeader = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
-            TextView displayName = navHeader.findViewById(R.id.display_name);
+            NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+            Menu menu = navigationView.getMenu();
+            // changing logout to login
+            MenuItem nav_camara = menu.findItem(R.id.logout);
+            nav_camara.setTitle("Login");
+            
+            // TODO(): add new icon for login
+//            nav_camara.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_launcher));
 
-            displayName.setText("Login please");
+            // hiding account button
+            nav_camara = menu.findItem(R.id.account);
+            nav_camara.setVisible(false);
+
+            // hiding header in menu
+            View navHeader = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
+            navHeader.setVisibility(View.GONE);
         }
 
     }
