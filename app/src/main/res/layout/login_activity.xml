@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/skip"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/skip_login"
@@ -16,9 +16,10 @@
         android:gravity="end"
         android:layout_marginEnd="16dp"
         android:textColor="@color/colorMiddle"
-        android:drawableEnd="@drawable/ic_last_page_black_24dp"
+        android:drawableStart="@drawable/ic_last_page_black_24dp"
         android:padding="8dp"
-        android:drawablePadding="2dp" />
+        android:drawablePadding="2dp"
+        android:layout_alignParentEnd="true"/>
 
 
     <TextView

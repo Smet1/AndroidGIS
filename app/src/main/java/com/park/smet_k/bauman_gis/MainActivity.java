@@ -111,40 +111,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Integer userId = preferences.getInt(KEY_OAUTH, -1);
 
-        Callback<User> callback = new Callback<User>() {
+        if (userId != 0) {
+            Callback<User> callback = new Callback<User>() {
 
-            @Override
-            public void onResponse(@NonNull retrofit2.Call<User> call, Response<User> response) {
+                @Override
+                public void onResponse(@NonNull retrofit2.Call<User> call, Response<User> response) {
 
-                User body = response.body();
-                if (body != null) {
-                    Log.d(LOG_TAG, "--- getUser OK body != null ---");
+                    User body = response.body();
+                    if (body != null) {
+                        Log.d(LOG_TAG, "--- getUser OK body != null ---");
 
-                    View navHeader = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
-                    TextView displayName = navHeader.findViewById(R.id.display_name);
+                        View navHeader = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
+                        TextView displayName = navHeader.findViewById(R.id.display_name);
 
-                    displayName.setText(body.getLogin());
-                } else {
-                    Log.d(LOG_TAG, "--- getUser OK body == null ---");
+                        displayName.setText(body.getLogin());
+                    } else {
+                        Log.d(LOG_TAG, "--- getUser OK body == null ---");
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull retrofit2.Call<User> call, Throwable t) {
-                Log.d(LOG_TAG, "--- getUser ERROR onFailure ---");
+                @Override
+                public void onFailure(@NonNull retrofit2.Call<User> call, Throwable t) {
+                    Log.d(LOG_TAG, "--- getUser ERROR onFailure ---");
 
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Server not reachable",
-                        Toast.LENGTH_SHORT);
-                toast.show();
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Server not reachable",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
 
-                t.printStackTrace();
-            }
-        };
+                    t.printStackTrace();
+                }
+            };
 
-        // avoid static error
-        AppComponent.getInstance().bgisApi.getUserInfo(userId).enqueue(callback);
+            // avoid static error
+            AppComponent.getInstance().bgisApi.getUserInfo(userId).enqueue(callback);
+        } else {
+            View navHeader = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
+            TextView displayName = navHeader.findViewById(R.id.display_name);
+
+            displayName.setText("Login please");
+        }
+
     }
 
     @Override

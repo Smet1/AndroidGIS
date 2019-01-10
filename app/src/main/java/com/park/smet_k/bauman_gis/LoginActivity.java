@@ -76,6 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setOnClickListener(this);
         loginSwitch.setOnClickListener(this);
 
+        findViewById(R.id.skip).setOnClickListener(this);
+
 
         registerForm.animate().translationX(3000);
 //        registerHeader.animate().translationX(3000);
@@ -140,7 +142,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Objects.requireNonNull(passwordLogin.getText()).clear();
 
 
-
                 registerForm.animate().translationX(0);
 //                registerHeader.animate().translationX(0);
                 registerButton.animate().translationX(0);
@@ -182,6 +183,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 findViewById(R.id.signup).setEnabled(true);
                 findViewById(R.id.textViewRegister).setEnabled(true);
+                break;
+
+            case R.id.skip:
+                Log.d(LOG_TAG, "--- Skip ---");
+
+                SharedPreferences.Editor editor = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE).edit();
+                // сохраняю айди незареганного пользователя
+                editor.putInt(KEY_OAUTH, 0);
+                // уже логинился
+                editor.putBoolean(KEY_IS_FIRST, false);
+                editor.apply();
+                startMainActivity();
                 break;
 
         }
@@ -287,7 +300,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     registerSwitch.animate().translationX(3000);
 
                     loginForm.animate().translationX(0);
-                    loginHeader.animate().translationX(0);
+//                    loginHeader.animate().translationX(0);
                     loginButton.animate().translationX(0);
                     loginSwitch.animate().translationX(0);
 
