@@ -99,7 +99,8 @@ public class RouteFragment extends Fragment {
         // фиксируем прибыль (уличная магия)
 //        textView.setText(Arrays.toString(graph.getNextVertices(0).stream().toArray(String[]::new)));
         ArrayList<Pair<Integer, Integer>> tmp = graph.getNextVertices(0);
-        graph.dijkstra(0, 2);
+        ArrayList<Integer> route = new ArrayList<>();
+        route = graph.dijkstra(0, 2);
 
 //        6
 //        9

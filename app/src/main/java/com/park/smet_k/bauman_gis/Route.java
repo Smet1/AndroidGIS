@@ -7,6 +7,7 @@ import android.util.Pair;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Map;
@@ -260,7 +261,7 @@ class WeightedGraph {
         return outEdges.get(vertex);
     }
 
-    public void dijkstra(Integer from, Integer to) {
+    public ArrayList<Integer> dijkstra(Integer from, Integer to) {
         TreeSet<Pair<Integer, Integer>> deque = new TreeSet<>((Comparator<Pair<Integer, Integer>>) (o1, o2) -> {
             if (o1.first - o2.first == 0) {
                 if (o1.second.equals(o2.second))
@@ -303,7 +304,18 @@ class WeightedGraph {
             }
         }
 
+        ArrayList<Integer> route = new ArrayList<>();
+        Integer i = to;
+        while (verts_from.get(i).size() != 0) {
+            route.add(i);
+            i = verts_from.get(i).get(0);
+        }
+
+        route.add(from);
+        Collections.reverse(route);
         Log.d("dijkstra", "end");
+
+        return route;
     }
 
 }
