@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 SharedPreferences.Editor editor = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE).edit();
                 // сохраняю айди незареганного пользователя
-                editor.putInt(KEY_OAUTH, 0);
+                editor.putInt(KEY_OAUTH, -1);
                 // уже логинился
                 editor.putBoolean(KEY_IS_FIRST, false);
                 editor.apply();

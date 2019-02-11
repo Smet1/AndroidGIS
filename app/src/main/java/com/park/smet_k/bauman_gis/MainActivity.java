@@ -2,11 +2,9 @@ package com.park.smet_k.bauman_gis;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +43,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // если первый раз запустил приложуху
+        SharedPreferences preferences = getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+        boolean usr = preferences.getBoolean(KEY_IS_FIRST, true);
+
+        if (usr) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+        ////////////////
+
         NavigationView navView = findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
 
@@ -61,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getUserInfo();
         getUserRoutes();
 
+        // показываем новостную ленту
+        // лучше начинать с навигации
+        // TODO(): после переезда на фрагменты навигации сделать то, что написано выше
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, ServerNewsFragment.newInstance())
                 .addToBackStack(null)
@@ -115,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Integer userId = preferences.getInt(KEY_OAUTH, -1);
 
-        if (userId != 0) {
+        if (userId != -1) {
             Callback<User> callback = new Callback<User>() {
 
                 @Override
@@ -156,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // changing logout to login
             MenuItem nav_camara = menu.findItem(R.id.logout);
             nav_camara.setTitle("Login");
-            
+
             // TODO(): add new icon for login
 //            nav_camara.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_launcher));
 
