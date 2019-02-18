@@ -214,9 +214,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.navigation: {
-                final Intent navIntent = new Intent(MainActivity.this, NavigatorActivity.class);
+//                final Intent navIntent = new Intent(MainActivity.this, NavigatorActivity.class);
 
-                startActivity(navIntent);
+//                startActivity(navIntent);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, NavigatorFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
                 // TODO(): есть ли смысл закрывать шторку, т.к. анимация
                 drawerLayout.closeDrawers();
                 break;
