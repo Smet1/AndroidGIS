@@ -5,11 +5,9 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.util.Pair;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;

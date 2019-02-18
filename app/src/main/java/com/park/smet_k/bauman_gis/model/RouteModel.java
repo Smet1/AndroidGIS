@@ -29,7 +29,6 @@ public class RouteModel {
     }
 
     public Integer getUser_id() {
-
         return user_id;
     }
 
