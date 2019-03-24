@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getUserInfo();
         getUserRoutes();
 
+        // скачиваем карту
+        AppComponent.getInstance().GetAllStairsInit();
+
         // показываем новостную ленту
         // лучше начинать с навигации
         // TODO(): после переезда на фрагменты навигации сделать то, что написано выше
