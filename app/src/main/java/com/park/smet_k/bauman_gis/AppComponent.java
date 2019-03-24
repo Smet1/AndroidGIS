@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.api.BgisApi;
 import com.park.smet_k.bauman_gis.model.Stairs;
+import com.park.smet_k.bauman_gis.model.StairsLink;
 import com.park.smet_k.bauman_gis.model.User;
 
 import java.util.ArrayList;
@@ -28,7 +29,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class AppComponent {
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
-    private List<Stairs> StairsArray;
+    // массив лестниц
+    public List<Stairs> StairsArray;
+    // массив связей между лестницами (1 связь - в две стороны)
+    public List<StairsLink> StairsLinksArray;
+
     private final String LOG_TAG = "INIT";
 
     private static AppComponent instance = null;
@@ -109,10 +114,16 @@ public class AppComponent {
             public void onFailure(@NonNull Call<List<Stairs>> call, Throwable t) {
                 Log.d(LOG_TAG, "--- GetAllStairsInit ERROR onFailure ---");
 
-                StairsArray = dbWorker.GetAllStairs();
-                if (StairsArray.size() == 0) {
-                    Log.d(LOG_TAG, "--- StairsArray.size == 0 ---");
+                // TODO(): если не будет инета, все упадет)))00)
+                try {
+                    StairsArray = dbWorker.GetAllStairs();
+                } catch (Throwable ex) {
+                    if (StairsArray.size() == 0) {
+                        Log.d(LOG_TAG, "--- StairsArray.size == 0 ---");
+                    }
+                    ex.printStackTrace();
                 }
+
 
                 t.printStackTrace();
             }
@@ -120,5 +131,53 @@ public class AppComponent {
 
         // avoid static error
         this.bgisApi.getStairs().enqueue(callback);
+    }
+
+    public void GetAllStairsLinksInit() {
+        Callback<List<StairsLink>> callback = new Callback<List<StairsLink>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<StairsLink>> call, Response<List<StairsLink>> response) {
+                List<StairsLink> body = response.body();
+                if (body != null) {
+                    Log.d(LOG_TAG, "--- GetAllStairsLinksInit OK body != null ---");
+
+                    StairsLinksArray = body;
+
+                    dbWorker.TruncateStairsLinks();
+                    dbWorker.InsertStairsLinks(StairsLinksArray);
+
+                    for (StairsLink i : StairsLinksArray) {
+                        Log.d(LOG_TAG, i.toString());
+                    }
+
+                } else {
+                    Log.d(LOG_TAG, "--- GetAllStairsLinksInit OK body == null ---");
+
+                    StairsLinksArray = dbWorker.GetAllStairsLinks();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<StairsLink>> call, Throwable t) {
+                Log.d(LOG_TAG, "--- GetAllStairsLinksInit ERROR onFailure ---");
+
+                // TODO(): если не будет инета, все упадет)))00)
+                try {
+                    StairsArray = dbWorker.GetAllStairs();
+                } catch (Throwable ex) {
+                    if (StairsArray.size() == 0) {
+                        Log.d(LOG_TAG, "--- StairsLinksArray.size == 0 ---");
+                    }
+                    ex.printStackTrace();
+                }
+
+
+                t.printStackTrace();
+            }
+        };
+
+        // avoid static error
+        this.bgisApi.getLinks().enqueue(callback);
     }
 }

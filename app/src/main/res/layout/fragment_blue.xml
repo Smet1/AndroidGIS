@@ -19,6 +19,7 @@
         android:textSize="16sp"/>
 
     <TextView
+        android:id="@+id/route"
         android:layout_below="@id/to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

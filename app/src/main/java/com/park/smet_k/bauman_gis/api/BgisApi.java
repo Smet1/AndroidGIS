@@ -3,6 +3,7 @@ package com.park.smet_k.bauman_gis.api;
 import com.park.smet_k.bauman_gis.model.Message;
 import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
+import com.park.smet_k.bauman_gis.model.StairsLink;
 import com.park.smet_k.bauman_gis.model.User;
 
 import java.util.List;
@@ -44,4 +45,7 @@ public interface BgisApi {
     // stairs points block
     @GET("/map/stairs/getall")
     Call<List<Stairs>> getStairs();
+
+    @GET("/map/links/stairs/getall")
+    Call<List<StairsLink>> getLinks();
 }

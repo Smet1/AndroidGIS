@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.park.smet_k.bauman_gis.model.Stairs;
+import com.park.smet_k.bauman_gis.model.StairsLink;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class DBWorker extends SQLiteOpenHelper {
     // Table Names
     private static final String TABLE_RECENT_ROUTES = "RecentRoutes";
     private static final String TABLE_MAP_STAIRS = "map_stairs";
+    private static final String TABLE_MAP_STAIRS_LINKS = "map_stairs_links";
 
     // RECENT_ROUTES Table - column names
     private static final String KEY_RR_ID = "id INTEGER PRIMARY KEY AUTOINCREMENT";
@@ -38,6 +40,13 @@ public class DBWorker extends SQLiteOpenHelper {
     private static final String KEY_MS_LEVEL = "level INTEGER";
     private static final String KEY_MS_OPEN = "open INTEGER";
 
+    // MAP_STAIRS_LINKS Table - column names
+    private static final String KEY_MSL_ID = "id INTEGER";
+    private static final String KEY_MSL_ID_FROM = "id_from INTEGER";
+    private static final String KEY_MSL_ID_TO = "id_to INTEGER";
+    private static final String KEY_MSL_WEIGHT = "weight INTEGER";
+    private static final String KEY_MSL_OPEN = "open INTEGER";
+
     // Table Create Statements
     // RECENT_ROUTES table create statement
     private static final String CREATE_TABLE_RECENT_ROUTES = "CREATE TABLE " + TABLE_RECENT_ROUTES +
@@ -47,6 +56,11 @@ public class DBWorker extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_MAP_STAIRS = "CREATE TABLE " + TABLE_MAP_STAIRS +
             "( " + KEY_MS_ID + ", " + KEY_MS_X + ", " + KEY_MS_Y + ", " + KEY_MS_LEVEL +
             ", " + KEY_MS_OPEN + ")";
+
+    // MAP_STAIRS_LINKS table create statement
+    private static final String CREATE_TABLE_MAP_STAIRS_LINKS = "CREATE TABLE " + TABLE_MAP_STAIRS_LINKS +
+            "( " + KEY_MSL_ID + ", " + KEY_MSL_ID_FROM + ", " + KEY_MSL_ID_TO + ", " +
+            KEY_MSL_WEIGHT + ", " + KEY_MSL_OPEN + ")";
 
     public DBWorker(Context context) {
 //        private final String table = "RecentRoutes";
@@ -61,6 +75,7 @@ public class DBWorker extends SQLiteOpenHelper {
         // создаем таблицу с полями
         db.execSQL(CREATE_TABLE_RECENT_ROUTES);
         db.execSQL(CREATE_TABLE_MAP_STAIRS);
+        db.execSQL(CREATE_TABLE_MAP_STAIRS_LINKS);
     }
 
     @Override
@@ -68,6 +83,7 @@ public class DBWorker extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECENT_ROUTES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAP_STAIRS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAP_STAIRS_LINKS);
 
         // create new tables
         onCreate(db);
@@ -136,6 +152,8 @@ public class DBWorker extends SQLiteOpenHelper {
     }
 
     public void InsertStairs(List<Stairs> stairsList) {
+        Log.d(LOG_TAG, "--- Insert in map stairs: ---");
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         for (Stairs val : stairsList) {
@@ -159,8 +177,11 @@ public class DBWorker extends SQLiteOpenHelper {
     }
 
     public void TruncateStairs() {
+        Log.d(LOG_TAG, "--- map stairs truncate: ---");
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_MAP_STAIRS);
+        Log.d(LOG_TAG, "--- map stairs truncate DONE ---");
+
     }
 
     public List<Stairs> GetAllStairs() {
@@ -176,13 +197,79 @@ public class DBWorker extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Stairs st = new Stairs();
-                st.setId(c.getInt((c.getColumnIndex(KEY_MS_ID))));
-                st.setX((c.getInt(c.getColumnIndex(KEY_MS_X))));
-                st.setY((c.getInt(c.getColumnIndex(KEY_MS_Y))));
-                st.setLevel((c.getInt(c.getColumnIndex(KEY_MS_LEVEL))));
+                st.setId(c.getInt((c.getColumnIndex("id"))));
+                st.setX((c.getInt(c.getColumnIndex("x"))));
+                st.setY((c.getInt(c.getColumnIndex("y"))));
+                st.setLevel((c.getInt(c.getColumnIndex("level"))));
 
                 // analyse true or false from int
-                int tmp = c.getInt(c.getColumnIndex(KEY_MS_OPEN));
+                int tmp = c.getInt(c.getColumnIndex("open"));
+                st.setOpen(tmp == 1);
+
+                // adding to stairs list
+                stairs.add(st);
+            } while (c.moveToNext());
+        }
+
+        return stairs;
+    }
+
+
+    //
+
+    public void InsertStairsLinks(List<StairsLink> stairsLinksList) {
+        Log.d(LOG_TAG, "--- Insert in map stairs: ---");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        for (StairsLink val : stairsLinksList) {
+            ContentValues values = new ContentValues();
+
+//            KEY_MS_ID
+//            KEY_MS_X
+//            KEY_MS_Y
+//            KEY_MS_LEVEL
+//            KEY_MS_OPEN
+
+            values.put("id", val.getId());
+            values.put("id_from", val.getIdFrom());
+            values.put("id_to", val.getIdTo());
+            values.put("weight", val.getWeight());
+            values.put("open", val.getOpen() ? 1 : 0);
+
+            long rowID = db.insert(TABLE_MAP_STAIRS_LINKS, null, values);
+            Log.d(LOG_TAG, "row inserted map_stairs_links, ID = " + rowID);
+        }
+    }
+
+    public void TruncateStairsLinks() {
+        Log.d(LOG_TAG, "--- map_stairs_links truncate: ---");
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_MAP_STAIRS_LINKS);
+        Log.d(LOG_TAG, "--- map_stairs_links truncate DONE ---");
+
+    }
+
+    public List<StairsLink> GetAllStairsLinks() {
+        List<StairsLink> stairs = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_MAP_STAIRS_LINKS;
+
+        Log.e(LOG_TAG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                StairsLink st = new StairsLink();
+                st.setId(c.getInt((c.getColumnIndex("id"))));
+                st.setIdFrom((c.getInt(c.getColumnIndex("id_from"))));
+                st.setIdTo((c.getInt(c.getColumnIndex("id_to"))));
+                st.setWeight((c.getInt(c.getColumnIndex("weight"))));
+
+                // analyse true or false from int
+                int tmp = c.getInt(c.getColumnIndex("open"));
                 st.setOpen(tmp == 1);
 
                 // adding to stairs list

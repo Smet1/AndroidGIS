@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.park.smet_k.bauman_gis.model.StairsLink;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class RouteFragment extends Fragment {
     // просчет маршрута при создании фрагмента
@@ -82,25 +85,45 @@ public class RouteFragment extends Fragment {
 //
 //        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
 
-        WeightedGraph graph = new WeightedGraph(6, 9);
+        // TODO(): размер графа и количество связей
+//        WeightedGraph graph = new WeightedGraph(6, 9);
+        WeightedGraph graph = new WeightedGraph(AppComponent.getInstance().StairsArray.size(),
+                AppComponent.getInstance().StairsLinksArray.size());
+
+        // TODO(): не генерить граф здесь
+        List<StairsLink> links = AppComponent.getInstance().StairsLinksArray;
+        for (StairsLink val : links) {
+            // id в бд начинаются с 1
+
+            // проверка на валидность связи (открыто или нет)
+            if (val.getOpen()) {
+                graph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
+            }
+        }
 
         // заполняем
-        graph.addEdge(0, 3, 1);
-        graph.addEdge(0, 4, 2);
-        graph.addEdge(1,2, 7);
-        graph.addEdge(1,3, 2);
-        graph.addEdge(1,4, 3);
-        graph.addEdge(1,5, 3);
-        graph.addEdge(2,5, 3);
-        graph.addEdge(3,4, 4);
-        graph.addEdge(3, 5, 6);
+//        graph.addEdge(0, 3, 1);
+//        graph.addEdge(0, 4, 2);
+//        graph.addEdge(1,2, 7);
+//        graph.addEdge(1,3, 2);
+//        graph.addEdge(1,4, 3);
+//        graph.addEdge(1,5, 3);
+//        graph.addEdge(2,5, 3);
+//        graph.addEdge(3,4, 4);
+//        graph.addEdge(3, 5, 6);
 
         // фиксируем прибыль (уличная магия)
 //        textView.setText(Arrays.toString(graph.getNextVertices(0).stream().toArray(String[]::new)));
-        ArrayList<Pair<Integer, Integer>> tmp = graph.getNextVertices(0);
         ArrayList<Integer> route = new ArrayList<>();
-        route = graph.dijkstra(0, 2);
+        route = graph.dijkstra(from - 1, to - 1);
+        String result = "";
+        for (Integer val : route) {
+            val += 1;
+            result += (", " + val.toString());
+        }
 
+        TextView routeView = view.findViewById(R.id.route);
+        routeView.setText(result);
 //        6
 //        9
 //        0 3 1
