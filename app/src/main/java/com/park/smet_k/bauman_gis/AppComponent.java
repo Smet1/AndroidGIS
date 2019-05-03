@@ -24,6 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import okhttp3.OkHttpClient;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class AppComponent {
@@ -156,6 +157,7 @@ public class AppComponent {
                     StairsLinksCount = StairsLinksArray.size();
 
                     // создаем граф лестниц
+                    Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
                     StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
 
                     for (StairsLink val : StairsLinksArray) {
