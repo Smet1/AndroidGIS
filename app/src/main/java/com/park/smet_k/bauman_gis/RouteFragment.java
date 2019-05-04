@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class RouteFragment extends Fragment {
     // просчет маршрута при создании фрагмента
@@ -77,6 +78,35 @@ public class RouteFragment extends Fragment {
 
         TextView routeView = view.findViewById(R.id.route);
         routeView.setText(result.toString());
+
+        GridWithWeights grid = new GridWithWeights(10, 10);
+        grid.add_rect(2, 0, 3, 9);
+//        Integer x1 = 1, x2 = 4, y1 = 7, y2 = 9;
+//        for (Integer x = x1; x < x2; ++x) {
+//            for (Integer y = y1; y < y2; ++y) {
+//                grid.walls.add(new GridLocation(x, y));
+//            }
+//        }
+
+
+        GridLocation start = new GridLocation(1, 4);
+        GridLocation goal = new GridLocation(8, 5);
+
+//        int check = start.compare(goal);
+//        Log.d(LOG_TAG, Integer.toString(check));
+
+//        Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
+        TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+        TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+
+        AStarSearch test = new AStarSearch();
+        test.doAStarSearch(grid, start, goal, came_from, cost_so_far);
+
+        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+        for (GridLocation i : path) {
+            Log.d("a star", i.getX().toString() + " " + i.getY().toString());
+        }
+
     }
 }
 

@@ -27,6 +27,7 @@ public class Route {
     public int getFrom() {
         return from;
     }
+
     public int getTo() {
         return to;
     }
@@ -34,6 +35,7 @@ public class Route {
     public void setFrom(Integer from) {
         this.from = from;
     }
+
     public void setTo(Integer to) {
         this.to = to;
     }
@@ -62,16 +64,23 @@ class GridLocation {
 //        } else {
 //            return 1;
 //        }
-        if (this.getX() < o.getX()) {
-            return 1;
-        } else if (this.getY() < o.getY()) {
-            if (this.getX().equals(o.getX()))
-                return 1;
-            else
-                return 0;
-        } else {
+
+        if (this.getX().equals(o.getX()) && this.getY().equals(o.getY())) {
             return 0;
         }
+
+        if (this.getX() < o.getX()) {
+            return -1;
+        } else if (this.getY() < o.getY()) {
+            if (this.getX().equals(o.getX()))
+                return -1;
+            else
+                return 1;
+        } else {
+            return 1;
+        }
+
+//        return (this.getX() < o.getX()) ? -1 : ((this.getY().equals(o.getY())) ? )
     }
 }
 
@@ -81,7 +90,11 @@ class AStarSearch {
     //    Pair<GridLocation, Double> PQElement;
     private PriorityQueue<Pair<GridLocation, Double>> frontier;
 
-    private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
+//    private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
+    private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (
+        (c1.second < c2.second) ? -1 : ((c1.second == c2.second) ? 0 : 1)
+        );
+
 
     AStarSearch() {
         frontier = new PriorityQueue<>(PQComparator);
@@ -109,8 +122,18 @@ class AStarSearch {
 
             for (GridLocation next : graph.neighbors(current)) {
                 double new_cost = cost_so_far.get(current) + graph.cost(current, next);
-                if (!cost_so_far.containsKey(next) || new_cost < cost_so_far.get(next)) {
+
+//                if (!cost_so_far.containsKey(next)) {
+                if (cost_so_far.get(next) == null) {
                     cost_so_far.put(next, new_cost);
+                    double priority = new_cost + heuristic(next, goal);
+                    frontier.add(new Pair<>(next, priority));
+                    came_from.put(next, current);
+//                    came_from.put(current, next);
+                    continue;
+                } else if (new_cost < cost_so_far.get(next)) {
+//                    cost_so_far.put(next, new_cost);
+                    cost_so_far.replace(next, new_cost);
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
@@ -138,7 +161,7 @@ class AStarSearch {
 
 
     // евристика для A со звездой
-    static double heuristic(GridLocation a, GridLocation b){
+    static double heuristic(GridLocation a, GridLocation b) {
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 }
@@ -154,10 +177,10 @@ class GridWithWeights {
         DIRS = new ArrayList<>();
         walls = new TreeSet<>(GridLocation::compare);
 
-        DIRS.add(new GridLocation(1,0));
+        DIRS.add(new GridLocation(1, 0));
         DIRS.add(new GridLocation(0, -1));
-        DIRS.add(new GridLocation(-1,0));
-        DIRS.add(new GridLocation(0,1));
+        DIRS.add(new GridLocation(-1, 0));
+        DIRS.add(new GridLocation(0, 1));
     }
 
     public GridWithWeights(Integer w, Integer h) {
@@ -166,10 +189,10 @@ class GridWithWeights {
         DIRS = new ArrayList<>();
         walls = new TreeSet<>(GridLocation::compare);
 
-        DIRS.add(new GridLocation(1,0));
+        DIRS.add(new GridLocation(1, 0));
         DIRS.add(new GridLocation(0, -1));
-        DIRS.add(new GridLocation(-1,0));
-        DIRS.add(new GridLocation(0,1));
+        DIRS.add(new GridLocation(-1, 0));
+        DIRS.add(new GridLocation(0, 1));
     }
 
     public void add_rect(Integer x1, Integer y1, Integer x2, Integer y2) {
@@ -265,7 +288,7 @@ class WeightedGraph {
                 if (o1.second.equals(o2.second))
                     return 1;
                 else
-                    return o1.second-o2.second;
+                    return o1.second - o2.second;
             }
             return o1.first - o2.first;
         });

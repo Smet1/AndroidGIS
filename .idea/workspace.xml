@@ -14,7 +14,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="INIT" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="search" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
@@ -34,6 +34,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,8 +95,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="259">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2146#2159#0" expanded="true" />
@@ -127,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RouteFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RouteFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+            <state relative-caret-position="119">
+              <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,8 +143,28 @@
       <file leaf-file-name="Route.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-930">
-              <caret line="156" column="21" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+            <state relative-caret-position="574">
+              <caret line="336" selection-start-line="336" selection-end-line="337" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1042#1043#0" expanded="true" />
+                <element signature="e#1066#1067#0" expanded="true" />
+                <element signature="e#5324#5325#0" expanded="true" />
+                <element signature="e#5366#5367#0" expanded="true" />
+                <element signature="e#6679#6680#0" expanded="true" />
+                <element signature="e#6711#6712#0" expanded="true" />
+                <element signature="e#6745#6746#0" expanded="true" />
+                <element signature="e#6778#6779#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="389">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -151,11 +172,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppComponent.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AppComponent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AppComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1985">
-              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+            <state relative-caret-position="113">
+              <caret line="159" selection-start-line="159" selection-end-line="159" />
             </state>
           </provider>
         </entry>
@@ -2511,7 +2532,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/RouteModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/RoutePoint.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/nav_menu.xml" />
@@ -2526,6 +2546,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/api/BgisApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AppComponent.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java" />
       </list>
     </option>
@@ -2581,7 +2602,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
+    <property name="device.picker.selection" value="ce051605dbefab3804" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -2783,7 +2804,7 @@
       <window_info id="Build Variants" order="3" sideWeight="0.50060606" side_tool="true" weight="0.21030043" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50214595" side_tool="true" weight="0.47030303" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" weight="0.53212124" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" weight="0.80242425" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32969698" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49928468" weight="0.32969698" />
       <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.49785408" weight="0.47030303" />
@@ -2796,7 +2817,7 @@
       <window_info id="Structure" order="1" sideWeight="0.36969697" side_tool="true" visible="true" weight="0.21030043" />
       <window_info anchor="right" id="Device File Explorer" order="5" sideWeight="0.5018182" side_tool="true" weight="0.32260373" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43757576" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43030304" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="right" id="Preview" order="4" sideWeight="0.49818182" weight="0.32260373" />
       <window_info anchor="right" id="StringPreview" order="8" />
@@ -2863,7 +2884,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java</url>
-          <line>101</line>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
@@ -2874,12 +2895,6 @@
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java</url>
-          <line>105</line>
-          <properties />
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/LoginActivity.java</url>
           <line>106</line>
           <properties />
@@ -2887,33 +2902,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java</url>
-          <line>59</line>
+          <line>104</line>
           <properties />
-          <option name="timeStamp" value="71" />
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java</url>
-          <line>124</line>
+          <line>147</line>
           <properties class="com.park.smet_k.bauman_gis.AStarSearch" method="reconstruct_path">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="80" />
+      <option name="time" value="82" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_bar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -2980,13 +2985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="61">
           <caret line="417" column="25" selection-start-line="417" selection-start-column="25" selection-end-line="417" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/cd8d31bc4551d4a5f55a43b5ca77e36f/jars/classes.jar!/android/support/v4/app/FragmentManagerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1598" selection-start-line="1598" selection-end-line="1598" />
         </state>
       </provider>
     </entry>
@@ -3178,6 +3176,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#2141#2573#0" expanded="true" />
+            <element signature="e#2572#2573#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3226,16 +3228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2101">
-          <caret line="332" column="48" selection-start-line="332" selection-start-column="48" selection-end-line="332" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/DBWorker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -3264,10 +3256,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="259">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2146#2159#0" expanded="true" />
@@ -3276,27 +3275,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/model/User.java">
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/java/util/PriorityQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-930">
-          <caret line="156" column="21" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AppComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1985">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+        <state relative-caret-position="884">
+          <caret line="684" column="17" selection-start-line="684" selection-start-column="17" selection-end-line="684" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -3311,13 +3293,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/cd8d31bc4551d4a5f55a43b5ca77e36f/jars/classes.jar!/android/support/v4/app/FragmentManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+        <state relative-caret-position="204">
+          <caret line="1598" selection-start-line="1598" selection-end-line="1598" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/Route.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="336" selection-start-line="336" selection-end-line="337" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
+            <element signature="e#1066#1067#0" expanded="true" />
+            <element signature="e#5324#5325#0" expanded="true" />
+            <element signature="e#5366#5367#0" expanded="true" />
+            <element signature="e#6679#6680#0" expanded="true" />
+            <element signature="e#6711#6712#0" expanded="true" />
+            <element signature="e#6745#6746#0" expanded="true" />
+            <element signature="e#6778#6779#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/RouteFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/park/smet_k/bauman_gis/AppComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
         </state>
       </provider>
     </entry>
