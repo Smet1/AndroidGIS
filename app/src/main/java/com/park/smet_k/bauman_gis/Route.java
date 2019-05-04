@@ -283,7 +283,7 @@ class WeightedGraph {
     }
 
     public ArrayList<Integer> dijkstra(Integer from, Integer to) {
-        TreeSet<Pair<Integer, Integer>> deque = new TreeSet<>((Comparator<Pair<Integer, Integer>>) (o1, o2) -> {
+        TreeSet<Pair<Integer, Integer>> deque = new TreeSet<>((o1, o2) -> {
             if (o1.first - o2.first == 0) {
                 if (o1.second.equals(o2.second))
                     return 1;

@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // avoid static error
             AppComponent.getInstance().bgisApi.getUserInfo(userId).enqueue(callback);
         } else {
-            NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+            NavigationView navigationView = findViewById(R.id.nav_view);
             Menu menu = navigationView.getMenu();
             // changing logout to login
             MenuItem nav_camara = menu.findItem(R.id.logout);
