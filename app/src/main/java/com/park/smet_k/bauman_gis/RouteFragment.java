@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.park.smet_k.bauman_gis.model.Stairs;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -90,34 +92,64 @@ public class RouteFragment extends Fragment {
 
         result.append("|");
 
+        result.append("run A star on: ");
         for (int i = 0; i < route.size() - 1; i++) {
-            result.append("run A star on: ");
-            if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
-                Log.d("kek", "same level, run A star on " + (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
+            if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
+                    equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
+                Log.d("kek", "same level, run A star on " +
+                        (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
                 result.append(route.get(i)).append(" ").append(route.get(i) + 1).append(", ");
+
+                Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
+                Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
+                Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
+                Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
+
+                GridLocation start = new GridLocation(x_f, y_f);
+                GridLocation goal = new GridLocation(x_l, y_l);
+
+                TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+                TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+
+                AStarSearch test = new AStarSearch();
+                test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+
+
+                ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+
+                result.append("a_star: ");
+                for (GridLocation p : path) {
+                    Log.d("a star", p.getX().toString() + " " + p.getY().toString());
+                    result.append("|").append(p.getX().toString()).append(" ").append(p.getY().toString());
+                }
             }
         }
 
+
+//        GridWithWeights grid = new GridWithWeights(10, 10);
+//        grid.add_rect(2, 0, 3, 9);
+
+//        GridLocation start = new GridLocation(1, 4);
+//        GridLocation goal = new GridLocation(8, 5);
+//
+//        TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+//        TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+//
+//        AStarSearch test = new AStarSearch();
+////        test.doAStarSearch(grid, start, goal, came_from, cost_so_far);
+//        test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+//
+//
+//        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+//
+//        result.append("a_star: ");
+//        for (GridLocation i : path) {
+//            Log.d("a star", i.getX().toString() + " " + i.getY().toString());
+//            result.append("|").append(i.getX().toString()).append(" ").append(i.getY().toString());
+//        }
+
+
         routeView.setText(result.toString());
-
-        GridWithWeights grid = new GridWithWeights(10, 10);
-        grid.add_rect(2, 0, 3, 9);
-
-
-        GridLocation start = new GridLocation(1, 4);
-        GridLocation goal = new GridLocation(8, 5);
-
-        TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
-        TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
-
-        AStarSearch test = new AStarSearch();
-        test.doAStarSearch(grid, start, goal, came_from, cost_so_far);
-
-        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
-        for (GridLocation i : path) {
-            Log.d("a star", i.getX().toString() + " " + i.getY().toString());
-        }
-
     }
 }
 

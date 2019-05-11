@@ -40,6 +40,8 @@ public class AppComponent {
     Integer StairsLinksCount;
     // граф лестниц
     WeightedGraph StairsGraph;
+    // массив графов этажей (грид)
+    List<GridWithWeights> LevelsGraph;
 
     private final String LOG_TAG = "INIT";
 
@@ -87,6 +89,13 @@ public class AppComponent {
         }
     }
 
+    void LevelsInit() {
+        LevelsGraph = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            LevelsGraph.add(new GridWithWeights(100, 100));
+            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
+        }
+    }
 //    ListenerHandler<On>
 
     // загрузка через сеть всех лестниц на старте прилки
