@@ -20,6 +20,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/title"
@@ -28,7 +29,7 @@
             android:textColor="@color/colorMiddle" />
 
         <TextView
-            android:id="@+id/Payload"
+            android:id="@+id/payload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
@@ -40,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Payload"
+            android:layout_below="@+id/payload"
             android:background="@drawable/line" />
     </RelativeLayout>
 </LinearLayout>
