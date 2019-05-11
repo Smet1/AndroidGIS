@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -41,6 +42,26 @@ public class RouteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView textView = view.findViewById(R.id.from);
+        TextView routeView = view.findViewById(R.id.route);
+
+        if (AppComponent.getInstance().StairsGraph == null || AppComponent.getInstance().StairsGraph.getGraphSize() == 0) {
+            Toast toast = Toast.makeText(getContext(),
+                    "stairs graph empty",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            routeView.setText("ERROR: stairs graph empty");
+            return;
+        }
+
+        if (AppComponent.getInstance().StairsArray == null || AppComponent.getInstance().StairsArray.size() == 0) {
+            Toast toast = Toast.makeText(getContext(),
+                    "stairs array empty",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            routeView.setText("ERROR: stairs array empty");
+            return;
+        }
 
         Integer from = 0;
         Integer to = 0;
@@ -49,9 +70,10 @@ public class RouteFragment extends Fragment {
         if (args != null) {
             from = args.getInt("from");
             to = args.getInt("to");
+        } else {
+            return;
         }
 
-        TextView textView = view.findViewById(R.id.from);
         textView.setText(from.toString());
 
         textView = view.findViewById(R.id.to);
@@ -71,31 +93,20 @@ public class RouteFragment extends Fragment {
         for (int i = 0; i < route.size() - 1; i++) {
             result.append("run A star on: ");
             if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
-                Log.d("kek", "same level, run A star on " + String.valueOf(route.get(i) + 1) + " " + String.valueOf(route.get(i + 1) + 1));
+                Log.d("kek", "same level, run A star on " + (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
                 result.append(route.get(i)).append(" ").append(route.get(i) + 1).append(", ");
             }
         }
 
-        TextView routeView = view.findViewById(R.id.route);
         routeView.setText(result.toString());
 
         GridWithWeights grid = new GridWithWeights(10, 10);
         grid.add_rect(2, 0, 3, 9);
-//        Integer x1 = 1, x2 = 4, y1 = 7, y2 = 9;
-//        for (Integer x = x1; x < x2; ++x) {
-//            for (Integer y = y1; y < y2; ++y) {
-//                grid.walls.add(new GridLocation(x, y));
-//            }
-//        }
 
 
         GridLocation start = new GridLocation(1, 4);
         GridLocation goal = new GridLocation(8, 5);
 
-//        int check = start.compare(goal);
-//        Log.d(LOG_TAG, Integer.toString(check));
-
-//        Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
         TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
         TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
 
