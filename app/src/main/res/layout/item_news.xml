@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,38 +11,36 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/pointer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="8dp"
-            android:textSize="20sp"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="title"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@drawable/ic_arrow_forward_black_24dp"
-            />
-
-        <TextView
-            android:id="@+id/num"
-            android:textSize="20sp"
-            android:layout_toStartOf="@id/pointer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"/>
-
-        <TextView
-            android:id="@+id/num_1"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/pointer"
-            android:layout_marginStart="8dp"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/num"
+            android:layout_toEndOf="@+id/title"
+            android:gravity="end"
+            android:text="time"
+            android:textColor="@color/colorMiddle" />
+
+        <TextView
+            android:id="@+id/Payload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginStart="16dp"
+            android:text="Payload"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Payload"
             android:background="@drawable/line" />
     </RelativeLayout>
-
 </LinearLayout>

@@ -35,8 +35,6 @@ public class RoutesListFragment extends Fragment {
         bundle.putSerializable(KEY, (Serializable) in);
         myFragment.setArguments(bundle);
 
-//        recentRoutes.addAll(in);
-
         return myFragment;
     }
 
@@ -63,23 +61,7 @@ public class RoutesListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//
         numbers = view.findViewById(R.id.route_list);
-//        AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
-//
-//        RecyclerView numbers = view.findViewById(R.id.route_list);
-//        numbers.setLayoutManager(new LinearLayoutManager(getContext()));
-//        numbers.setAdapter(numbersAdapter);
-//        numbers.setHasFixedSize(true);
-//
-//        Bundle arguments = getArguments();
-//        if (arguments != null) {
-//            recentRoutes = (List<Route>) arguments.get(KEY);
-//        }
-//
-//        for (Route i : recentRoutes) {
-//            numbersAdapter.add(i);
-//        }
     }
 
     private void onItemClick(Route i) {
@@ -94,9 +76,7 @@ public class RoutesListFragment extends Fragment {
 
         // выставляю значения в эдит текст в нижнем баре
         EditText editText = Objects.requireNonNull(getActivity()).findViewById(R.id.InputFrom);
-//        EditText editText = (EditText) getActivity().findViewById(R.id.InputFrom);
         editText.setText(Integer.toString(i.getFrom()));
-//        editText.setText(Integer.toString(i.getFrom()));
 
         editText = getActivity().findViewById(R.id.InputTo);
         editText.setText(Integer.toString(i.getTo()));
@@ -121,7 +101,6 @@ public class RoutesListFragment extends Fragment {
 
         AdapterRoutesList numbersAdapter = new AdapterRoutesList(getContext(), this::onItemClick);
 
-//        RecyclerView numbers = view.findViewById(R.id.route_list);
         numbers.setLayoutManager(new LinearLayoutManager(getContext()));
         numbers.setAdapter(numbersAdapter);
         numbers.setHasFixedSize(true);
