@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.park.smet_k.bauman_gis.api.BgisApi;
+import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
 import com.park.smet_k.bauman_gis.model.User;
@@ -219,5 +220,34 @@ public class AppComponent {
 
         // получаем связи лестниц (выполняется после загрузки лестниц)
         this.bgisApi.getLinks().enqueue(callback);
+    }
+
+    public void GetNewsInit() {
+        Callback<List<NewsModel>> callback = new Callback<List<NewsModel>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
+                List<NewsModel> body = response.body();
+                if (body != null) {
+                    Log.d(LOG_TAG, "--- GetNewsInit OK body != null ---");
+                    for (NewsModel i : body) {
+                        Log.d(LOG_TAG, i.getTitle() + " " + i.getPayload() + " " + i.getTime());
+                    }
+                } else {
+                    Log.d(LOG_TAG, "--- GetNewsInit OK body == null ---");
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<NewsModel>> call, Throwable t) {
+                Log.d(LOG_TAG, "--- GetNewsInit ERROR onFailure ---");
+
+                t.printStackTrace();
+            }
+        };
+
+        // получаем связи лестниц (выполняется после загрузки лестниц)
+        this.bgisApi.getNews().enqueue(callback);
     }
 }

@@ -1,6 +1,7 @@
 package com.park.smet_k.bauman_gis.api;
 
 import com.park.smet_k.bauman_gis.model.Message;
+import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.RouteModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
@@ -48,4 +49,7 @@ public interface BgisApi {
 
     @GET("/map/links/stairs/getall")
     Call<List<StairsLink>> getLinks();
+
+    @GET("/news")
+    Call<List<NewsModel>> getNews();
 }

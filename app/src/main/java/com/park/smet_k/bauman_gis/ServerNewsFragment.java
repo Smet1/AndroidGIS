@@ -32,7 +32,7 @@ public class ServerNewsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("News");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("NewsModel");
         return inflater.inflate(R.layout.server_news_fragment, container, false);
     }
 

@@ -58,7 +58,7 @@ public class NewsListFragment extends Fragment {
 
 //        dbHelper = new DBWorker(getActivity());
 
-//        List<News> listToShow = AppComponent.getInstance().dbWorker.select(dbHelper, "all", "");
+//        List<NewsModel> listToShow = AppComponent.getInstance().dbWorker.select(dbHelper, "all", "");
         List<News> listToShow = new ArrayList<>();
         listToShow.add(new News("kek1", "kek2", new java.util.Date(29368498236L)));
         listToShow.add(new News("kek2", "kek3", new java.util.Date(2936848236L)));

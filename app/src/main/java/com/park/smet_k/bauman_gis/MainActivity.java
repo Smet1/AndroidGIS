@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AppComponent.getInstance().GetAllStairsLinksInit();
 
         AppComponent.getInstance().LevelsInit();
+
+        AppComponent.getInstance().GetNewsInit();
         // показываем новостную ленту
         // лучше начинать с навигации
         // TODO(): после переезда на фрагменты навигации сделать то, что написано выше
