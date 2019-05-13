@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getUserRoutes();
 
         // скачиваем карту
+        Log.d(LOG_TAG, "INIT map");
+        AppComponent.getInstance().GetNewsInit();
         AppComponent.getInstance().GetAllStairsInit();
         AppComponent.getInstance().GetAllStairsLinksInit();
+//        AppComponent.getInstance().InitStairsGraph();
         AppComponent.getInstance().LevelsInit();
-        AppComponent.getInstance().GetNewsInit();
-
+        
         // показываем новостную ленту
-        // лучше начинать с навигации
-        // TODO(): после переезда на фрагменты навигации сделать то, что написано выше
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, ServerNewsFragment.newInstance())
                 .addToBackStack(null)

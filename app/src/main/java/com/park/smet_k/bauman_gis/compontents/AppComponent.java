@@ -124,6 +124,7 @@ public class AppComponent {
                     Log.d(LOG_TAG, "--- GetAllStairsInit OK body == null ---");
 
                     StairsArray = dbWorker.GetAllStairs();
+                    StairsCount = StairsArray.size();
                 }
             }
 
@@ -140,7 +141,7 @@ public class AppComponent {
                     }
                     ex.printStackTrace();
                 }
-
+                StairsCount = StairsArray.size();
 
                 t.printStackTrace();
             }
@@ -167,17 +168,19 @@ public class AppComponent {
                     // вычисляем количество связей в графе лестниц
                     StairsLinksCount = StairsLinksArray.size();
 
-                    // создаем граф лестниц
-                    Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
-                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
+//                    // создаем граф лестниц
+//                    Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
+//                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
+//
+//                    for (StairsLink val : StairsLinksArray) {
+//                        // id в бд начинаются с 1 (поэтому минус 1)
+//                        // проверка на валидность связи (открыто или нет)
+//                        if (val.getOpen()) {
+//                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
+//                        }
+//                    }
+                    InitStairsGraph();
 
-                    for (StairsLink val : StairsLinksArray) {
-                        // id в бд начинаются с 1 (поэтому минус 1)
-                        // проверка на валидность связи (открыто или нет)
-                        if (val.getOpen()) {
-                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
-                        }
-                    }
 
                 } else {
                     Log.d(LOG_TAG, "--- GetAllStairsLinksInit OK body == null ---");
@@ -187,16 +190,17 @@ public class AppComponent {
                     // вычисляем количество связей в графе лестниц
                     StairsLinksCount = StairsLinksArray.size();
 
-                    // создаем граф лестниц
-                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
-
-                    for (StairsLink val : StairsLinksArray) {
-                        // id в бд начинаются с 1 (поэтому минус 1)
-                        // проверка на валидность связи (открыто или нет)
-                        if (val.getOpen()) {
-                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
-                        }
-                    }
+//                    // создаем граф лестниц
+//                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
+//
+//                    for (StairsLink val : StairsLinksArray) {
+//                        // id в бд начинаются с 1 (поэтому минус 1)
+//                        // проверка на валидность связи (открыто или нет)
+//                        if (val.getOpen()) {
+//                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
+//                        }
+//                    }
+                    InitStairsGraph();
                 }
             }
 
@@ -206,13 +210,27 @@ public class AppComponent {
 
                 // TODO(): если не будет инета, все упадет)))00)
                 try {
-                    StairsArray = dbWorker.GetAllStairs();
+                    StairsLinksArray = dbWorker.GetAllStairsLinks();
                 } catch (Throwable ex) {
-                    if (StairsArray.size() == 0) {
+                    if (StairsLinksArray.size() == 0) {
                         Log.d(LOG_TAG, "--- StairsLinksArray.size == 0 ---");
                     }
                     ex.printStackTrace();
                 }
+                // вычисляем количество связей в графе лестниц
+                StairsLinksCount = StairsLinksArray.size();
+
+//                // создаем граф лестниц
+//                StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
+//
+//                for (StairsLink val : StairsLinksArray) {
+//                    // id в бд начинаются с 1 (поэтому минус 1)
+//                    // проверка на валидность связи (открыто или нет)
+//                    if (val.getOpen()) {
+//                        StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
+//                    }
+//                }
+                InitStairsGraph();
 
 
                 t.printStackTrace();
@@ -221,6 +239,25 @@ public class AppComponent {
 
         // получаем связи лестниц (выполняется после загрузки лестниц)
         this.bgisApi.getLinks().enqueue(callback);
+    }
+
+    public void InitStairsGraph() {
+        // вычисляем количество связей в графе лестниц
+//        while (StairsLinksArray == null) {
+//            for (int i = 0; i < 1000; i++) {}
+//        }
+//        StairsLinksCount = StairsLinksArray.size();
+        // создаем граф лестниц
+        Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
+        StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
+
+        for (StairsLink val : StairsLinksArray) {
+            // id в бд начинаются с 1 (поэтому минус 1)
+            // проверка на валидность связи (открыто или нет)
+            if (val.getOpen()) {
+                StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
+            }
+        }
     }
 
     public void GetNewsInit() {
