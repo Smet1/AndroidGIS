@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_marginTop="8dp"
-    android:padding="8dp">
+    android:padding="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/time"
@@ -33,10 +33,11 @@
             android:layout_below="@+id/title"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textColor="@color/colorMiddle"
+            android:textSize="16sp" />
 
         <TextView
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/payload"
