@@ -231,11 +231,12 @@ public class AppComponent {
                 if (body != null) {
                     Log.d(LOG_TAG, "--- GetNewsInit OK body != null ---");
                     for (NewsModel i : body) {
-                        Log.d(LOG_TAG, i.getTitle() + " " + i.getPayload() + " " + i.getTime());
+                        Log.d(LOG_TAG, i.getTitle() + " " + i.getPayload());
+                        dbWorker.TruncateNews();
+                        dbWorker.InsertNews(body);
                     }
                 } else {
                     Log.d(LOG_TAG, "--- GetNewsInit OK body == null ---");
-
                 }
             }
 
@@ -247,7 +248,6 @@ public class AppComponent {
             }
         };
 
-        // получаем связи лестниц (выполняется после загрузки лестниц)
         this.bgisApi.getNews().enqueue(callback);
     }
 }

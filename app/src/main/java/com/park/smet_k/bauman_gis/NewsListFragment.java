@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +59,13 @@ public class NewsListFragment extends Fragment {
 
 //        dbHelper = new DBWorker(getActivity());
 
-//        List<NewsModel> listToShow = AppComponent.getInstance().dbWorker.select(dbHelper, "all", "");
-        List<News> listToShow = new ArrayList<>();
-        listToShow.add(new News("kek1", "kek2", new java.util.Date(29368498236L)));
-        listToShow.add(new News("kek2", "kek3", new java.util.Date(2936848236L)));
+        List<News> listToShow = AppComponent.getInstance().dbWorker.GetAllNews();
+//        List<News> listToShow = new ArrayList<>();
+//        listToShow.add(new News("kek1", "kek2", new java.util.Date(1557608400000)));
+//        listToShow.add(new News("kek1", "kek2", new Timestamp(1557608400000L)));
+//        listToShow.add(new News("kek2", "kek3", new Timestamp(1557608400000L)));
+//        Timestamp timestamp = new Timestamp(1557608400000L);
+//        timestamp.toString();
 
         AdapterNewsList adapterNewsList = new AdapterNewsList(getContext(), this::onItemClick);
 

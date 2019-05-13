@@ -110,17 +110,17 @@ public class NavigatorFragment extends Fragment {
                     if (body != null) {
                         Log.d(LOG_TAG, "--- Login OK body != null ---");
 
-                        Toast toast = Toast.makeText(getContext(),
-                                "Success, now login please",
-                                Toast.LENGTH_SHORT);
-                        toast.show();
+//                        Toast toast = Toast.makeText(getContext(),
+//                                "Success, now login please",
+//                                Toast.LENGTH_SHORT);
+//                        toast.show();
                     } else {
                         Log.d(LOG_TAG, "--- Login OK body == null ---");
 
-                        Toast toast = Toast.makeText(getContext(),
-                                "Invalid login/password",
-                                Toast.LENGTH_SHORT);
-                        toast.show();
+//                        Toast toast = Toast.makeText(getContext(),
+//                                "Invalid login/password",
+//                                Toast.LENGTH_SHORT);
+//                        toast.show();
                     }
                 }
 

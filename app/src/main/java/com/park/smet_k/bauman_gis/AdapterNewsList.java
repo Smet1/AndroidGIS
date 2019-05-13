@@ -59,7 +59,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<AdapterNewsList.NewsRe
 
         void bind(final News i, OnItemClickListener onItemClickListener) {
             title.setText(i.getTitle());
-            time.setText(i.getTime().toString());
+//            time.setText(i.getTime().toString());
             payload.setText(i.getPayload());
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));

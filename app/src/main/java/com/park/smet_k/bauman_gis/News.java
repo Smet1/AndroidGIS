@@ -13,6 +13,9 @@ public class News {
         this.time = time;
     }
 
+    public News() {
+    }
+
     public String getTitle() {
         return title;
     }

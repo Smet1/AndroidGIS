@@ -7,10 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DBWorker extends SQLiteOpenHelper {
@@ -27,6 +30,7 @@ public class DBWorker extends SQLiteOpenHelper {
     private static final String TABLE_RECENT_ROUTES = "RecentRoutes";
     private static final String TABLE_MAP_STAIRS = "map_stairs";
     private static final String TABLE_MAP_STAIRS_LINKS = "map_stairs_links";
+    private static final String TABLE_NEWS = "news";
 
     // RECENT_ROUTES Table - column names
     private static final String KEY_RR_ID = "id INTEGER PRIMARY KEY AUTOINCREMENT";
@@ -47,20 +51,30 @@ public class DBWorker extends SQLiteOpenHelper {
     private static final String KEY_MSL_WEIGHT = "weight INTEGER";
     private static final String KEY_MSL_OPEN = "open INTEGER";
 
+    // NEWS Table - column names
+    private static final String KEY_N_ID = "id INTEGER";
+    private static final String KEY_N_TITLE = "title TEXT";
+    private static final String KEY_N_TIME = "time INTEGER";
+    private static final String KEY_N_PAYLOAD = "payload TEXT";
+
     // Table Create Statements
     // RECENT_ROUTES table create statement
-    private static final String CREATE_TABLE_RECENT_ROUTES = "CREATE TABLE " + TABLE_RECENT_ROUTES +
+    private static final String CREATE_TABLE_RECENT_ROUTES = "CREATE TABLE IF NOT EXISTS " + TABLE_RECENT_ROUTES +
             "( " + KEY_RR_ID + ", " + KEY_RR_POINT_FROM + ", " + KEY_RR_POINT_TO + ")";
 
     // MAP_STAIRS table create statement
-    private static final String CREATE_TABLE_MAP_STAIRS = "CREATE TABLE " + TABLE_MAP_STAIRS +
+    private static final String CREATE_TABLE_MAP_STAIRS = "CREATE TABLE IF NOT EXISTS " + TABLE_MAP_STAIRS +
             "( " + KEY_MS_ID + ", " + KEY_MS_X + ", " + KEY_MS_Y + ", " + KEY_MS_LEVEL +
             ", " + KEY_MS_OPEN + ")";
 
     // MAP_STAIRS_LINKS table create statement
-    private static final String CREATE_TABLE_MAP_STAIRS_LINKS = "CREATE TABLE " + TABLE_MAP_STAIRS_LINKS +
+    private static final String CREATE_TABLE_MAP_STAIRS_LINKS = "CREATE TABLE IF NOT EXISTS " + TABLE_MAP_STAIRS_LINKS +
             "( " + KEY_MSL_ID + ", " + KEY_MSL_ID_FROM + ", " + KEY_MSL_ID_TO + ", " +
             KEY_MSL_WEIGHT + ", " + KEY_MSL_OPEN + ")";
+
+    // NEWS table create statement
+    private static final String CREATE_TABLE_NEWS = "CREATE TABLE IF NOT EXISTS " + TABLE_NEWS +
+            "( " + KEY_N_ID + ", " + KEY_N_TITLE + ", " + KEY_N_TIME + ", " + KEY_N_PAYLOAD + ")";
 
     public DBWorker(Context context) {
 //        private final String table = "RecentRoutes";
@@ -72,18 +86,23 @@ public class DBWorker extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(LOG_TAG, "--- onCreate database ---");
+
         // создаем таблицу с полями
         db.execSQL(CREATE_TABLE_RECENT_ROUTES);
         db.execSQL(CREATE_TABLE_MAP_STAIRS);
         db.execSQL(CREATE_TABLE_MAP_STAIRS_LINKS);
+        db.execSQL(CREATE_TABLE_NEWS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d(LOG_TAG, "--- onUpgrade database ---");
+
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECENT_ROUTES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAP_STAIRS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAP_STAIRS_LINKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NEWS);
 
         // create new tables
         onCreate(db);
@@ -211,11 +230,10 @@ public class DBWorker extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
 
+        c.close();
+
         return stairs;
     }
-
-
-    //
 
     public void InsertStairsLinks(List<StairsLink> stairsLinksList) {
         Log.d(LOG_TAG, "--- Insert in map stairs: ---");
@@ -224,12 +242,6 @@ public class DBWorker extends SQLiteOpenHelper {
 
         for (StairsLink val : stairsLinksList) {
             ContentValues values = new ContentValues();
-
-//            KEY_MS_ID
-//            KEY_MS_X
-//            KEY_MS_Y
-//            KEY_MS_LEVEL
-//            KEY_MS_OPEN
 
             values.put("id", val.getId());
             values.put("id_from", val.getIdFrom());
@@ -277,10 +289,61 @@ public class DBWorker extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
 
+        c.close();
+
         return stairs;
     }
 
-    //insert
-    //select
-    //update
+    public void InsertNews(List<NewsModel> newsList) {
+        Log.d(LOG_TAG, "--- Insert in news: ---");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        for (NewsModel val : newsList) {
+            ContentValues values = new ContentValues();
+
+            values.put("id", val.getID());
+            values.put("title", val.getTitle());
+//            values.put("time", String.valueOf(val.getTime()));
+            values.put("payload", val.getPayload());
+
+            long rowID = db.insert(TABLE_NEWS, null, values);
+            Log.d(LOG_TAG, "row inserted news, ID = " + rowID);
+        }
+    }
+
+    public void TruncateNews() {
+        Log.d(LOG_TAG, "--- news truncate: ---");
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NEWS);
+        Log.d(LOG_TAG, "--- news truncate DONE ---");
+
+    }
+
+    public List<News> GetAllNews() {
+        List<News> news = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_NEWS;
+
+        Log.e(LOG_TAG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                News n = new News();
+                n.setTitle((c.getString(c.getColumnIndex("title"))));
+                n.setTime(new Date(c.getInt(c.getColumnIndex("time"))));
+                n.setPayload((c.getString(c.getColumnIndex("payload"))));
+
+                // adding to news list
+                news.add(n);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+
+        return news;
+    }
 }
