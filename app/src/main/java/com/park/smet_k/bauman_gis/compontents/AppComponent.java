@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.compontents;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,13 +6,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.park.smet_k.bauman_gis.database.DBWorker;
+import com.park.smet_k.bauman_gis.searchMap.GridWithWeights;
+import com.park.smet_k.bauman_gis.searchMap.WeightedGraph;
 import com.park.smet_k.bauman_gis.api.BgisApi;
 import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
-import com.park.smet_k.bauman_gis.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,19 +37,19 @@ public class AppComponent {
     // массив связей между лестницами (1 связь - в две стороны)
     public List<StairsLink> StairsLinksArray;
     // количество узлов в графе лестниц
-    Integer StairsCount;
+    public Integer StairsCount;
     // количество связей в графе лестниц
-    Integer StairsLinksCount;
+    public Integer StairsLinksCount;
     // граф лестниц
-    WeightedGraph StairsGraph;
+    public WeightedGraph StairsGraph;
     // массив графов этажей (грид)
-    List<GridWithWeights> LevelsGraph;
+    public List<GridWithWeights> LevelsGraph;
 
     private final String LOG_TAG = "INIT";
 
     private static AppComponent instance = null;
-    final DBWorker dbWorker;
-    final BgisApi bgisApi;
+    public final DBWorker dbWorker;
+    public final BgisApi bgisApi;
 
     private final SharedPreferences prefs;
 
@@ -84,13 +85,13 @@ public class AppComponent {
 //        GetAllStairsInit();
     }
 
-    static void init(Context context) {
+    public static void init(Context context) {
         if (instance == null) {
             instance = new AppComponent(context);
         }
     }
 
-    void LevelsInit() {
+    public void LevelsInit() {
         LevelsGraph = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             LevelsGraph.add(new GridWithWeights(100, 100));

@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.recycler;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.park.smet_k.bauman_gis.utils.OnItemClickListner;
+import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.model.Route;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,10 +21,10 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
     private final LayoutInflater layoutInflater;
     private final List<Route> data;
-    private final OnItemClickListener<Route> onItemClickListener;
+    private final OnItemClickListner<Route> onItemClickListener;
 
 
-    public AdapterRoutesList(Context context, OnItemClickListener<Route> onItemClickListener) {
+    public AdapterRoutesList(Context context, OnItemClickListner<Route> onItemClickListener) {
         layoutInflater = LayoutInflater.from(context);
 
         this.data = new ArrayList<>();
@@ -63,7 +67,7 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
             number_1 = itemView.findViewById(R.id.num_1);
         }
 
-        void bind(final Route i, OnItemClickListener onItemClickListener) {
+        void bind(final Route i, OnItemClickListner onItemClickListener) {
             number.setText(Integer.toString(i.getFrom()));
             number_1.setText(Integer.toString(i.getTo()));
 

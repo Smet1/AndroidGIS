@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,11 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.park.smet_k.bauman_gis.model.News;
+import com.park.smet_k.bauman_gis.model.Route;
 import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

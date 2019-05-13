@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
 import com.park.smet_k.bauman_gis.model.User;
 
 import java.util.Objects;

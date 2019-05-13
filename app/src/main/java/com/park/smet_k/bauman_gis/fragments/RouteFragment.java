@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.park.smet_k.bauman_gis.model.Stairs;
+import com.park.smet_k.bauman_gis.searchMap.AStarSearch;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
+import com.park.smet_k.bauman_gis.searchMap.GridLocation;
+import com.park.smet_k.bauman_gis.R;
 
 import java.util.ArrayList;
 import java.util.TreeMap;

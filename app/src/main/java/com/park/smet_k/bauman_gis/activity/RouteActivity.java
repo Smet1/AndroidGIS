@@ -1,8 +1,10 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.park.smet_k.bauman_gis.R;
 
 public class RouteActivity extends AppCompatActivity {
     @Override

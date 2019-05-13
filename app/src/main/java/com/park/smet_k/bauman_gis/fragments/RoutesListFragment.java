@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.model.Route;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
+import com.park.smet_k.bauman_gis.database.DBWorker;
+import com.park.smet_k.bauman_gis.recycler.AdapterRoutesList;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.recycler;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,16 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.park.smet_k.bauman_gis.model.News;
+import com.park.smet_k.bauman_gis.utils.OnItemClickListner;
+import com.park.smet_k.bauman_gis.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterNewsList extends RecyclerView.Adapter<AdapterNewsList.NewsRecyclerViewHolder> {
     private final LayoutInflater layoutInflater;
     private final List<News> data;
-    private final OnItemClickListener<News> onItemClickListener;
+    private final OnItemClickListner<News> onItemClickListener;
 
 
-    public AdapterNewsList(Context context, OnItemClickListener<News> onItemClickListener) {
+    public AdapterNewsList(Context context, OnItemClickListner<News> onItemClickListener) {
         layoutInflater = LayoutInflater.from(context);
 
         this.data = new ArrayList<>();
@@ -57,7 +61,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<AdapterNewsList.NewsRe
             payload = itemView.findViewById(R.id.payload);
         }
 
-        void bind(final News i, OnItemClickListener onItemClickListener) {
+        void bind(final News i, OnItemClickListner onItemClickListener) {
             title.setText(i.getTitle());
 //            time.setText(i.getTime().toString());
             payload.setText(i.getPayload());

@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.service;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.activity.MainActivity;
 
 public class MessageService extends FirebaseMessagingService {
 

@@ -1,4 +1,4 @@
-package com.park.smet_k.bauman_gis;
+package com.park.smet_k.bauman_gis.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.sql.Timestamp;
+import com.park.smet_k.bauman_gis.model.News;
+import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
+import com.park.smet_k.bauman_gis.recycler.AdapterNewsList;
+
 import java.util.ArrayList;
 import java.util.List;
 
