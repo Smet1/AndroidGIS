@@ -13,13 +13,11 @@ import java.util.PriorityQueue;
 // для приоритетной очередин
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class AStarSearch {
-    //    Pair<GridLocation, Double> PQElement;
     private PriorityQueue<Pair<GridLocation, Double>> frontier;
 
-//    private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (c1.second - c2.second);
     private static Comparator<Pair<GridLocation, Double>> PQComparator = (c1, c2) -> (int) (
-        (c1.second < c2.second) ? -1 : ((c1.second == c2.second) ? 0 : 1)
-        );
+            c1.second > c2.second ? 1 : -1
+    );
 
 
     public AStarSearch() {
@@ -30,7 +28,6 @@ public class AStarSearch {
     public void doAStarSearch(GridWithWeights graph,
                               GridLocation start, GridLocation goal,
                               Map<GridLocation, GridLocation> came_from, Map<GridLocation, Double> cost_so_far) {
-//        frontier = new PriorityQueue<>(PQComparator);
         frontier.add(new Pair<>(start, 0.0));
 
         came_from.put(start, start);
@@ -49,26 +46,21 @@ public class AStarSearch {
             for (GridLocation next : graph.neighbors(current)) {
                 double new_cost = cost_so_far.get(current) + graph.cost(current, next);
 
-//                if (!cost_so_far.containsKey(next)) {
                 if (cost_so_far.get(next) == null) {
                     cost_so_far.put(next, new_cost);
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
-//                    came_from.put(current, next);
                     continue;
                 } else if (new_cost < cost_so_far.get(next)) {
-//                    cost_so_far.put(next, new_cost);
                     cost_so_far.replace(next, new_cost);
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
-//                    came_from.put(current, next);
                 }
             }
-            Log.d("search", Integer.toString(counter));
         }
-
+        Log.d("search", Integer.toString(counter));
     }
 
     public ArrayList<GridLocation> reconstruct_path(GridLocation start, GridLocation goal, Map<GridLocation, GridLocation> came_from) {
