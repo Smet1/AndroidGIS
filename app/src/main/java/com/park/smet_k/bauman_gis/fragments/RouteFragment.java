@@ -1,5 +1,13 @@
 package com.park.smet_k.bauman_gis.fragments;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,13 +32,21 @@ import java.util.TreeMap;
 public class RouteFragment extends Fragment {
     // просчет маршрута при создании фрагмента
     String LOG_TAG = "RouteFragment";
+    ArrayList<Integer> route;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getActivity().setContentView(new DrawView(getContext()));
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blue, container, false);
-        return view;
+        getActivity().setContentView(new DrawView(getContext()));
+        //        View view = inflater.inflate(new DrawView(getContext()), container, false);
+        return inflater.inflate(R.layout.fragment_blue, container, false);
     }
 
     public static RouteFragment newInstance(int from, int to) {
@@ -85,7 +101,7 @@ public class RouteFragment extends Fragment {
         textView.setText(to.toString());
 
         // фиксируем прибыль (уличная магия)
-        ArrayList<Integer> route = AppComponent.getInstance().StairsGraph.dijkstra(from - 1, to - 1);
+        route = AppComponent.getInstance().StairsGraph.dijkstra(from - 1, to - 1);
 
         StringBuilder result = new StringBuilder();
         for (Integer val : route) {
@@ -95,38 +111,37 @@ public class RouteFragment extends Fragment {
 
         result.append("|");
 
-        result.append("run A star on: ");
-        for (int i = 0; i < route.size() - 1; i++) {
-            if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
-                    equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
-                Log.d("kek", "same level, run A star on " +
-                        (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
-                result.append(route.get(i)).append(" ").append(route.get(i) + 1).append(", ");
-
-                Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
-                Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
-                Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
-                Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
-
-                GridLocation start = new GridLocation(x_f, y_f);
-                GridLocation goal = new GridLocation(x_l, y_l);
-
-                TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
-                TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
-
-                AStarSearch test = new AStarSearch();
-                test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
-
-
-                ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
-
-                result.append("a_star: ");
-                for (GridLocation p : path) {
-                    Log.d("a star", p.getX().toString() + " " + p.getY().toString());
-                    result.append("|").append(p.getX().toString()).append(" ").append(p.getY().toString());
-                }
-            }
-        }
+//        result.append("run A star on: ");
+//        for (int i = 0; i < route.size() - 1; i++) {
+//            if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
+//                    equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
+////                Log.d("kek", "same level, run A star on " +
+////                        (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
+//                result.append(route.get(i)).append(" ").append(route.get(i) + 1).append(", ");
+//
+//                Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
+//                Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
+//                Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
+//                Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
+//
+//                GridLocation start = new GridLocation(x_f, y_f);
+//                GridLocation goal = new GridLocation(x_l, y_l);
+//
+//                TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+//                TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+//
+//                AStarSearch test = new AStarSearch();
+//                test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+//
+//                ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+//
+//                result.append("a_star: ");
+//                for (GridLocation p : path) {
+//                    Log.d("a star", p.getX().toString() + " " + p.getY().toString());
+//                    result.append("|").append(p.getX().toString()).append(" ").append(p.getY().toString());
+//                }
+//            }
+//        }
 
 
 //        GridWithWeights grid = new GridWithWeights(10, 10);
@@ -154,5 +169,75 @@ public class RouteFragment extends Fragment {
 
         routeView.setText(result.toString());
     }
-}
 
+    class DrawView extends View {
+        Paint p;
+
+        public DrawView(Context context) {
+            super(context);
+            p = new Paint();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            // заливка канвы цветом
+//            canvas.drawARGB(80, 102, 204, 255);
+            canvas.scale(10f, 10f);
+            // настройка кисти
+            // красный цвет
+            p.setColor(Color.RED);
+            // толщина линии = 10
+            p.setStrokeWidth(1);
+
+            // рисуем точку (50,50)
+//            canvas.drawPoint(50, 50, p);
+//
+//            // рисуем линию от (100,100) до (500,50)
+//            canvas.drawLine(100, 100, 500, 50, p);
+//
+//            // рисуем круг с центром в (100,200), радиус = 50
+//            canvas.drawCircle(100, 200, 50, p);
+//
+//            // рисуем прямоугольник
+//            // левая верхняя точка (200,150), нижняя правая (400,200)
+//            canvas.drawRect(200, 150, 400, 200, p);
+//
+//            // настройка объекта Rect
+//            // левая верхняя точка (250,300), нижняя правая (350,500)
+//            rect.set(250, 300, 350, 500);
+//            // рисуем прямоугольник из объекта rect
+//            canvas.drawRect(rect, p);
+
+            for (int i = 0; i < route.size() - 1; i++) {
+                if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
+                        equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
+                    Log.d("kek", "same level, run A star on " +
+                            (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
+                    Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
+                    Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
+                    Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
+                    Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
+
+                    Log.d("kek", "points: " + x_f.toString() + " " + y_f.toString() + ", " +
+                            x_l.toString() + " " + y_l.toString());
+
+                    GridLocation start = new GridLocation(x_f, y_f);
+                    GridLocation goal = new GridLocation(x_l, y_l);
+
+                    TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+                    TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+
+                    AStarSearch test = new AStarSearch();
+                    test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+
+                    ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+
+                    for (GridLocation gl : path) {
+                        canvas.drawPoint(gl.getX(), gl.getY(), p);
+                    }
+                }
+            }
+        }
+    }
+
+}

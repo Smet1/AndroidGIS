@@ -95,7 +95,9 @@ public class AppComponent {
         LevelsGraph = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             LevelsGraph.add(new GridWithWeights(100, 100));
-            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
+//            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
+            LevelsGraph.get(i).add_rect(57, 40, 58, 80);
+
         }
     }
 //    ListenerHandler<On>

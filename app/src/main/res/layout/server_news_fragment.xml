@@ -19,11 +19,11 @@
 
     <Button
         android:id="@+id/update"
-        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorMiddle"
-        android:text="update" />
+        android:text="update"
+        android:textSize="14sp" />
 
 </RelativeLayout>

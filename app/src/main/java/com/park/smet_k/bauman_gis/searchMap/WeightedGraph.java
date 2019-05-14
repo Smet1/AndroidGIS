@@ -77,7 +77,7 @@ public class WeightedGraph {
 
             for (Pair<Integer, Integer> vert : this.getNextVertices(tmp_from)) {
                 if (weights.get(vert.first) > vert.second + weights.get(tmp_from)) {
-                    Log.d("kek", vert.first + " " + vert.second);
+//                    Log.d("kek", vert.first + " " + vert.second);
 
                     if (!verts_from.get(vert.first).isEmpty()) {
                         verts_from.get(vert.first).clear();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <TextView
+        android:id="@+id/fragment_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/routes_list_title"
+        android:textColor="@color/colorPrimary"
+        android:textSize="32sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/route_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/fragment_name"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:padding="8dp" />
+
+
+</RelativeLayout>

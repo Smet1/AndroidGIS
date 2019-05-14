@@ -12,5 +12,13 @@
         android:textSize="32sp"
         android:textColor="@color/colorPrimary"
         android:text="@string/news_title" />
+    <Button
+        android:id="@+id/update"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorMiddle"
+        android:text="update" />
 
 </RelativeLayout>
