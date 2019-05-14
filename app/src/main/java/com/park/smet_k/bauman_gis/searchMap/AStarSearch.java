@@ -39,7 +39,8 @@ public class AStarSearch {
             counter += 1;
             GridLocation current = frontier.poll().first;
 
-            if (current == goal) {
+//            if (current == goal) {
+            if (current.getX().equals(goal.getX()) && current.getY().equals(goal.getY())) {
                 break;
             }
 
