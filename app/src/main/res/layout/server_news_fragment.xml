@@ -3,33 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<TextView-->
-    <!--android:id="@+id/fragment_name"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="16dp"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--android:textSize="32sp"-->
-    <!--android:textColor="@color/colorPrimary"-->
-    <!--android:text="@string/news_title" />-->
-
-    <!--<FrameLayout-->
-    <!--android:id="@+id/TopFrame"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginBottom="8dp">-->
-
-    <!--<ListView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
-    <!--</FrameLayout>-->
     <FrameLayout
         android:id="@+id/TopFrameNews"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/update"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="8dp">
 
@@ -38,5 +16,14 @@
             android:layout_height="match_parent" />
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/update"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorMiddle"
+        android:text="update" />
 
 </RelativeLayout>

@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AppComponent.getInstance().GetAllStairsLinksInit();
 //        AppComponent.getInstance().InitStairsGraph();
         AppComponent.getInstance().LevelsInit();
-        
+
         // показываем новостную ленту
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, ServerNewsFragment.newInstance())

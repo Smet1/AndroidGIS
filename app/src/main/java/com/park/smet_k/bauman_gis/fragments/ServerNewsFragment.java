@@ -7,14 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import com.park.smet_k.bauman_gis.activity.MainActivity;
 import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
+
+import java.util.Objects;
 
 public class ServerNewsFragment extends Fragment {
-
     public static ServerNewsFragment newInstance() {
-
         Bundle args = new Bundle();
 
         ServerNewsFragment fragment = new ServerNewsFragment();
@@ -32,9 +36,22 @@ public class ServerNewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final Animation animAlpha = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.TopFrameNews, NewsListFragment.newInstance())
                 .commit();
+
+        Button update = Objects.requireNonNull(getActivity()).findViewById(R.id.update);
+        update.setOnClickListener(v -> {
+            AppComponent.getInstance().GetNewsInit();
+            update.startAnimation(animAlpha);
+            
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.TopFrameNews, NewsListFragment.newInstance())
+                    .commit();
+
+        });
+
     }
 }
