@@ -1,6 +1,6 @@
 package com.park.smet_k.bauman_gis.utils;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Класс, позволяющий реализовать удобную отписку от получения результатов асинхронных операций.

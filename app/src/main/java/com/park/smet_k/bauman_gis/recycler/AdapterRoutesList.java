@@ -1,16 +1,17 @@
 package com.park.smet_k.bauman_gis.recycler;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.park.smet_k.bauman_gis.utils.OnItemClickListner;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.model.Route;
+import com.park.smet_k.bauman_gis.utils.OnItemClickListner;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,7 +1,5 @@
 package com.park.smet_k.bauman_gis.searchMap;
 
-import com.park.smet_k.bauman_gis.searchMap.GridLocation;
-
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;

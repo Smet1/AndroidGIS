@@ -6,10 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +14,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
@@ -32,6 +33,10 @@ public class RouteFragment extends Fragment {
     String LOG_TAG = "RouteFragment";
     ArrayList<Integer> route;
 
+    GridLocation start = new GridLocation();
+    GridLocation goal = new GridLocation();
+    AStarSearch aStarSearch = new AStarSearch();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,8 @@ public class RouteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blue, container, false);
-        RelativeLayout relativeLayout = view.findViewById(R.id.routeLayout);
-        relativeLayout.addView(new DrawView(getActivity()));
+//        RelativeLayout relativeLayout = view.findViewById(R.id.routeLayout);
+//        relativeLayout.addView(new DrawView(getActivity()), R.id.canvas);
         return view;
     }
 
@@ -128,10 +133,10 @@ public class RouteFragment extends Fragment {
 //                TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
 //                TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
 //
-//                AStarSearch test = new AStarSearch();
-//                test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+//                AStarSearch aStarSearch = new AStarSearch();
+//                aStarSearch.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
 //
-//                ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+//                ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
 //
 //                result.append("a_star: ");
 //                for (GridLocation p : path) {
@@ -151,12 +156,12 @@ public class RouteFragment extends Fragment {
 //        TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
 //        TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
 //
-//        AStarSearch test = new AStarSearch();
-////        test.doAStarSearch(grid, start, goal, came_from, cost_so_far);
-//        test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+//        AStarSearch aStarSearch = new AStarSearch();
+////        aStarSearch.doAStarSearch(grid, start, goal, came_from, cost_so_far);
+//        aStarSearch.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
 //
 //
-//        ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+//        ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
 //
 //        result.append("a_star: ");
 //        for (GridLocation i : path) {
@@ -166,6 +171,9 @@ public class RouteFragment extends Fragment {
 
 
         routeView.setText(result.toString());
+
+        RelativeLayout relativeLayout = view.findViewById(R.id.canvas);
+        relativeLayout.addView(new DrawView(getActivity()));
     }
 
     public class DrawView extends View {
@@ -186,23 +194,16 @@ public class RouteFragment extends Fragment {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            // заливка канвы цветом
-//            canvas.drawARGB(80, 102, 204, 255);
             canvas.scale(10f, 10f);
-            // настройка кисти
-            // красный цвет
             p.setColor(Color.GRAY);
-            // толщина линии = 10
             p.setStrokeWidth(1);
-
-//            // рисуем круг с центром в (100,200), радиус = 50
-//            canvas.drawCircle(100, 200, 50, p);//
 
             for (int i = 0; i < route.size() - 1; i++) {
                 if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
                         equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
                     Log.d("kek", "same level, run A star on " +
                             (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
+
                     Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
                     Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
                     Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
@@ -211,28 +212,36 @@ public class RouteFragment extends Fragment {
                     Log.d("kek", "points: " + x_f.toString() + " " + y_f.toString() + ", " +
                             x_l.toString() + " " + y_l.toString());
 
-                    GridLocation start = new GridLocation(x_f, y_f);
-                    GridLocation goal = new GridLocation(x_l, y_l);
+                    start.setX(x_f);
+                    start.setY(y_f);
+
+                    goal.setX(x_l);
+                    goal.setY(y_l);
 
                     TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
                     TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
 
-                    AStarSearch test = new AStarSearch();
-                    test.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+                    aStarSearch.clear();
+                    aStarSearch.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
 
-                    ArrayList<GridLocation> path = test.reconstruct_path(start, goal, came_from);
+                    ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
 
                     for (GridLocation gl : path) {
                         canvas.drawPoint(gl.getX(), gl.getY(), p);
                     }
 
+                    canvas.drawLine(0, 0, 0, 100, p);
+                    canvas.drawLine(0, 100, 100, 100, p);
+                    canvas.drawLine(100, 100, 100, 0, p);
+                    canvas.drawLine(100, 0, 0, 0, p);
+
                     p.setColor(Color.GREEN);
                     canvas.drawCircle(x_f, y_f, 2, p);
                     p.setColor(Color.RED);
                     canvas.drawCircle(x_l, y_l, 2, p);
+
                 }
             }
         }
     }
-
 }

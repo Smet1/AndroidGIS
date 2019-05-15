@@ -1,9 +1,10 @@
 package com.park.smet_k.bauman_gis.searchMap;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.util.Pair;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +25,9 @@ public class AStarSearch {
         frontier = new PriorityQueue<>(PQComparator);
     }
 
+    public void clear() {
+        frontier = new PriorityQueue<>(PQComparator);
+    }
 
     public void doAStarSearch(GridWithWeights graph,
                               GridLocation start, GridLocation goal,

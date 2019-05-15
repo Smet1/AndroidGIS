@@ -4,27 +4,28 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.park.smet_k.bauman_gis.database.DBWorker;
-import com.park.smet_k.bauman_gis.searchMap.GridWithWeights;
-import com.park.smet_k.bauman_gis.searchMap.WeightedGraph;
+import androidx.annotation.NonNull;
+
 import com.park.smet_k.bauman_gis.api.BgisApi;
+import com.park.smet_k.bauman_gis.database.DBWorker;
 import com.park.smet_k.bauman_gis.model.NewsModel;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
+import com.park.smet_k.bauman_gis.searchMap.GridWithWeights;
+import com.park.smet_k.bauman_gis.searchMap.WeightedGraph;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import okhttp3.OkHttpClient;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
