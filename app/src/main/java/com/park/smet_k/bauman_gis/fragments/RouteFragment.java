@@ -3,28 +3,26 @@ package com.park.smet_k.bauman_gis.fragments;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.park.smet_k.bauman_gis.searchMap.AStarSearch;
-import com.park.smet_k.bauman_gis.compontents.AppComponent;
-import com.park.smet_k.bauman_gis.searchMap.GridLocation;
 import com.park.smet_k.bauman_gis.R;
+import com.park.smet_k.bauman_gis.compontents.AppComponent;
+import com.park.smet_k.bauman_gis.searchMap.AStarSearch;
+import com.park.smet_k.bauman_gis.searchMap.GridLocation;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -37,16 +35,16 @@ public class RouteFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getActivity().setContentView(new DrawView(getContext()));
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        getActivity().setContentView(new DrawView(getContext()));
-        //        View view = inflater.inflate(new DrawView(getContext()), container, false);
-        return inflater.inflate(R.layout.fragment_blue, container, false);
+        View view = inflater.inflate(R.layout.fragment_blue, container, false);
+        RelativeLayout relativeLayout = view.findViewById(R.id.routeLayout);
+        relativeLayout.addView(new DrawView(getActivity()));
+        return view;
     }
 
     public static RouteFragment newInstance(int from, int to) {
@@ -170,8 +168,16 @@ public class RouteFragment extends Fragment {
         routeView.setText(result.toString());
     }
 
-    class DrawView extends View {
+    public class DrawView extends View {
         Paint p;
+
+        public DrawView(Context context, @Nullable AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+            super(context, attrs, defStyleAttr);
+        }
 
         public DrawView(Context context) {
             super(context);
@@ -185,28 +191,12 @@ public class RouteFragment extends Fragment {
             canvas.scale(10f, 10f);
             // настройка кисти
             // красный цвет
-            p.setColor(Color.RED);
+            p.setColor(Color.GRAY);
             // толщина линии = 10
             p.setStrokeWidth(1);
 
-            // рисуем точку (50,50)
-//            canvas.drawPoint(50, 50, p);
-//
-//            // рисуем линию от (100,100) до (500,50)
-//            canvas.drawLine(100, 100, 500, 50, p);
-//
 //            // рисуем круг с центром в (100,200), радиус = 50
-//            canvas.drawCircle(100, 200, 50, p);
-//
-//            // рисуем прямоугольник
-//            // левая верхняя точка (200,150), нижняя правая (400,200)
-//            canvas.drawRect(200, 150, 400, 200, p);
-//
-//            // настройка объекта Rect
-//            // левая верхняя точка (250,300), нижняя правая (350,500)
-//            rect.set(250, 300, 350, 500);
-//            // рисуем прямоугольник из объекта rect
-//            canvas.drawRect(rect, p);
+//            canvas.drawCircle(100, 200, 50, p);//
 
             for (int i = 0; i < route.size() - 1; i++) {
                 if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
@@ -235,6 +225,11 @@ public class RouteFragment extends Fragment {
                     for (GridLocation gl : path) {
                         canvas.drawPoint(gl.getX(), gl.getY(), p);
                     }
+
+                    p.setColor(Color.GREEN);
+                    canvas.drawCircle(x_f, y_f, 2, p);
+                    p.setColor(Color.RED);
+                    canvas.drawCircle(x_l, y_l, 2, p);
                 }
             }
         }
