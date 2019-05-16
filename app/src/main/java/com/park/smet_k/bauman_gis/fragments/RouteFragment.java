@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +24,15 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
 import com.park.smet_k.bauman_gis.searchMap.AStarSearch;
 import com.park.smet_k.bauman_gis.searchMap.GridLocation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class RouteFragment extends Fragment {
@@ -39,6 +43,8 @@ public class RouteFragment extends Fragment {
     GridLocation start = new GridLocation();
     GridLocation goal = new GridLocation();
     AStarSearch aStarSearch = new AStarSearch();
+//    ImageView imageView = getView().findViewById(R.id.photo_view);
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,9 +56,6 @@ public class RouteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blue, container, false);
-//        RelativeLayout relativeLayout = view.findViewById(R.id.routeLayout);
-//        relativeLayout.addView(new DrawView(getActivity()), R.id.canvas);
-        view.setDrawingCacheEnabled(true);
         return view;
     }
 
@@ -176,8 +179,65 @@ public class RouteFragment extends Fragment {
 
         routeView.setText(result.toString());
 
-        RelativeLayout relativeLayout = view.findViewById(R.id.canvas);
-        relativeLayout.addView(new DrawView(getActivity()));
+//        RelativeLayout relativeLayout = view.findViewById(R.id.canvas);
+//        relativeLayout.addView(new DrawView(getActivity()));
+
+
+//        ImageView imageView = findViewById(R.id.photo_view);
+        Paint p = new Paint();
+        Bitmap bitmapImg = BitmapFactory.decodeResource(getResources(), R.drawable.bmstuplan);
+        Bitmap bitmapPath = Bitmap.createBitmap(1240, 1080, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapPath);
+
+        canvas.scale(10f, 10f);
+        p.setColor(Color.GRAY);
+        p.setStrokeWidth(1);
+
+        for (int i = 0; i < route.size() - 1; i++) {
+            if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
+                    equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
+                Log.d("kek", "same level, run A star on " +
+                        (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
+
+                Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
+                Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
+                Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
+                Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
+
+                Log.d("kek", "points: " + x_f.toString() + " " + y_f.toString() + ", " +
+                        x_l.toString() + " " + y_l.toString());
+
+                start.setX(x_f);
+                start.setY(y_f);
+
+                goal.setX(x_l);
+                goal.setY(y_l);
+
+                TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
+                TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
+
+                aStarSearch.clear();
+                aStarSearch.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
+
+                ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
+
+                for (GridLocation gl : path) {
+                    canvas.drawPoint(gl.getX(), gl.getY(), p);
+                }
+
+                p.setColor(Color.GREEN);
+                canvas.drawCircle(x_f, y_f, 2, p);
+                p.setColor(Color.RED);
+                canvas.drawCircle(x_l, y_l, 2, p);
+            }
+        }
+        Bitmap merge = createSingleImageFromMultipleImages(bitmapImg, bitmapPath);
+        Log.d(LOG_TAG, "get canvas bitmap");
+
+        ImageView imageView = Objects.requireNonNull(getView()).findViewById(R.id.photo_view);
+        imageView.setImageBitmap(merge);
+        PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imageView);
+        photoViewAttacher.update();
     }
 
     public class DrawView extends View {
@@ -261,6 +321,12 @@ public class RouteFragment extends Fragment {
 
             Bitmap merge = createSingleImageFromMultipleImages(bitmapImg, bitmapPath);
             Log.d(LOG_TAG, "get canvas bitmap");
+//            ImageView imageView = findViewById(R.id.photo_view);
+            ImageView imageView = Objects.requireNonNull(getView()).findViewById(R.id.photo_view);
+            if (imageView != null) {
+                imageView.setImageBitmap(merge);
+                PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imageView);
+            }
         }
     }
 

@@ -36,17 +36,18 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/line" />
 
-    <RelativeLayout
-        android:id="@+id/canvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line"
-        android:layout_centerInParent="true" />
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/canvas"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/line"-->
+        <!--android:layout_centerInParent="true" />-->
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photo_view"
-        android:layout_below="@+id/canvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line"
+        android:scaleType="centerInside" />
 
 </RelativeLayout>
