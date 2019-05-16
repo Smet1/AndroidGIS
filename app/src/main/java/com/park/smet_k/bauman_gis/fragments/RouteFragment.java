@@ -1,6 +1,9 @@
 package com.park.smet_k.bauman_gis.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -49,6 +52,7 @@ public class RouteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_blue, container, false);
 //        RelativeLayout relativeLayout = view.findViewById(R.id.routeLayout);
 //        relativeLayout.addView(new DrawView(getActivity()), R.id.canvas);
+        view.setDrawingCacheEnabled(true);
         return view;
     }
 
@@ -178,6 +182,7 @@ public class RouteFragment extends Fragment {
 
     public class DrawView extends View {
         Paint p;
+        Bitmap bitmapPath;
 
         public DrawView(Context context, @Nullable AttributeSet attrs) {
             super(context, attrs);
@@ -185,15 +190,26 @@ public class RouteFragment extends Fragment {
 
         public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
             super(context, attrs, defStyleAttr);
+            this.setDrawingCacheEnabled(true);
         }
 
         public DrawView(Context context) {
             super(context);
+//            bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             p = new Paint();
+        }
+
+        public Bitmap get() {
+            return this.getDrawingCache();
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
+            Resources res = getResources();
+            bitmapPath = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+            Bitmap bitmapImg = BitmapFactory.decodeResource(res, R.drawable.bmstuplan);
+            canvas = new Canvas(bitmapPath);
+//            canvas.drawBitmap(bitmap, 0, 0, p);
             canvas.scale(10f, 10f);
             p.setColor(Color.GRAY);
             p.setStrokeWidth(1);
@@ -230,10 +246,10 @@ public class RouteFragment extends Fragment {
                         canvas.drawPoint(gl.getX(), gl.getY(), p);
                     }
 
-                    canvas.drawLine(0, 0, 0, 100, p);
-                    canvas.drawLine(0, 100, 100, 100, p);
-                    canvas.drawLine(100, 100, 100, 0, p);
-                    canvas.drawLine(100, 0, 0, 0, p);
+//                    canvas.drawLine(0, 0, 0, 100, p);
+//                    canvas.drawLine(0, 100, 100, 100, p);
+//                    canvas.drawLine(100, 100, 100, 0, p);
+//                    canvas.drawLine(100, 0, 0, 0, p);
 
                     p.setColor(Color.GREEN);
                     canvas.drawCircle(x_f, y_f, 2, p);
@@ -242,6 +258,18 @@ public class RouteFragment extends Fragment {
 
                 }
             }
+
+            Bitmap merge = createSingleImageFromMultipleImages(bitmapImg, bitmapPath);
+            Log.d(LOG_TAG, "get canvas bitmap");
         }
+    }
+
+    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage){
+
+        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(firstImage, 0f, 0f, null);
+        canvas.drawBitmap(secondImage, 10, 10, null);
+        return result;
     }
 }
