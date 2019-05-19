@@ -62,15 +62,7 @@ public class NewsListFragment extends Fragment {
     public void onResume() {
         Log.d(LOG_TAG, "=== ON RESUME === ");
 
-//        dbHelper = new DBWorker(getActivity());
-
         List<News> listToShow = AppComponent.getInstance().dbWorker.GetAllNews();
-//        List<News> listToShow = new ArrayList<>();
-//        listToShow.add(new News("kek1", "kek2", new java.util.Date(1557608400000)));
-//        listToShow.add(new News("kek1", "kek2", new Timestamp(1557608400000L)));
-//        listToShow.add(new News("kek2", "kek3", new Timestamp(1557608400000L)));
-//        Timestamp timestamp = new Timestamp(1557608400000L);
-//        timestamp.toString();
 
         AdapterNewsList adapterNewsList = new AdapterNewsList(getContext(), this::onItemClick);
 

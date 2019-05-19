@@ -1,13 +1,15 @@
 package com.park.smet_k.bauman_gis.searchMap;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class GridWithWeights {
-    ArrayList<GridLocation> DIRS;
-    Integer width, height;
-    Set<GridLocation> walls;
+    private ArrayList<GridLocation> DIRS;
+    private Integer width, height;
+    private Set<GridLocation> walls;
 
     public GridWithWeights() {
         width = 0;
@@ -22,21 +24,46 @@ public class GridWithWeights {
     }
 
     public GridWithWeights(Integer w, Integer h) {
-        width = w;
-        height = h;
-        DIRS = new ArrayList<>();
-        walls = new TreeSet<>(GridLocation::compare);
+        this.width = w;
+        this.height = h;
+        this.DIRS = new ArrayList<>();
+        this.walls = new TreeSet<>(GridLocation::compare);
 
-        DIRS.add(new GridLocation(1, 0));
-        DIRS.add(new GridLocation(0, -1));
-        DIRS.add(new GridLocation(-1, 0));
-        DIRS.add(new GridLocation(0, 1));
+        this.DIRS.add(new GridLocation(1, 0));
+        this.DIRS.add(new GridLocation(0, -1));
+        this.DIRS.add(new GridLocation(-1, 0));
+        this.DIRS.add(new GridLocation(0, 1));
     }
 
     public void add_rect(Integer x1, Integer y1, Integer x2, Integer y2) {
         for (Integer x = x1; x < x2; ++x) {
             for (Integer y = y1; y < y2; ++y) {
-                walls.add(new GridLocation(x, y));
+                this.walls.add(new GridLocation(x, y));
+            }
+        }
+    }
+
+    public void add_spline(Integer centerX, Integer centerY, Integer radius, boolean right) {
+        double angleA;
+        double c;
+        if (right) {
+            for (int a = 0; a <= radius; a++) {
+//                if (a == 0) {
+//                    int new_x = (centerX);
+//                    int new_y = (centerY - radius);
+//                    this.walls.add(new GridLocation(new_x, new_y));
+//                    Log.d("add_spline", new_x + " " + new_y);
+//                    continue;
+//                }
+
+                angleA = Math.acos((double) a / (double) radius);
+
+                c = radius * Math.sin(angleA);
+
+                int new_x = (centerX + a);
+                int new_y = (centerY - (int) c);
+                this.walls.add(new GridLocation(new_x, new_y));
+                Log.d("add_spline", new_x + " " + new_y);
             }
         }
     }
@@ -54,14 +81,14 @@ public class GridWithWeights {
 
     // проверка на проходимость
     boolean passable(GridLocation id) {
-        return !walls.contains(id);
+        return !this.walls.contains(id);
     }
 
     // возможные шаги (вправо, вниз, влево, вверх)
     public ArrayList<GridLocation> neighbors(GridLocation id) {
         ArrayList<GridLocation> results = new ArrayList<>();
 
-        for (GridLocation dir : DIRS) {
+        for (GridLocation dir : this.DIRS) {
             GridLocation next = new GridLocation(id.getX() + dir.getX(), id.getY() + dir.getY());
             if (in_bounds(next) && passable(next)) {
                 results.add(next);

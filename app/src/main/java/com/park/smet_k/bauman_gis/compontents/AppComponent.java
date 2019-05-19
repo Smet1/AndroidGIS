@@ -11,13 +11,17 @@ import androidx.annotation.NonNull;
 import com.park.smet_k.bauman_gis.api.BgisApi;
 import com.park.smet_k.bauman_gis.database.DBWorker;
 import com.park.smet_k.bauman_gis.model.NewsModel;
+import com.park.smet_k.bauman_gis.model.RoutePoint;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.model.StairsLink;
 import com.park.smet_k.bauman_gis.searchMap.GridWithWeights;
 import com.park.smet_k.bauman_gis.searchMap.WeightedGraph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -45,6 +49,8 @@ public class AppComponent {
     public WeightedGraph StairsGraph;
     // массив графов этажей (грид)
     public List<GridWithWeights> LevelsGraph;
+    // мапа точек на карте
+    public Map<String, RoutePoint> PointsMap;
 
     private final String LOG_TAG = "INIT";
 
@@ -82,8 +88,6 @@ public class AppComponent {
                 .build()
                 .create(BgisApi.class);
 
-        // fill stairs array
-//        GetAllStairsInit();
     }
 
     public static void init(Context context) {
@@ -95,13 +99,21 @@ public class AppComponent {
     public void LevelsInit() {
         LevelsGraph = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            LevelsGraph.add(new GridWithWeights(100, 100));
+            LevelsGraph.add(new GridWithWeights(1280, 1080));
 //            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
-            LevelsGraph.get(i).add_rect(57, 40, 58, 80);
-
+            LevelsGraph.get(i).add_rect(670, 455, 749, 500);
+            Log.d("level", "new level");
+            LevelsGraph.get(i).add_spline(830, 630, 88, true);
         }
     }
-//    ListenerHandler<On>
+
+    public void MapPointsInit() {
+        PointsMap = new TreeMap<>();
+
+        PointsMap.put("ТП", new RoutePoint(730, 475, 3, "ТП"));
+        PointsMap.put("буфет", new RoutePoint(775, 527, 3, "буфет"));
+        PointsMap.put("384", new RoutePoint(953, 599, 3, "384"));
+    }
 
     // загрузка через сеть всех лестниц на старте прилки
     // при неудаче, берет данные из БД map_stairs
@@ -123,11 +135,14 @@ public class AppComponent {
                     // вычисляем количество узлов в графе лестниц
                     StairsCount = StairsArray.size();
 
+                    GetAllStairsLinksInit();
                 } else {
                     Log.d(LOG_TAG, "--- GetAllStairsInit OK body == null ---");
 
                     StairsArray = dbWorker.GetAllStairs();
                     StairsCount = StairsArray.size();
+
+                    GetAllStairsLinksInit();
                 }
             }
 
@@ -147,6 +162,8 @@ public class AppComponent {
                 StairsCount = StairsArray.size();
 
                 t.printStackTrace();
+
+                GetAllStairsLinksInit();
             }
         };
 
@@ -171,20 +188,7 @@ public class AppComponent {
                     // вычисляем количество связей в графе лестниц
                     StairsLinksCount = StairsLinksArray.size();
 
-//                    // создаем граф лестниц
-//                    Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
-//                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
-//
-//                    for (StairsLink val : StairsLinksArray) {
-//                        // id в бд начинаются с 1 (поэтому минус 1)
-//                        // проверка на валидность связи (открыто или нет)
-//                        if (val.getOpen()) {
-//                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
-//                        }
-//                    }
                     InitStairsGraph();
-
-
                 } else {
                     Log.d(LOG_TAG, "--- GetAllStairsLinksInit OK body == null ---");
 
@@ -193,16 +197,6 @@ public class AppComponent {
                     // вычисляем количество связей в графе лестниц
                     StairsLinksCount = StairsLinksArray.size();
 
-//                    // создаем граф лестниц
-//                    StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
-//
-//                    for (StairsLink val : StairsLinksArray) {
-//                        // id в бд начинаются с 1 (поэтому минус 1)
-//                        // проверка на валидность связи (открыто или нет)
-//                        if (val.getOpen()) {
-//                            StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
-//                        }
-//                    }
                     InitStairsGraph();
                 }
             }
@@ -223,18 +217,7 @@ public class AppComponent {
                 // вычисляем количество связей в графе лестниц
                 StairsLinksCount = StairsLinksArray.size();
 
-//                // создаем граф лестниц
-//                StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
-//
-//                for (StairsLink val : StairsLinksArray) {
-//                    // id в бд начинаются с 1 (поэтому минус 1)
-//                    // проверка на валидность связи (открыто или нет)
-//                    if (val.getOpen()) {
-//                        StairsGraph.addEdge(val.getIdFrom() - 1, val.getIdTo() - 1, val.getWeight());
-//                    }
-//                }
                 InitStairsGraph();
-
 
                 t.printStackTrace();
             }
@@ -245,11 +228,6 @@ public class AppComponent {
     }
 
     public void InitStairsGraph() {
-        // вычисляем количество связей в графе лестниц
-//        while (StairsLinksArray == null) {
-//            for (int i = 0; i < 1000; i++) {}
-//        }
-//        StairsLinksCount = StairsLinksArray.size();
         // создаем граф лестниц
         Log.d(LOG_TAG, "--- CREATE StairsGraph ---" + " " + StairsCount.toString() + " " + StairsLinksCount.toString());
         StairsGraph = new WeightedGraph(StairsCount, StairsLinksCount);
@@ -290,5 +268,19 @@ public class AppComponent {
         };
 
         this.bgisApi.getNews().enqueue(callback);
+    }
+
+    public void InitMap() {
+        GetAllStairsInit();
+        while (StairsArray == null) {
+            Log.d(LOG_TAG, "null StairsArray");
+        }
+
+        GetAllStairsLinksInit();
+        while (StairsLinksArray == null) {
+            Log.d(LOG_TAG, "null StairsLinksArray");
+        }
+
+        LevelsInit();
     }
 }

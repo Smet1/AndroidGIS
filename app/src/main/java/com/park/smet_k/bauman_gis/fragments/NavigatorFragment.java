@@ -74,19 +74,18 @@ public class NavigatorFragment extends Fragment {
 
         startNewActivityBtn.setOnClickListener(v -> {
             EditText check_edit = view.findViewById(R.id.InputFrom);
-            Integer from;
-            try {
-                from = Integer.parseInt(check_edit.getText().toString());
-                cur_from = from;
-            } catch (NumberFormatException e) {
+            String from = check_edit.getText().toString();
+
+            if (!AppComponent.getInstance().PointsMap.containsKey(from)) {
                 check_edit.setError("Invalid value");
                 check_edit.requestFocus();
-//                Toast toast = Toast.makeText(getApplicationContext(),
-//                        "Invalid values!",
-//                        Toast.LENGTH_SHORT);
-//                toast.show();
+                Toast toast = Toast.makeText(getContext(),
+                        "Unknown point",
+                        Toast.LENGTH_SHORT);
+                toast.show();
                 return;
             }
+
 
             check_edit = view.findViewById(R.id.InputTo);
             Integer to;
@@ -114,18 +113,8 @@ public class NavigatorFragment extends Fragment {
                     RouteModel body = response.body();
                     if (body != null) {
                         Log.d(LOG_TAG, "--- Login OK body != null ---");
-
-//                        Toast toast = Toast.makeText(getContext(),
-//                                "Success, now login please",
-//                                Toast.LENGTH_SHORT);
-//                        toast.show();
                     } else {
                         Log.d(LOG_TAG, "--- Login OK body == null ---");
-
-//                        Toast toast = Toast.makeText(getContext(),
-//                                "Invalid login/password",
-//                                Toast.LENGTH_SHORT);
-//                        toast.show();
                     }
                 }
 

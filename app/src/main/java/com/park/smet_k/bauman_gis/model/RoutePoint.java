@@ -1,19 +1,23 @@
 package com.park.smet_k.bauman_gis.model;
 
+import com.park.smet_k.bauman_gis.searchMap.GridLocation;
+
 public class RoutePoint {
     private Integer id;
-    private Character type;  // S, L, W
     private Integer x;
     private Integer y;
     private Integer level;
     private String name;
 
-    public void setId(Integer id) {
-        this.id = id;
+    public RoutePoint(Integer x, Integer y, Integer level, String name) {
+        this.x = x;
+        this.y = y;
+        this.level = level;
+        this.name = name;
     }
 
-    public void setType(Character type) {
-        this.type = type;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setX(Integer x) {
@@ -32,14 +36,8 @@ public class RoutePoint {
         this.name = name;
     }
 
-
-
     public Integer getId() {
         return id;
-    }
-
-    public Character getType() {
-        return type;
     }
 
     public Integer getX() {
@@ -56,5 +54,18 @@ public class RoutePoint {
 
     public String getName() {
         return name;
+    }
+
+    public int compare(RoutePoint o) {
+        if (this.getX() < o.getX()) {
+            return -1;
+        } else if (this.getY() < o.getY()) {
+            if (this.getX().equals(o.getX()))
+                return -1;
+            else
+                return 1;
+        } else {
+            return 1;
+        }
     }
 }

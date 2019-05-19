@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
@@ -43,8 +42,6 @@ public class RouteFragment extends Fragment {
     GridLocation start = new GridLocation();
     GridLocation goal = new GridLocation();
     AStarSearch aStarSearch = new AStarSearch();
-//    ImageView imageView = getView().findViewById(R.id.photo_view);
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -179,19 +176,16 @@ public class RouteFragment extends Fragment {
 
         routeView.setText(result.toString());
 
-//        RelativeLayout relativeLayout = view.findViewById(R.id.canvas);
-//        relativeLayout.addView(new DrawView(getActivity()));
-
-
-//        ImageView imageView = findViewById(R.id.photo_view);
         Paint p = new Paint();
-        Bitmap bitmapImg = BitmapFactory.decodeResource(getResources(), R.drawable.bmstuplan);
-        Bitmap bitmapPath = Bitmap.createBitmap(1240, 1080, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmapPath);
+        Bitmap bitmapImg1 = BitmapFactory.decodeResource(getResources(), R.drawable.bmstuplan);
+        int width = bitmapImg1.getWidth();
+        int height = bitmapImg1.getHeight();
+        Bitmap bitmapImg = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapImg);
 
-        canvas.scale(10f, 10f);
+//        canvas.scale(10f, 10f);
         p.setColor(Color.GRAY);
-        p.setStrokeWidth(1);
+        p.setStrokeWidth(5);
 
         for (int i = 0; i < route.size() - 1; i++) {
             if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
@@ -210,8 +204,13 @@ public class RouteFragment extends Fragment {
                 start.setX(x_f);
                 start.setY(y_f);
 
+//                start.setX(874);
+//                start.setY(547);
+
                 goal.setX(x_l);
                 goal.setY(y_l);
+//                goal.setX(925);
+//                goal.setY(637);
 
                 TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
                 TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
@@ -221,17 +220,21 @@ public class RouteFragment extends Fragment {
 
                 ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
 
+                canvas.drawLine(0, 0, 0, 1280 * 3, p);
+                canvas.drawLine(0, 0, 1080 * 3, 0, p);
+
                 for (GridLocation gl : path) {
-                    canvas.drawPoint(gl.getX(), gl.getY(), p);
+                    Log.d("kek", "points: " + gl.getX().toString() + " " + gl.getY().toString());
+                    canvas.drawPoint(gl.getX() * 3, gl.getY() * 3, p);
                 }
 
                 p.setColor(Color.GREEN);
-                canvas.drawCircle(x_f, y_f, 2, p);
+                canvas.drawCircle(x_f * 3, y_f * 3, 10, p);
                 p.setColor(Color.RED);
-                canvas.drawCircle(x_l, y_l, 2, p);
+                canvas.drawCircle(x_l * 3, y_l * 3, 10, p);
             }
         }
-        Bitmap merge = createSingleImageFromMultipleImages(bitmapImg, bitmapPath);
+        Bitmap merge = overlay(bitmapImg1, bitmapImg);
         Log.d(LOG_TAG, "get canvas bitmap");
 
         ImageView imageView = Objects.requireNonNull(getView()).findViewById(R.id.photo_view);
@@ -240,102 +243,19 @@ public class RouteFragment extends Fragment {
         photoViewAttacher.update();
     }
 
-    public class DrawView extends View {
-        Paint p;
-        Bitmap bitmapPath;
-
-        public DrawView(Context context, @Nullable AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-            super(context, attrs, defStyleAttr);
-            this.setDrawingCacheEnabled(true);
-        }
-
-        public DrawView(Context context) {
-            super(context);
-//            bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-            p = new Paint();
-        }
-
-        public Bitmap get() {
-            return this.getDrawingCache();
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            Resources res = getResources();
-            bitmapPath = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-            Bitmap bitmapImg = BitmapFactory.decodeResource(res, R.drawable.bmstuplan);
-            canvas = new Canvas(bitmapPath);
-//            canvas.drawBitmap(bitmap, 0, 0, p);
-            canvas.scale(10f, 10f);
-            p.setColor(Color.GRAY);
-            p.setStrokeWidth(1);
-
-            for (int i = 0; i < route.size() - 1; i++) {
-                if (AppComponent.getInstance().StairsArray.get(route.get(i)).getLevel().
-                        equals(AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getLevel())) {
-                    Log.d("kek", "same level, run A star on " +
-                            (route.get(i) + 1) + " " + (route.get(i + 1) + 1));
-
-                    Integer x_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getX();
-                    Integer y_f = AppComponent.getInstance().StairsArray.get(route.get(i)).getY();
-                    Integer x_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getX();
-                    Integer y_l = AppComponent.getInstance().StairsArray.get(route.get(i + 1)).getY();
-
-                    Log.d("kek", "points: " + x_f.toString() + " " + y_f.toString() + ", " +
-                            x_l.toString() + " " + y_l.toString());
-
-                    start.setX(x_f);
-                    start.setY(y_f);
-
-                    goal.setX(x_l);
-                    goal.setY(y_l);
-
-                    TreeMap<GridLocation, GridLocation> came_from = new TreeMap<>(GridLocation::compare);
-                    TreeMap<GridLocation, Double> cost_so_far = new TreeMap<>(GridLocation::compare);
-
-                    aStarSearch.clear();
-                    aStarSearch.doAStarSearch(AppComponent.getInstance().LevelsGraph.get(0), start, goal, came_from, cost_so_far);
-
-                    ArrayList<GridLocation> path = aStarSearch.reconstruct_path(start, goal, came_from);
-
-                    for (GridLocation gl : path) {
-                        canvas.drawPoint(gl.getX(), gl.getY(), p);
-                    }
-
-//                    canvas.drawLine(0, 0, 0, 100, p);
-//                    canvas.drawLine(0, 100, 100, 100, p);
-//                    canvas.drawLine(100, 100, 100, 0, p);
-//                    canvas.drawLine(100, 0, 0, 0, p);
-
-                    p.setColor(Color.GREEN);
-                    canvas.drawCircle(x_f, y_f, 2, p);
-                    p.setColor(Color.RED);
-                    canvas.drawCircle(x_l, y_l, 2, p);
-
-                }
-            }
-
-            Bitmap merge = createSingleImageFromMultipleImages(bitmapImg, bitmapPath);
-            Log.d(LOG_TAG, "get canvas bitmap");
-//            ImageView imageView = findViewById(R.id.photo_view);
-            ImageView imageView = Objects.requireNonNull(getView()).findViewById(R.id.photo_view);
-            if (imageView != null) {
-                imageView.setImageBitmap(merge);
-                PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imageView);
-            }
-        }
-    }
-
-    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage){
-
+    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
         Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(firstImage, 0f, 0f, null);
-        canvas.drawBitmap(secondImage, 10, 10, null);
+        canvas.drawBitmap(secondImage, 0f, 0f, null);
         return result;
+    }
+
+    private Bitmap overlay(Bitmap bmp1, Bitmap bmp2) {
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        canvas.drawBitmap(bmp1, new Matrix(), null);
+        canvas.drawBitmap(bmp2, new Matrix(), null);
+        return bmOverlay;
     }
 }

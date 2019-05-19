@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.park.smet_k.bauman_gis.App;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
 import com.park.smet_k.bauman_gis.database.DBWorker;
@@ -72,8 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle("main");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getUserInfo();
         getUserRoutes();
@@ -81,10 +80,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // скачиваем карту
         Log.d(LOG_TAG, "INIT map");
         AppComponent.getInstance().GetNewsInit();
+
         AppComponent.getInstance().GetAllStairsInit();
-        AppComponent.getInstance().GetAllStairsLinksInit();
-//        AppComponent.getInstance().InitStairsGraph();
+//        AppComponent.getInstance().GetAllStairsLinksInit();
+////        AppComponent.getInstance().InitStairsGraph();
         AppComponent.getInstance().LevelsInit();
+        AppComponent.getInstance().MapPointsInit();
 
         // показываем новостную ленту
         getSupportFragmentManager().beginTransaction()
