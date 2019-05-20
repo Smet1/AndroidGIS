@@ -72,8 +72,6 @@ public class RoutesListFragment extends Fragment {
     }
 
     private void onItemClick(Route i) {
-
-
         // getChildFragmentManager не работает, нельзя бросить данные в другой фрагмент
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();
@@ -83,10 +81,10 @@ public class RoutesListFragment extends Fragment {
 
         // выставляю значения в эдит текст в нижнем баре
         EditText editText = Objects.requireNonNull(getActivity()).findViewById(R.id.InputFrom);
-        editText.setText(Integer.toString(i.getFrom()));
+        editText.setText(i.getFrom());
 
         editText = getActivity().findViewById(R.id.InputTo);
-        editText.setText(Integer.toString(i.getTo()));
+        editText.setText(i.getTo());
 
         assert bottom != null;
         transaction.remove(bottom);

@@ -1,7 +1,5 @@
 package com.park.smet_k.bauman_gis.model;
 
-import com.park.smet_k.bauman_gis.searchMap.GridLocation;
-
 public class RoutePoint {
     private Integer id;
     private Integer x;

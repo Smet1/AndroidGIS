@@ -15,11 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.park.smet_k.bauman_gis.App;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.activity.MainActivity;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
 import com.park.smet_k.bauman_gis.database.DBWorker;
 import com.park.smet_k.bauman_gis.model.RouteModel;
+import com.park.smet_k.bauman_gis.model.RoutePoint;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +35,8 @@ public class NavigatorFragment extends Fragment {
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
     private DBWorker dbHelper;
-    private Integer cur_from = 0;
-    private Integer cur_to = 0;
+    private String cur_from = "";
+    private String cur_to = "";
 
     public static NavigatorFragment newInstance() {
         NavigatorFragment myFragment = new NavigatorFragment();
@@ -74,33 +76,33 @@ public class NavigatorFragment extends Fragment {
 
         startNewActivityBtn.setOnClickListener(v -> {
             EditText check_edit = view.findViewById(R.id.InputFrom);
-            String from = check_edit.getText().toString();
+            cur_from = check_edit.getText().toString();
 
-            if (!AppComponent.getInstance().PointsMap.containsKey(from)) {
-                check_edit.setError("Invalid value");
+            if (!AppComponent.getInstance().PointsMap.containsKey(cur_from)) {
+                check_edit.setError("Unknown value");
                 check_edit.requestFocus();
                 Toast toast = Toast.makeText(getContext(),
-                        "Unknown point",
+                        "Unknown first point",
                         Toast.LENGTH_SHORT);
                 toast.show();
                 return;
             }
 
-
             check_edit = view.findViewById(R.id.InputTo);
-            Integer to;
-            try {
-                to = Integer.parseInt(check_edit.getText().toString());
-                cur_to = to;
-            } catch (NumberFormatException e) {
-                check_edit.setError("Invalid value");
+            cur_to = check_edit.getText().toString();
+
+            if (!AppComponent.getInstance().PointsMap.containsKey(cur_to)) {
+                check_edit.setError("Unknown value");
                 check_edit.requestFocus();
-//                Toast toast = Toast.makeText(getApplicationContext(),
-//                        "Invalid values!",
-//                        Toast.LENGTH_SHORT);
-//                toast.show();
+                Toast toast = Toast.makeText(getContext(),
+                        "Unknown last point",
+                        Toast.LENGTH_SHORT);
+                toast.show();
                 return;
             }
+
+            RoutePoint pointFrom = AppComponent.getInstance().PointsMap.get(cur_from);
+            RoutePoint pointTo = AppComponent.getInstance().PointsMap.get(cur_to);
 
             // заносим данные в БД
             AppComponent.getInstance().dbWorker.insert(dbHelper, cur_from, cur_to);
@@ -133,7 +135,9 @@ public class NavigatorFragment extends Fragment {
 
             Integer userId = preferences.getInt(KEY_OAUTH, -1);
             // avoid static error
-            AppComponent.getInstance().bgisApi.pushRoute(new RouteModel(userId, cur_from, cur_to)).enqueue(callback);
+            assert pointFrom != null;
+            assert pointTo != null;
+            AppComponent.getInstance().bgisApi.pushRoute(new RouteModel(userId, pointFrom.getName(), pointTo.getName())).enqueue(callback);
 
             toggleState();
         });

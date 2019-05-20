@@ -69,8 +69,8 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
         }
 
         void bind(final Route i, OnItemClickListner onItemClickListener) {
-            number.setText(Integer.toString(i.getFrom()));
-            number_1.setText(Integer.toString(i.getTo()));
+            number.setText(i.getFrom());
+            number_1.setText(i.getTo());
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
         }

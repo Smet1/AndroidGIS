@@ -18,8 +18,8 @@ import retrofit2.http.Path;
 
 public interface BgisApi {
     // TODO(): URL
-//    String BASE_URL = "http://10.0.2.2:5000";
-    String BASE_URL = "http://bmstu-gis-spring.herokuapp.com";
+    String BASE_URL = "http://10.0.2.2:5000";
+//    String BASE_URL = "http://bmstu-gis-spring.herokuapp.com";
 
     // user login block
     @POST("/login")

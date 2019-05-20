@@ -18,7 +18,6 @@ import com.park.smet_k.bauman_gis.searchMap.GridWithWeights;
 import com.park.smet_k.bauman_gis.searchMap.WeightedGraph;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -101,7 +100,9 @@ public class AppComponent {
         for (int i = 0; i < 10; i++) {
             LevelsGraph.add(new GridWithWeights(1280, 1080));
 //            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
-            LevelsGraph.get(i).add_rect(670, 455, 749, 500);
+//            LevelsGraph.get(i).add_rect(670, 455, 749, 500);
+            LevelsGraph.get(i).add_rect(708, 456, 726, 497);
+            LevelsGraph.get(i).add_rect(730, 456, 745, 497);
             Log.d("level", "new level");
             LevelsGraph.get(i).add_spline(830, 630, 88, true);
         }
@@ -110,9 +111,32 @@ public class AppComponent {
     public void MapPointsInit() {
         PointsMap = new TreeMap<>();
 
-        PointsMap.put("ТП", new RoutePoint(730, 475, 3, "ТП"));
-        PointsMap.put("буфет", new RoutePoint(775, 527, 3, "буфет"));
-        PointsMap.put("384", new RoutePoint(953, 599, 3, "384"));
+        PointsMap.put("ТП", new RoutePoint(730, 475, 2, "ТП"));
+        PointsMap.put("TP", new RoutePoint(730, 475, 2, "TP"));
+        PointsMap.put("буфет", new RoutePoint(775, 527, 2, "буфет"));
+        PointsMap.put("384", new RoutePoint(953, 599, 2, "384"));
+    }
+
+    public Stairs GetClosestStair(RoutePoint rp) {
+        Integer level = rp.getLevel();
+        int x = rp.getX();
+        int y = rp.getY();
+        double path = 999999999;
+        double tmpPath = 0;
+        Stairs res = new Stairs();
+
+        for (int i = 0; i < StairsArray.size(); i++) {
+            if (level.equals(StairsArray.get(i).getLevel())) {
+                tmpPath = Math.sqrt(Math.pow(x - StairsArray.get(i).getX(), 2) + Math.pow(y - StairsArray.get(i).getY(), 2));
+                if (path < tmpPath) {
+                    path = tmpPath;
+                }
+
+                res = StairsArray.get(i);
+            }
+        }
+
+        return res;
     }
 
     // загрузка через сеть всех лестниц на старте прилки

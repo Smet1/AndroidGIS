@@ -35,8 +35,8 @@ public class DBWorker extends SQLiteOpenHelper {
 
     // RECENT_ROUTES Table - column names
     private static final String KEY_RR_ID = "id INTEGER PRIMARY KEY AUTOINCREMENT";
-    private static final String KEY_RR_POINT_FROM = "point_from INTEGER";
-    private static final String KEY_RR_POINT_TO = "point_to INTEGER";
+    private static final String KEY_RR_POINT_FROM = "point_from TEXT";
+    private static final String KEY_RR_POINT_TO = "point_to TEXT";
 
     // MAP_STAIRS Table - column names
     private static final String KEY_MS_ID = "id INTEGER";
@@ -109,7 +109,7 @@ public class DBWorker extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(DBWorker dbWorker, Integer point_from, Integer point_to) {
+    public void insert(DBWorker dbWorker, String point_from, String point_to) {
         // создаем объект для данных
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = dbWorker.getWritableDatabase();
@@ -147,7 +147,7 @@ public class DBWorker extends SQLiteOpenHelper {
                                         ", to = " + c.getString(point_to));
                         // переход на следующую строку
 
-                        listToShow.add(new Route(Integer.parseInt(c.getString(point_from)), Integer.parseInt(c.getString(point_to))));
+                        listToShow.add(new Route(c.getString(point_from), c.getString(point_to)));
 
                         // а если следующей нет (текущая - последняя), то false - выходим из цикла
                     } while (c.moveToNext());

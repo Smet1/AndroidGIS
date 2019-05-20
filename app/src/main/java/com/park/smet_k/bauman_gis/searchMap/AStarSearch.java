@@ -72,6 +72,10 @@ public class AStarSearch {
         ArrayList<GridLocation> path = new ArrayList<>();
         GridLocation current = goal;
 
+        if (came_from.size() < 2 ) {
+            return path;
+        }
+
         while (current != start) {
             path.add(current);
             current = came_from.get(current);

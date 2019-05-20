@@ -30,8 +30,8 @@ public class NavigatorActivity extends AppCompatActivity {
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
     private DBWorker dbHelper;
-    private Integer cur_from = 0;
-    private Integer cur_to = 0;
+    private String cur_from = "";
+    private String cur_to = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,9 +50,9 @@ public class NavigatorActivity extends AppCompatActivity {
 
         startNewActivityBtn.setOnClickListener(v -> {
             EditText check_edit = findViewById(R.id.InputFrom);
-            Integer from;
+            String from;
             try {
-                from = Integer.parseInt(check_edit.getText().toString());
+                from = check_edit.getText().toString();
                 cur_from = from;
             } catch (NumberFormatException e) {
                 check_edit.setError("Invalid value");
@@ -65,9 +65,9 @@ public class NavigatorActivity extends AppCompatActivity {
             }
 
             check_edit = findViewById(R.id.InputTo);
-            Integer to;
+            String to;
             try {
-                to = Integer.parseInt(check_edit.getText().toString());
+                to = check_edit.getText().toString();
                 cur_to = to;
             } catch (NumberFormatException e) {
                 check_edit.setError("Invalid value");
