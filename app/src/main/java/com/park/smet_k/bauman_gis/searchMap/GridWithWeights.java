@@ -48,16 +48,7 @@ public class GridWithWeights {
         double c;
         if (right) {
             for (int a = 0; a <= radius; a++) {
-//                if (a == 0) {
-//                    int new_x = (centerX);
-//                    int new_y = (centerY - radius);
-//                    this.walls.add(new GridLocation(new_x, new_y));
-//                    Log.d("add_spline", new_x + " " + new_y);
-//                    continue;
-//                }
-
                 angleA = Math.acos((double) a / (double) radius);
-
                 c = radius * Math.sin(angleA);
 
                 int new_x = (centerX + a);

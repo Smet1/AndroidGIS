@@ -78,6 +78,7 @@ public class NewsListFragment extends Fragment {
         for (News i : newsArrayList) {
             adapterNewsList.add(i);
         }
+
         super.onResume();
     }
 

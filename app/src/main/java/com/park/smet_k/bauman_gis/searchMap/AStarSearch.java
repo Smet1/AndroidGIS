@@ -37,7 +37,12 @@ public class AStarSearch {
         came_from.put(start, start);
         cost_so_far.put(start, 0.0);
 
-        Integer counter = 0;
+        int counter = 0;
+        int dx1;
+        int dy1;
+        int dx2;
+        int dy2;
+        float cross;
 
         while (!frontier.isEmpty()) {
             counter += 1;
@@ -53,12 +58,30 @@ public class AStarSearch {
 
                 if (cost_so_far.get(next) == null) {
                     cost_so_far.put(next, new_cost);
+
+//                    dx1 = current.getX() - goal.getX();
+//                    dy1 = current.getY() - goal.getY();
+//                    dx2 = start.getX() - goal.getX();
+//                    dy2 = start.getY() - goal.getY();
+//                    cross = Math.abs(dx1 * dy2 - dx2 * dy1);
+//
+//                    double priority = new_cost + heuristic(next, goal) + cross * 0.001;
+
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
-                    continue;
+
                 } else if (new_cost < cost_so_far.get(next)) {
                     cost_so_far.replace(next, new_cost);
+
+//                    dx1 = current.getX() - goal.getX();
+//                    dy1 = current.getY() - goal.getY();
+//                    dx2 = start.getX() - goal.getX();
+//                    dy2 = start.getY() - goal.getY();
+//                    cross = Math.abs(dx1 * dy2 - dx2 * dy1);
+//
+//                    double priority = new_cost + heuristic(next, goal) + cross * 0.001;
+
                     double priority = new_cost + heuristic(next, goal);
                     frontier.add(new Pair<>(next, priority));
                     came_from.put(next, current);
@@ -72,7 +95,7 @@ public class AStarSearch {
         ArrayList<GridLocation> path = new ArrayList<>();
         GridLocation current = goal;
 
-        if (came_from.size() < 2 ) {
+        if (came_from.size() < 2) {
             return path;
         }
 
@@ -87,8 +110,12 @@ public class AStarSearch {
     }
 
 
-    // евристика для A со звездой
+    // hеuвристика для A со звездой
     static double heuristic(GridLocation a, GridLocation b) {
+        // манхэтаннское расстояние
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+
+        // евклидова евристика, медленная, но красивая
+//        return Math.sqrt(Math.pow(Math.abs(a.getX() - b.getX()), 2) + Math.pow(Math.abs(a.getY() - b.getY()), 2));
     }
 }

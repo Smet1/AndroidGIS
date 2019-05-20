@@ -99,11 +99,17 @@ public class AppComponent {
         LevelsGraph = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             LevelsGraph.add(new GridWithWeights(1280, 1080));
-//            LevelsGraph.get(i).add_rect(2, 0, 3, 9);
-//            LevelsGraph.get(i).add_rect(670, 455, 749, 500);
-            LevelsGraph.get(i).add_rect(708, 456, 726, 497);
-            LevelsGraph.get(i).add_rect(730, 456, 745, 497);
-            Log.d("level", "new level");
+//            LevelsGraph.get(i).add_rect(708, 456, 726, 497);
+//            LevelsGraph.get(i).add_rect(730, 456, 745, 497);
+//            LevelsGraph.get(i).add_rect(677, 514, 720, 552);
+//            LevelsGraph.get(i).add_rect(728, 514, 745, 556);
+//            LevelsGraph.get(i).add_rect(742, 509, 752, 535);
+//            LevelsGraph.get(i).add_rect(760, 515, 775, 535);
+//            LevelsGraph.get(i).add_rect(746, 535, 858, 538);
+//            LevelsGraph.get(i).add_rect(787, 514, 837, 517);
+//            LevelsGraph.get(i).add_rect(804, 471, 835, 517);
+
+
             LevelsGraph.get(i).add_spline(830, 630, 88, true);
         }
     }
@@ -115,6 +121,9 @@ public class AppComponent {
         PointsMap.put("TP", new RoutePoint(730, 475, 2, "TP"));
         PointsMap.put("буфет", new RoutePoint(775, 527, 2, "буфет"));
         PointsMap.put("384", new RoutePoint(953, 599, 2, "384"));
+
+        PointsMap.put("284", new RoutePoint(953, 599, 1, "284"));
+        PointsMap.put("TP_test_2", new RoutePoint(730, 475, 1, "TP_test_2"));
     }
 
     public Stairs GetClosestStair(RoutePoint rp) {

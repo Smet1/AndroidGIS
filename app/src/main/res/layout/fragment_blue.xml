@@ -4,42 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:textSize="16sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/from"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="80dp"-->
+        <!--android:textSize="16sp" />-->
 
-    <TextView
-        android:id="@+id/to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_toEndOf="@+id/from"
-        android:textSize="16sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/to"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="50dp"-->
+        <!--android:layout_toEndOf="@+id/from"-->
+        <!--android:textSize="16sp" />-->
 
-    <TextView
-        android:id="@+id/route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/to"
-        android:padding="8dp"
-        android:text="@string/undone"
-        android:textSize="24sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/route"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/to"-->
+        <!--android:padding="8dp"-->
+        <!--android:text="@string/undone"-->
+        <!--android:textSize="24sp" />-->
 
-    <TextView
-        android:id="@+id/line"
+    <!--<TextView-->
+        <!--android:id="@+id/line"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/route"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@drawable/line" />-->
+
+    <!--<com.github.chrisbanes.photoview.PhotoView-->
+        <!--android:id="@+id/photo_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/line" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/path_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/route"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/line" />
-
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photo_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:padding="8dp" />
 
 </RelativeLayout>

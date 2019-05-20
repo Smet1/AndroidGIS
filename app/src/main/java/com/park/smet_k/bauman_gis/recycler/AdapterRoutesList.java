@@ -74,7 +74,6 @@ public class AdapterRoutesList extends RecyclerView.Adapter<AdapterRoutesList.Ro
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
         }
-
     }
 }
 
