@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        navView.setCheckedItem(R.id.home);
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         getUserInfo();
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.container, ServerNewsFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
+
     }
 
     private void getUserRoutes() {

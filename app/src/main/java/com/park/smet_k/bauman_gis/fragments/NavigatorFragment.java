@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.park.smet_k.bauman_gis.App;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.activity.MainActivity;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
@@ -103,6 +102,30 @@ public class NavigatorFragment extends Fragment {
 
             RoutePoint pointFrom = AppComponent.getInstance().PointsMap.get(cur_from);
             RoutePoint pointTo = AppComponent.getInstance().PointsMap.get(cur_to);
+
+            if (pointFrom.getName().equals(pointTo.getName())) {
+                Toast toast = Toast.makeText(getContext(),
+                        "points are same",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
+            if (AppComponent.getInstance().StairsGraph == null || AppComponent.getInstance().StairsGraph.getGraphSize() == 0) {
+                Toast toast = Toast.makeText(getContext(),
+                        "stairs graph empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
+            if (AppComponent.getInstance().StairsArray == null || AppComponent.getInstance().StairsArray.size() == 0) {
+                Toast toast = Toast.makeText(getContext(),
+                        "stairs array empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
 
             // заносим данные в БД
             AppComponent.getInstance().dbWorker.insert(dbHelper, cur_from, cur_to);

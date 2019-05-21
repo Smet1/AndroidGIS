@@ -38,12 +38,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final static String KEY_OAUTH = "oauth";
     private final static String STORAGE_NAME = "storage";
 
-//    private TextView registerHeader;
+    //    private TextView registerHeader;
     private View registerForm;
     private Button registerButton;
     private TextView registerSwitch;
 
-//    private TextView loginHeader;
+    //    private TextView loginHeader;
     private View loginForm;
     private Button loginButton;
     private TextView loginSwitch;
@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 userRegister();
 
                 findViewById(R.id.login).setEnabled(true);
+                findViewById(R.id.signup).setEnabled(true);
                 findViewById(R.id.textViewRegister).setEnabled(true);
                 break;
 
