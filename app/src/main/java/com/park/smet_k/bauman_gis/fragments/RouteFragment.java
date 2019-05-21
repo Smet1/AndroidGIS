@@ -326,8 +326,11 @@ public class RouteFragment extends Fragment {
         mapsList.setAdapter(adapterPathList);
         mapsList.setHasFixedSize(true);
 
-        for (Pair<Bitmap, Integer> i : pathList) {
-            adapterPathList.add(i);
+//        for (Pair<Bitmap, Integer> i : pathList) {
+//            adapterPathList.add(i);
+//        }
+        for (int i = pathList.size() - 1; i >= 0; i--) {
+            adapterPathList.add(pathList.get(i));
         }
     }
 
