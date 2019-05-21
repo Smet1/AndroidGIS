@@ -12,7 +12,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,10 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.park.smet_k.bauman_gis.R;
 import com.park.smet_k.bauman_gis.compontents.AppComponent;
-import com.park.smet_k.bauman_gis.model.News;
 import com.park.smet_k.bauman_gis.model.RoutePoint;
 import com.park.smet_k.bauman_gis.model.Stairs;
 import com.park.smet_k.bauman_gis.recycler.AdapterPathList;
@@ -34,7 +31,6 @@ import com.park.smet_k.bauman_gis.searchMap.GridLocation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.TreeMap;
 
 public class RouteFragment extends Fragment {
