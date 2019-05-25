@@ -113,9 +113,9 @@ public class AStarSearch {
     // hеuвристика для A со звездой
     static double heuristic(GridLocation a, GridLocation b) {
         // манхэтаннское расстояние
-//        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
 
         // евклидова евристика, медленная, но красивая
-        return Math.sqrt(Math.pow(Math.abs(a.getX() - b.getX()), 2) + Math.pow(Math.abs(a.getY() - b.getY()), 2));
+//        return Math.sqrt(Math.pow(Math.abs(a.getX() - b.getX()), 2) + Math.pow(Math.abs(a.getY() - b.getY()), 2));
     }
 }
