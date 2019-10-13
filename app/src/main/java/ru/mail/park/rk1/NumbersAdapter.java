@@ -46,8 +46,8 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumbersR
     }
 
     public void add(Integer newData) {
-        data.add(0, newData);
-        notifyItemInserted(0);
+        data.add(newData);
+        notifyItemInserted(data.size() - 1);
     }
 
     final static class NumbersRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -60,11 +60,9 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumbersR
         }
 
         void bind(final Integer i, OnItemClickListener onItemClickListener) {
-           number.setText(i.toString());
+            number.setText(i.toString());
 
-           itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
+            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(i));
         }
-
-
     }
 }

@@ -13,7 +13,6 @@ public class NumberFragment  extends Fragment {
 
     private final static String KEY = "lol";
     private Integer number;
-    TextView textView;
 
     public static NumberFragment newInstance(Integer num) {
         NumberFragment myFragment = new NumberFragment();
@@ -47,7 +46,7 @@ public class NumberFragment  extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textView = view.findViewById(R.id.text);
+        TextView textView = view.findViewById(R.id.text);
 
         if (number % 2 == 0) {
             textView.setTextColor(getResources().getColor(R.color.red));
