@@ -14,6 +14,8 @@ import android.widget.Button;
 
 import java.util.Objects;
 
+import ru.mail.park.rk1.appComponent.AppComponent;
+
 public class RecyclerFragment extends Fragment {
     private final static String KEY = "kek";
     private final static Integer DEFAULT = 100;
@@ -25,6 +27,17 @@ public class RecyclerFragment extends Fragment {
 
         Bundle bundle = new Bundle();
         myFragment.setArguments(bundle);
+
+        return myFragment;
+    }
+
+    public static RecyclerFragment newInstance(int i) {
+        RecyclerFragment myFragment = new RecyclerFragment();
+
+        Bundle bundle = new Bundle();
+        myFragment.setArguments(bundle);
+
+        myFragment.last = i;
 
         return myFragment;
     }
@@ -53,6 +66,7 @@ public class RecyclerFragment extends Fragment {
             int newLen = adapter.getItemCount() + 1;
             adapter.add(newLen);
             last = newLen;
+            AppComponent.getInstance().setLastNumber(last);
         });
 
         NumbersAdapter numbersAdapter = new NumbersAdapter(getContext(), this::onItemClick);
@@ -64,14 +78,45 @@ public class RecyclerFragment extends Fragment {
         numbers.setHasFixedSize(true);
 
 
-        for (Integer i = 1; i <= last; i++) {
+        for (Integer i = 1; i <= AppComponent.getInstance().getLastNumber(); i++) {
             numbersAdapter.add(i);
         }
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY, last);
+
+        MainActivity m = ((MainActivity) getActivity());
+        if (m != null) {
+            m.SetLastNumber(last);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            last = savedInstanceState.getInt(KEY);
+        } else {
+            last = DEFAULT;
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
+
+        MainActivity m = ((MainActivity) getActivity());
+        if (m != null) {
+            m.SetLastNumber(last);
+        }
     }
 
     @Override
@@ -80,7 +125,6 @@ public class RecyclerFragment extends Fragment {
     }
 
     private void onItemClick(Integer i) {
-
         Objects.requireNonNull(getFragmentManager()).beginTransaction()
                 .replace(R.id.container, NumberFragment.newInstance(i))
                 .addToBackStack(null)
